@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router";
-import { Calendar, ArrowRight, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { Calendar, ArrowRight, ChevronRight, Share2, Facebook, Twitter, Linkedin, Link2, Check } from "lucide-react";
 import { C, wa, IMG, BtnRed, SectionHead } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 
@@ -118,8 +119,158 @@ export const posts: Post[] = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+const SITE = "https://trijalmotors.com.np";
+
 function fmtDate(d: string) {
   return new Date(d).toLocaleDateString("en-NP", { year: "numeric", month: "long", day: "numeric" });
+}
+
+// ─── Share Bar ────────────────────────────────────────────────────────────────
+function ShareBar({ post }: { post: Post }) {
+  const [copied, setCopied] = useState(false);
+  const pageUrl = `${SITE}/blog/${post.slug}`;
+  const shareText = encodeURIComponent(`${post.title} — Trijal Motors`);
+  const shareUrl  = encodeURIComponent(pageUrl);
+
+  const platforms = [
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.551 4.103 1.513 5.83L.057 23.57a.5.5 0 0 0 .614.614l5.74-1.456A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.667-.5-5.2-1.376l-.372-.22-3.857.979.997-3.76-.242-.387A9.958 9.958 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>,
+      href: `https://wa.me/?text=${shareText}%20${shareUrl}`,
+      bg: "#25D366",
+      color: "#fff",
+    },
+    {
+      id: "facebook",
+      label: "Facebook",
+      icon: <Facebook size={15} />,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
+      bg: "#1877F2",
+      color: "#fff",
+    },
+    {
+      id: "twitter",
+      label: "X / Twitter",
+      icon: <Twitter size={15} />,
+      href: `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
+      bg: "#000",
+      color: "#fff",
+    },
+    {
+      id: "linkedin",
+      label: "LinkedIn",
+      icon: <Linkedin size={15} />,
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`,
+      bg: "#0A66C2",
+      color: "#fff",
+    },
+  ];
+
+  function copyLink() {
+    navigator.clipboard.writeText(pageUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    });
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: 10,
+        marginBottom: 32,
+        paddingTop: 4,
+      }}
+    >
+      {/* Label */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <Share2 size={13} color={C.grayLight} />
+        <span
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 9,
+            color: C.grayLight,
+            textTransform: "uppercase",
+            letterSpacing: "0.14em",
+          }}
+        >
+          Share
+        </span>
+      </div>
+
+      {/* Platform buttons */}
+      {platforms.map((p) => (
+        <a
+          key={p.id}
+          id={`share-${p.id}`}
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`Share on ${p.label}`}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            background: p.bg,
+            color: p.color,
+            fontFamily: "Inter, sans-serif",
+            fontSize: 11,
+            fontWeight: 600,
+            padding: "7px 14px",
+            borderRadius: 100,
+            textDecoration: "none",
+            transition: "transform 0.15s, box-shadow 0.15s",
+            boxShadow: "0 1px 6px rgba(0,0,0,0.15)",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 14px rgba(0,0,0,0.2)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 1px 6px rgba(0,0,0,0.15)";
+          }}
+        >
+          {p.icon}
+          {p.label}
+        </a>
+      ))}
+
+      {/* Copy link button */}
+      <button
+        id="share-copy-link"
+        onClick={copyLink}
+        title="Copy link"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 6,
+          background: copied ? "#22c55e" : "transparent",
+          color: copied ? "#fff" : C.gray,
+          fontFamily: "Inter, sans-serif",
+          fontSize: 11,
+          fontWeight: 600,
+          padding: "7px 14px",
+          borderRadius: 100,
+          border: `1px solid ${copied ? "#22c55e" : C.border}`,
+          cursor: "pointer",
+          transition: "background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        }}
+      >
+        {copied ? <Check size={13} /> : <Link2 size={13} />}
+        {copied ? "Copied!" : "Copy link"}
+      </button>
+    </div>
+  );
 }
 
 // ─── Blog Hero ────────────────────────────────────────────────────────────────
@@ -379,6 +530,12 @@ export function BlogPost() {
       <PageMeta
         title={post.title + " | Trijal Motors Blog"}
         description={post.excerpt}
+        ogImage={post.img.startsWith("http") ? post.img : post.img}
+        article={{
+          publishedTime: new Date(post.date).toISOString(),
+          author: "Trijal Motors Pvt. Ltd.",
+          section: post.category,
+        }}
       />
       {/* Post hero */}
       <div
@@ -483,6 +640,9 @@ export function BlogPost() {
               </p>
             ))}
           </div>
+
+          {/* Share bar */}
+          <ShareBar post={post} />
 
           {/* Author / source note */}
           <div

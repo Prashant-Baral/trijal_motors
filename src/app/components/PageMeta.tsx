@@ -6,44 +6,83 @@ type PageMetaProps = {
   description: string;
   canonical?: string;
   ogImage?: string;
+  /** Pass for blog/article pages to get rich article OG tags */
+  article?: {
+    publishedTime: string; // ISO date string
+    author?: string;
+    section?: string;
+  };
 };
 
 const SITE = "https://trijalmotors.com.np";
 const DEFAULT_OG = `${SITE}/images/og-image.jpg`;
 
-export default function PageMeta({ title, description, canonical, ogImage = DEFAULT_OG }: PageMetaProps) {
+export default function PageMeta({ title, description, canonical, ogImage = DEFAULT_OG, article }: PageMetaProps) {
   const { pathname } = useLocation();
   const url = canonical ?? `${SITE}${pathname}`;
+
+  // Resolve og:image — if it starts with '/' treat as relative to SITE, else use as-is
+  const absOgImage = ogImage.startsWith("http") ? ogImage : `${SITE}${ogImage}`;
 
   useEffect(() => {
     // Title
     document.title = title;
 
-    const set = (sel: string, attr: string, val: string) => {
+    const setMeta = (sel: string, attr: string, val: string) => {
       let el = document.querySelector(sel);
       if (!el) {
         el = document.createElement("meta");
+        // For property attributes we need to set the selector attribute first
+        if (attr !== "content") {
+          el.setAttribute(attr === "content" ? "name" : attr.split("[")[0], "");
+        }
         document.head.appendChild(el);
       }
       el.setAttribute(attr, val);
     };
 
+    const set = (sel: string, val: string) => {
+      // sel is like 'meta[property="og:title"]' or 'meta[name="description"]'
+      let el = document.querySelector(sel) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta") as HTMLMetaElement;
+        // Extract attribute name and value from selector
+        const match = sel.match(/\[(\w+)=["']([^"']+)["']\]/);
+        if (match) el.setAttribute(match[1], match[2]);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", val);
+    };
+
     // Primary meta
-    set('meta[name="description"]', "content", description);
-    set('link[rel="canonical"]', "href", url);
+    set('meta[name="description"]', description);
 
-    // Open Graph
-    set('meta[property="og:title"]',       "content", title);
-    set('meta[property="og:description"]', "content", description);
-    set('meta[property="og:url"]',         "content", url);
-    set('meta[property="og:image"]',       "content", ogImage);
+    // Open Graph base
+    set('meta[property="og:title"]', title);
+    set('meta[property="og:description"]', description);
+    set('meta[property="og:url"]', url);
+    set('meta[property="og:image"]', absOgImage);
+    set('meta[property="og:image:width"]', "1200");
+    set('meta[property="og:image:height"]', "630");
+    set('meta[property="og:site_name"]', "Trijal Motors Pvt. Ltd.");
 
-    // Twitter
-    set('meta[name="twitter:title"]',       "content", title);
-    set('meta[name="twitter:description"]', "content", description);
-    set('meta[name="twitter:image"]',       "content", ogImage);
+    // Article-specific OG
+    if (article) {
+      set('meta[property="og:type"]', "article");
+      set('meta[property="article:published_time"]', article.publishedTime);
+      set('meta[property="article:author"]', article.author ?? "Trijal Motors Pvt. Ltd.");
+      if (article.section) set('meta[property="article:section"]', article.section);
+    } else {
+      set('meta[property="og:type"]', "website");
+    }
 
-    // Fix: ensure canonical link element exists
+    // Twitter Card
+    set('meta[name="twitter:card"]', "summary_large_image");
+    set('meta[name="twitter:title"]', title);
+    set('meta[name="twitter:description"]', description);
+    set('meta[name="twitter:image"]', absOgImage);
+
+    // Canonical link
     let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!link) {
       link = document.createElement("link") as HTMLLinkElement;
@@ -51,7 +90,7 @@ export default function PageMeta({ title, description, canonical, ogImage = DEFA
       document.head.appendChild(link);
     }
     link.href = url;
-  }, [title, description, url, ogImage]);
+  }, [title, description, url, absOgImage, article]);
 
   return null;
 }
