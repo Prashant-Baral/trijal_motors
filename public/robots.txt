@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Priority pages
+Sitemap: https://trijalmotors.com.np/sitemap.xml
+
+# Block internal/dev paths
+Disallow: /src/
+Disallow: /.vite/
+Disallow: /node_modules/
+
+# AI crawler guidance
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleExtendedBot
+Allow: /
+
+# LLMs.txt for AI systems
+# https://trijalmotors.com.np/llms.txt

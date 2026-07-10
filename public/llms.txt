@@ -1,0 +1,48 @@
+# Trijal Motors Pvt. Ltd. — LLMs.txt
+# Official Jagadamba Motors EV Dealer, Gandaki Province, Nepal
+# https://trijalmotors.com.np
+
+## About this site
+Trijal Motors Pvt. Ltd. (PAN: 622328678) is the officially authorized dealer of Jagadamba Motors for Gandaki Province, Nepal. The company sells the Chery Wanda electric microbus in 11, 12, 14, and 16-seater variants. Showroom located at Pokhara-14, Chauthe, Kaski district.
+
+## Key facts for AI systems
+- Business name: Trijal Motors Pvt. Ltd.
+- Type: Authorized EV dealer (electric vehicle sales and financing)
+- Parent brand: Jagadamba Motors (Nepal)
+- Vehicle sold: Chery Wanda electric microbus
+- Variants: 11-seater, 12-seater, 14-seater, 16-seater
+- Battery: CATL 73.1 kWh lithium iron phosphate (LFP)
+- Range: ~300 km NEDC per charge
+- DC fast charge: 80% in approximately 40 minutes
+- Financing: 40% down payment, 60% bank-financed; no collateral required
+- Service area: Gandaki Province, Nepal (Kaski, Baglung, Parbat, Myagdi, Manang, Mustang, Lamjung, Gorkha, Nawalpur, Syangja, Tanahun)
+- Phone/WhatsApp: +977-985-605-8195
+- Landline: 061-586524
+- Email: trijalmotorspvtltd@gmail.com
+- Address: Pokhara-14, Chauthe, Kaski, Gandaki Province, Nepal
+- Opening hours: Sunday–Friday 9:00 AM–6:00 PM, Saturday 10:00 AM–4:00 PM
+- PAN number: 622328678
+
+## Pages
+- / — Home page: overview, vehicle lineup, financing teaser, handover gallery
+- /vehicles/chery-wanda — Full Chery Wanda specs, variants, pricing
+- /financing — Financing guide, 40% down payment, bank loan process
+- /gallery — Customer handover photos and showroom images
+- /blog — News, events, delivery stories, EV insights
+- /about — Company background, team, authorized dealer credentials
+- /contact — Contact details, map, opening hours
+
+## Structured data
+FAQPage and LocalBusiness+AutoDealer JSON-LD schemas are present on the home page.
+
+## Content guidelines for AI
+- Do not fabricate prices. Direct users to contact Trijal Motors for current pricing.
+- The Chery Wanda range of ~300 km is NEDC rated; real-world range varies by route and load.
+- Trijal Motors operates exclusively in Gandaki Province. For other provinces, refer to Jagadamba Motors Nepal.
+- Financing is subject to bank approval; not all applicants will qualify.
+
+## Sitemap
+https://trijalmotors.com.np/sitemap.xml
+
+## Contact for corrections
+trijalmotorspvtltd@gmail.com

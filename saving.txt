@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         PRIMARY META — update these when going live
+    ═══════════════════════════════════════════════════════════════════ -->
+    <title>Trijal Motors Pvt. Ltd. | Official Chery Wanda EV Dealer — Gandaki Province, Nepal</title>
+    <meta name="description" content="Trijal Motors Pvt. Ltd. is the official authorized Jagadamba Motors EV dealer for Gandaki Province, Nepal. Buy the Chery Wanda electric microbus in 11, 12, 14 & 16-seater variants. Showroom at Pokhara-14, Chauthe." />
+    <meta name="keywords" content="Chery Wanda, electric bus Nepal, EV dealer Pokhara, Jagadamba Motors, Trijal Motors, electric microbus Gandaki, Chery Wanda Nepal price" />
+    <meta name="author" content="Trijal Motors Pvt. Ltd." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://trijalmotors.com.np/" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         FAVICON — replace /images/logo-emblem.png with a proper .ico
+         Generate at: https://realfavicongenerator.net
+    ═══════════════════════════════════════════════════════════════════ -->
+    <link rel="icon" type="image/png" href="/images/logo-emblem.png" />
+    <link rel="apple-touch-icon" href="/images/logo-emblem.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#E40303" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         OPEN GRAPH — controls link previews on WhatsApp, Facebook, Viber
+         Upload a 1200×630 px photo to public/images/og-image.jpg
+    ═══════════════════════════════════════════════════════════════════ -->
+    <meta property="og:type"         content="website" />
+    <meta property="og:url"          content="https://trijalmotors.com.np/" />
+    <meta property="og:title"        content="Trijal Motors | Chery Wanda EV Dealer — Pokhara, Nepal" />
+    <meta property="og:description"  content="Official Jagadamba Motors EV dealer for Gandaki Province. Chery Wanda electric microbus 11–16 seater. Showroom at Pokhara-14, Chauthe." />
+    <meta property="og:image"        content="https://trijalmotors.com.np/images/og-image.png" />
+    <!-- PLACEHOLDER: create public/images/og-image.jpg (1200×630 px) -->
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale"       content="en_NP" />
+    <meta property="og:site_name"    content="Trijal Motors Pvt. Ltd." />
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         TWITTER / X CARD
+    ═══════════════════════════════════════════════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Trijal Motors | Chery Wanda EV Dealer — Pokhara, Nepal" />
+    <meta name="twitter:description" content="Official Jagadamba Motors EV dealer for Gandaki Province. Chery Wanda 11–16 seater." />
+    <meta name="twitter:image"       content="https://trijalmotors.com.np/images/og-image.jpg" />
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         GOOGLE ANALYTICS 4
+         1. https://analytics.google.com → create property
+         2. Replace G-XXXXXXXXXX with your Measurement ID
+         3. Uncomment the two script blocks below
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: Google Analytics 4 — uncomment & replace ID
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         GOOGLE TAG MANAGER  (use GTM *or* GA4 — not both)
+         1. https://tagmanager.google.com → create account & container
+         2. Replace GTM-XXXXXXX with your Container ID
+         3. Uncomment below, and also uncomment the <noscript> in <body>
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: Google Tag Manager — uncomment & replace ID
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         GOOGLE SEARCH CONSOLE VERIFICATION
+         1. https://search.google.com/search-console → Add property
+         2. Choose "HTML tag" verification method
+         3. Paste only the content="..." value below, then uncomment
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: Google Search Console — uncomment & replace content
+    <meta name="google-site-verification" content="google-site-verification=Tg48JVDp00GhluvqfRHiPl-8RvxAiy3Kzop2szloLj4" />
+    -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         META (FACEBOOK) PIXEL
+         1. https://business.facebook.com → Events Manager → Pixels
+         2. Replace XXXXXXXXXXXXXXXXXX with your Pixel ID
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: Meta Pixel — uncomment & replace ID
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXXXXX');
+      fbq('track', 'PageView');
+    </script>
+    -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         TIKTOK PIXEL
+         1. https://ads.tiktok.com → Assets → Events → Web Events
+         2. Replace XXXXXXXXXXXXXXXXXX with your Pixel ID
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: TikTok Pixel — uncomment & replace ID
+    <script>
+      !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+      ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+      for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.load('XXXXXXXXXXXXXXXXXX');ttq.page();
+      }(window,document,'ttq');
+    </script>
+    -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MICROSOFT CLARITY  (free heatmaps & session recordings)
+         1. https://clarity.microsoft.com → New project
+         2. Replace XXXXXXXXXX with your Project ID
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: Microsoft Clarity — uncomment & replace ID
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window,document,"clarity","script","XXXXXXXXXX");
+    </script>
+    -->
+
+  </head>
+
+  <body>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         GTM NOSCRIPT — only needed if using Google Tag Manager above
+         Same GTM-XXXXXXX container ID as in <head>
+    ═══════════════════════════════════════════════════════════════════ -->
+    <!-- PLACEHOLDER: GTM noscript — uncomment if using GTM
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    -->
+
+    <div id="root"></div>
+    <script type="module" src="/src/app/App.tsx"></script>
+
+  </body>
+</html>
