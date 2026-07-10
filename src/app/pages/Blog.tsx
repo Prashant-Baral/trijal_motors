@@ -128,7 +128,8 @@ function fmtDate(d: string) {
 // ─── Share Bar ────────────────────────────────────────────────────────────────
 function ShareBar({ post }: { post: Post }) {
   const [copied, setCopied] = useState(false);
-  const pageUrl = `${SITE}/blog/${post.slug}`;
+  // Use the real current URL — works on any domain (netlify.app, custom domain, etc.)
+  const pageUrl   = typeof window !== "undefined" ? window.location.href : `https://trijalmotors.netlify.app/blog/${post.slug}`;
   const shareText = encodeURIComponent(`${post.title} — Trijal Motors`);
   const shareUrl  = encodeURIComponent(pageUrl);
 
