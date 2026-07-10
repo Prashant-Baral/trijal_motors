@@ -18,7 +18,13 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(ROOT, "dist");
-const SITE = "https://trijalmotors.com.np";
+
+// trijalmotors.com.np is still under DNS config — use Netlify URL for images
+// so that Facebook/WhatsApp bots can actually fetch them.
+// Update IMG_BASE to trijalmotors.com.np once DNS is live.
+const SITE     = "https://trijalmotors.com.np";   // canonical URL (fine even before DNS)
+const IMG_BASE = "https://trijalmotors.netlify.app"; // images must be reachable NOW
+
 
 // ── Keep in sync with src/app/pages/Blog.tsx ──────────────────────────────────
 const posts = [
@@ -83,7 +89,7 @@ const baseHtml = fs.readFileSync(path.join(DIST, "index.html"), "utf-8");
 
 for (const post of posts) {
   const pageUrl   = `${SITE}/blog/${post.slug}`;
-  const imgUrl    = `${SITE}${post.img}`;
+  const imgUrl    = `${IMG_BASE}${post.img}`;
   const fullTitle = `${post.title} | Trijal Motors Blog`;
   const published = new Date(post.date).toISOString();
 
