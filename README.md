@@ -1,11 +1,35 @@
+# Trijal Motors
 
-  # Trijal Motors website design
+Official website for **Trijal Motors** — an authorized dealer of Chery wanda vehicles in Nepal.
 
-  This is a code bundle for Trijal Motors website design. The original project is available at https://www.figma.com/design/7Si5Nsb1TDEDhUQNb6SFf2/Trijal-Motors-website-design.
+## Getting Started
 
-  ## Running the code
+Install dependencies:
 
-  Run `npm i` to install the dependencies.
+```bash
+npm install
+```
 
-  Run `npm run dev` to start the development server.
-  
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+## Tech Stack
+
+- **React** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS** (styling)
+- **shadcn/ui** (UI components)
+- **React Router** (navigation)
+
+## Deployment
+
+This project is configured for deployment on **Netlify**. See [`netlify.toml`](./netlify.toml) for build configuration.
