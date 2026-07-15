@@ -1,101 +1,670 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Home -->
   <url>
     <loc>https://trijalmotors.com.np/</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/showroom.webp</image:loc>
+      <image:title>Trijal Motors Pvt Ltd showroom — Pokhara-14, Chauthe</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/logo-emblem-512x512.png</image:loc>
+      <image:title>Trijal Motors official logo emblem</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/jagadamba.png</image:loc>
+      <image:title>Jagadamba Motors authorized dealer badge</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/cherywandalogo.png</image:loc>
+      <image:title>Chery Wanda electric microbus brand logo</image:title>
+    </image:image>
   </url>
-
-  <!-- Vehicles -->
   <url>
     <loc>https://trijalmotors.com.np/vehicles/chery-wanda</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda1.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda10.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda10</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda11.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda11</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda2.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda3.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda4.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda5.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda6.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda6</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda7.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda7</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda8.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda8</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda9.webp</image:loc>
+      <image:title>Chery Wanda 16-seater EV microbus — 16 seater chery wanda9</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda1.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda2.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda3.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda4.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda5.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda6.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda6</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda7.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda7</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda8.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda8</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/14seater/14_seater_chery_wanda9.webp</image:loc>
+      <image:title>Chery Wanda 14-seater EV microbus — 14 seater chery wanda9</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/12seater/12_seater_chery_wanda1.webp</image:loc>
+      <image:title>Chery Wanda 12-seater EV microbus — 12 seater chery wanda1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/12seater/12_seater_chery_wanda2.webp</image:loc>
+      <image:title>Chery Wanda 12-seater EV microbus — 12 seater chery wanda2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/11seater/11_seater_chery_wanda1.webp</image:loc>
+      <image:title>Chery Wanda 11-seater EV microbus — 11 seater chery wanda1</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/11seater/11_seater_chery_wanda2.webp</image:loc>
+      <image:title>Chery Wanda 11-seater EV microbus — 11 seater chery wanda2</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/11seater/11_seater_chery_wanda3.webp</image:loc>
+      <image:title>Chery Wanda 11-seater EV microbus — 11 seater chery wanda3</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/11seater/11_seater_chery_wanda4.webp</image:loc>
+      <image:title>Chery Wanda 11-seater EV microbus — 11 seater chery wanda4</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/chery_wanda_fleet.png</image:loc>
+      <image:title>Chery Wanda EV microbus full fleet — Trijal Motors Nepal</image:title>
+    </image:image>
   </url>
-
-  <!-- Financing -->
+  <url>
+    <loc>https://trijalmotors.com.np/gallery</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_14_seater.png</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer 14 seater</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_bharat_karki.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer bharat karki</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_dhan_kumari.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer dhan kumari</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_khim_thapa.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer khim thapa</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_madan_sunar.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer madan sunar</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_narayan_sunar.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer narayan sunar</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_nirmal_parajuli_purushottam_lamsal.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer nirmal parajuli purushottam lamsal</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_prakash_tripathi.png</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer prakash tripathi</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_raju_makhim.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer raju makhim</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_sher_bahadur_gurung.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer sher bahadur gurung</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/chery_wanda_customer_thirmati_gurung.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — chery wanda customer thirmati gurung</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer12.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer12</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer5.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer5</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_bharat.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer bharat</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_bharat_group.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer bharat group</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_dhan_kumari.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer dhan kumari</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_khim.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer khim</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_madan.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer madan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_narayan.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer narayan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_narayan_group.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer narayan group</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_prakash.png</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer prakash</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_rainbow.png</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer rainbow</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_raju.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer raju</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_sher_bahadur.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer sher bahadur</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer_thirmati.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer thirmati</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/showroom.webp</image:loc>
+      <image:title>Trijal Motors showroom interior — Pokhara</image:title>
+    </image:image>
+  </url>
   <url>
     <loc>https://trijalmotors.com.np/financing</loc>
-    <lastmod>2024-11-01</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Gallery -->
-  <url>
-    <loc>https://trijalmotors.com.np/gallery</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- About -->
-  <url>
-    <loc>https://trijalmotors.com.np/about</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Contact -->
-  <url>
-    <loc>https://trijalmotors.com.np/contact</loc>
-    <lastmod>2026-07-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Blog index -->
   <url>
     <loc>https://trijalmotors.com.np/blog</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Blog posts -->
   <url>
-    <loc>https://trijalmotors.com.np/blog/wanda-ev-expo-pokhara-2024</loc>
-    <lastmod>2024-11-18</lastmod>
+    <loc>https://trijalmotors.com.np/contact</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/showroom.webp</image:loc>
+      <image:title>Trijal Motors Pvt Ltd — Pokhara-14, Chauthe, Kaski</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://trijalmotors.com.np/blog/first-chery-wanda-delivery-baglung</loc>
-    <lastmod>2024-09-05</lastmod>
+    <loc>https://trijalmotors.com.np/about</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/jagadamba.png</image:loc>
+      <image:title>Jagadamba Motors — authorized EV distributor Nepal</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/logo-eagle.png</image:loc>
+      <image:title>Trijal Motors Pvt Ltd logo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/wada-auto-show-pokhara-2026</loc>
+    <lastmod>2026-07-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/wadashow.webp</image:loc>
+      <image:title>Trijal Motors commercial EV microbus stall at WADA Auto Show Pokhara</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/best-family-car-nepal-electric-vehicle</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Best_Family_Car_in_Nepal_Why_EVs_are_the_Top_Choice.webp</image:loc>
+      <image:title>A happy family packing luggage easily into the spacious rear cargo area of a modern electric vehicle before a road trip</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/best-mileage-car-nepal-ev-range-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Best_Mileage_Car_in_Nepal_Why_EV_Range_Beats_Petrol.webp</image:loc>
+      <image:title>A digital vehicle dashboard showing a high remaining range indicator next to an efficiency graph</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/chery-wanda-mileage-kati-dinchha-range-nepal</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Chery_Wanda_Mileage_Kati_Dinchha_EV_Range_Analysis_for_Nepal.webp</image:loc>
+      <image:title>A driver monitoring the digital State of Charge gauge on a Chery Wanda vehicle instrument panel</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/chery-wanda-safety-features-nepal</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Safety_Features_of_the_Chery_Wanda_Electric_Microbus.webp</image:loc>
+      <image:title>Cutaway diagram showing the high-strength steel monocoque safety frame of a Chery Wanda electric vehicle</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/chery-wanda-specifications-deep-dive</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Chery_Wanda_EV_SpecificationsBattery&_Range_Deep_Dive.webp</image:loc>
+      <image:title>Under-chassis and CATL battery configuration of the Chery Wanda EV</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/chery-wanda-warranty-after-sales-support</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Chery_Wanda_Warranty_&_After-Sales_Support_in_Pokhara.webp</image:loc>
+      <image:title>Trijal Motors service center technicians conducting high-voltage battery diagnostic checks on a Chery Wanda microbus</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/commercial-ev-financing-40-percent-down-payment-pokhara</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Commercial_EV_Financing_in_Pokhara_40pct_Down_Payment_Guide.webp</image:loc>
+      <image:title>Financing documentation outline for Trijal Motors EV microbus</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/commercial-ev-gadi-nepal-b2b-procurement-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Commercial_EV_Gadi_in_Nepal_B2B_Procurement_Guide_for_Institutions.webp</image:loc>
+      <image:title>A corporate procurement committee reviewing technical vehicle specifications inside a boardroom</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/electric-suv-nepal-ground-clearance-specs</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Electric_SUV_Nepal_Ground_Clearance,Specs&_Best_Value.webp</image:loc>
+      <image:title>A rugged, stylish electric SUV parked on a scenic mountain highway overlook with clear Himalayan views</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/electric-van-price-nepal-total-cost-ownership</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Electric_Van_Price_in_Nepal_Total_Cost_of_Ownership_Guide.webp</image:loc>
+      <image:title>Detailed cost spreadsheet comparing diesel operating costs against electric microbus tariffs in Nepal</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-battery-fire-safety-nepal-facts-myths</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Battery_Fire_Safety_in_Nepal_Facts_vs._Social_Media_Myths.webp</image:loc>
+      <image:title>A secure, structural steel battery compartment casing undergoing precise high-temperature laboratory testing</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-battery-life-replacement-cost-nepal</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/The_Shift_to_EV_Gadi_How_Pokhara_Tourism_Operators_are_Upgrading.webp</image:loc>
+      <image:title>A close-up view of a high-tech Lithium Iron Phosphate (LFP) battery cell structure inside a certified testing facility</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-car-price-nepal-2026-complete-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Car_Price_in_Nepal_The_2026_Complete_Price_Segment_Guide.webp</image:loc>
+      <image:title>A clean, modern automotive showroom displaying electric vehicles with pricing and specification banners</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-car-price-nepal-commercial-van-comparison</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Price_in_Nepal_Commercial_Van_vs_Passenger_EV_Guide.webp</image:loc>
+      <image:title>A showroom display showing structural breakdowns of passenger EV cars and commercial electric microbuses side by side</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-driving-monsoon-nepal-water-safety</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Driving_in_the_Nepal_Monsoon＿Water_Wading＿&_Battery_Safety.webp</image:loc>
+      <image:title>A modern electric commercial van driving confidently through a rainy street with heavy water spray</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-gadi-pokhara-tourism-fleet-upgrade</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/The_Shift_to_EV_Gadi_How_Pokhara_Tourism_Operators_are_Upgrading.webp</image:loc>
+      <image:title>International tourists loading luxury luggage into a spacious, high-roof electric microbus in Pokhara</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-loan-nepal-commercial-fleet-financing</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/How_to_Secure_an_EV_Loan_in_Nepal_for_Commercial_Fleets.webp</image:loc>
+      <image:title>A corporate representative signing official vehicle loan registration documents at a commercial bank terminal</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-microbus-load-tanchha-pulling-power-nepal</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Microbus_Load_Tanchha_Pulling_Power_on_Nepal's_Hills.webp</image:loc>
+      <image:title>A Chery Wanda microbus easily navigating a steep, uphill mountain switchback road with a full passenger payload</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ev-vs-hybrid-cars-nepal-budget-comparison</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Microbus_Load_Tanchha_Pulling_Power_on_Nepal's_Hills.webp</image:loc>
+      <image:title>An electric vehicle charging port positioned next to a hybrid engine badge, highlighting the technology choice</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/gbt-fast-charging-chery-wanda-gandaki</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/pokhara.webp</image:loc>
+      <image:title>A commercial Chery Wanda high-roof electric microbus charging at an NEA public GBT DC fast-charging station</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/green-fleet-shift-pokhara-schools-tourism</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/EV_Microbus_Load_Tanchha_Pulling_Power_on_Nepal's_Hills.webp</image:loc>
+      <image:title>Chery Wanda electric microbuses ready for commercial deployment in Pokhara</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/maximizing-route-vada-chery-wanda-running-costs</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Maximizing_Route_Vada_Chery_Wanda_EV_Running_Costs_in_Pokhara.webp</image:loc>
+      <image:title>A driver interacting with passengers boarding a clean, high-roof electric transport vehicle</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/monsoon-safety-ip67-waterproofing-chery-wanda</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Monsoon_Safety_&_IP67_Waterproofing_in_the_Chery_Wanda_EV.webp</image:loc>
+      <image:title>A Chery Wanda microbus traveling safely along a wet, rain-slicked urban road during a heavy downpour</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/nea-public-charging-stations-gandaki-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/pokhara.webp</image:loc>
+      <image:title>A brightly lit public DC fast-charging station displaying charging status screens next to a parked commercial vehicle</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/petrol-vs-ev-running-costs-nepal</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Petrol_vs._EV_Running_Costs_in_Nepal_The_Everyday_Math.webp</image:loc>
+      <image:title>A side-by-side graphical chart illustrating the massive cost difference between a fuel pump nozzle and an electric charging plug</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/pokhara-chitwan-kathmandu-ev-tourism-route-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Pokhara-Chitwan-Kathmandu_Triangle_EV_Tourism_Route_Guide.webp</image:loc>
+      <image:title>A group of international tourists boarding a premium electric microbus outside a resort terminal</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/pokhara-to-kathmandu-electric-microbus-highway-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Pokhara_to_Kathmandu_Electric_Microbus_Highway_Range_Guide.webp</image:loc>
+      <image:title>A 14-seater Chery Wanda microbus traveling along a scenic highway corridor in Gandaki Province</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/premium-airport-shuttle-hotel-hospitality-ev</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/16seater/16_seater_chery_wanda3.webp</image:loc>
+      <image:title>International travelers getting out of a silent, premium high-roof electric van outside a luxury resort lobby</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ramro-ev-gadi-nepal-chery-wanda-build-quality</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/vehicles/12seater/12_seater_chery_wanda2.webp</image:loc>
+      <image:title>A deep structural view highlighting the heavy-duty suspension and chassis cross-members of a Chery Wanda microbus</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/ramro-ev-gadi-price-nepal-chery-wanda-value</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/og-image.png</image:loc>
+      <image:title>A business owner reviewing an official corporate invoice quotation at a vehicle showroom</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/route-permits-commercial-ev-nepal-yatayat-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Route_Permits_for_Commercial_EVs_A_Nepal_Transport_Guide.webp</image:loc>
+      <image:title>A group of transport cooperative operators reviewing official route maps and registration paperwork in a corporate office</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/school-bus-costs-nepal-ev-fleet-academies</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/School_Bus_Costs_in_Nepal_Why_Academies_are_Switching_to_EVs.webp</image:loc>
+      <image:title>A clean Chery Wanda 16-seater vehicle parked inside a modern school campus courtyard as students board safely</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/second-hand-van-vs-naya-chery-wanda-ev-guide</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Second_Hand_Diesel_Van_vs._Naya_Chery_Wanda_EV_Capital_Guide.webp</image:loc>
+      <image:title>A side-by-side visual comparison highlighting a used mechanical diesel van engine and a modern clean electric vehicle powertrain</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/nepal-ev-policy-2026</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Nepal_EV_Policy_2026_Commercial_EV_Microbus_Incentives_in_Pokhara.webp</image:loc>
+      <image:title>Commercial EV microbus traveling through Gandaki Province mountain passes</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://trijalmotors.com.np/blog/trijal-motors-showroom-pokhara</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/showroom.webp</image:loc>
+      <image:title>Trijal Motors EV showroom in Pokhara-14, Chauthe</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://trijalmotors.com.np/blog/why-chery-wanda-beats-diesel-nepal</loc>
-    <lastmod>2024-08-12</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/Why_the_Chery_Wanda_EV_Microbus_Beats_Diesel_in_Nepal.webp</image:loc>
+      <image:title>Chery Wanda commercial EV microbus driving on a mountain highway in Nepal</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://trijalmotors.com.np/blog/catl-battery-technology-explained</loc>
     <lastmod>2024-07-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/blogs/CATL_Battery_Technology_in_the_Chery_Wanda_EV_Microbus.webp</image:loc>
+      <image:title>Chery Wanda 12-seater EV microbus with CATL battery pack by Trijal Motors</image:title>
+    </image:image>
   </url>
-  <url>
-    <loc>https://trijalmotors.com.np/blog/gandaki-ev-policy-2024</loc>
-    <lastmod>2024-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://trijalmotors.com.np/blog/trijal-motors-showroom-pokhara</loc>
-    <lastmod>2024-05-02</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
 </urlset>

@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/generate-blog-data.mjs",
+    "predev": "node scripts/generate-blog-data.mjs && node scripts/generate-sitemap.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/generate-blog-data.mjs",
+    "prebuild": "node scripts/generate-blog-data.mjs && node scripts/generate-sitemap.mjs",
     "build": "vite build",
     "postbuild": "node scripts/generate-og-pages.mjs"
   },
