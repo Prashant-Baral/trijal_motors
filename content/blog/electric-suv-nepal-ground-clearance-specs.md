@@ -3,7 +3,7 @@ title: "Electric SUV Nepal: Ground Clearance, Specs & Best Value"
 excerpt: "A comprehensive look at why high-ground-clearance electric SUVs are dominating family and corporate travel needs across diverse local terrains."
 date: 2026-07-13
 category: Insights
-image: images/blogs/Electric_SUV_Nepal_Ground_Clearance,Specs&_Best_Value.webp
+image: images/blogs/Electric_SUV_Nepal_Ground_Clearance_Specs_and_Best_Value.webp
 imageAlt: "A rugged, stylish electric SUV parked on a scenic mountain highway overlook with clear Himalayan views"
 keywords: ["electric suv", "ev suv nepal price", "best electric suv kaski", "high ground clearance ev"]
 ---

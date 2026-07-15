@@ -3,7 +3,7 @@ title: "EV Driving in the Nepal Monsoon: Water Wading & Battery Safety"
 excerpt: "Addressing the seasonal concerns of driving an electric vehicle during heavy rains, deep puddles, and waterlogged road conditions."
 date: 2026-07-13
 category: Insights
-image: images/blogs/EV_Driving_in_the_Nepal_Monsoon＿Water_Wading＿&_Battery_Safety.webp
+image: images/blogs/EV_Driving_in_the_Nepal_Monsoon_Water_Wading_and_Battery_Safety.webp
 imageAlt: "A modern electric commercial van driving confidently through a rainy street with heavy water spray"
 keywords: ["ev driving in monsoon nepal", "electric car water wading capacity", "ip67 battery rating pokhara", "electric vehicle heavy rain safety"]
 ---

@@ -3,7 +3,7 @@ title: "Monsoon Safety & IP67 Waterproofing in the Chery Wanda EV"
 excerpt: "An engineering review of IP67 ingress protection, high-voltage battery insulation, and waterlogged road safety for Nepalese fleet managers."
 date: 2026-07-13
 category: Technology
-image: images/blogs/Monsoon_Safety_&_IP67_Waterproofing_in_the_Chery_Wanda_EV.webp
+image: images/blogs/Monsoon_Safety_and_IP67_Waterproofing_in_the_Chery_Wanda_EV.webp
 imageAlt: "A Chery Wanda microbus traveling safely along a wet, rain-slicked urban road during a heavy downpour"
 keywords: ["pani parne ev safety", "chery wanda waterproofing nepal", "monsoon driving ev gadi", "battery ingress protection ip67"]
 ---

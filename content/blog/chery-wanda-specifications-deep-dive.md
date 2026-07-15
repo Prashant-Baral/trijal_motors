@@ -3,7 +3,7 @@ title: "Chery Wanda EV Specifications: Battery & Range Deep Dive"
 excerpt: "Evaluate the Chery Wanda EV's engineering. Discover how its CATL battery, range, and ground clearance perform on Nepal's demanding terrain."
 date: 2026-07-13
 category: Technology
-image: images/blogs/Chery_Wanda_EV_SpecificationsBattery&_Range_Deep_Dive.webp
+image: images/blogs/Chery_Wanda_EV_Specifications_Battery_and_Range_Deep_Dive.webp
 imageAlt: "Under-chassis and CATL battery configuration of the Chery Wanda EV"
 keywords: ["Chery Wanda specifications", "CATL battery EV Nepal", "electric microbus range"]
 ---

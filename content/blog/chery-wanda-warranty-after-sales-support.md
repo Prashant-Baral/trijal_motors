@@ -3,7 +3,7 @@ title: "Chery Wanda Warranty & After-Sales Support in Pokhara"
 excerpt: "A look at the 5-year/300,000 km factory warranty, local EV diagnostic support, and genuine parts supply chain at Trijal Motors, Pokhara."
 date: 2026-07-13
 category: Insights
-image: images/blogs/Chery_Wanda_Warranty_&_After-Sales_Support_in_Pokhara.webp
+image: images/blogs/Chery_Wanda_Warranty_and_After-Sales_Support_in_Pokhara.webp
 imageAlt: "Trijal Motors service center technicians conducting high-voltage battery diagnostic checks on a Chery Wanda microbus"
 keywords: ["Chery Wanda warranty Nepal", "EV microbus maintenance Pokhara", "Jagdamba Motors after sales", "commercial EV battery repair"]
 ---
