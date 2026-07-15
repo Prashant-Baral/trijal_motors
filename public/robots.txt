@@ -108,5 +108,3 @@ Disallow: /netlify/
 Crawl-delay: 5
 
 Sitemap: https://trijalmotors.com.np/sitemap.xml
-
-LLMs-txt: https://trijalmotors.com.np/llms.txt

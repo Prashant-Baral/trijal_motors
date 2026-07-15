@@ -223,6 +223,7 @@ export default function Gallery() {
                   <button
                     type="button"
                     onClick={() => setActiveIdx(i)}
+                    aria-label={`Open ${item.kind === "photo" ? "photo" : "video"}: ${item.caption}`}
                     className="relative overflow-hidden block w-full text-left cursor-pointer"
                     style={{
                       aspectRatio: i % 5 === 0 ? "16/10" : "4/3",
@@ -242,6 +243,7 @@ export default function Gallery() {
                       <img
                         src={thumb} alt={item.kind === "photo" ? item.alt : item.caption}
                         loading={i < 3 ? "eager" : "lazy"}
+                        {...(i === 0 ? { fetchPriority: "high" } : {})}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         style={{ opacity: isVideo ? 0.7 : 0.85 }}
                       />

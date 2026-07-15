@@ -13,8 +13,7 @@ export default function About() {
           { name: "About", url: "https://trijalmotors.com.np/about" },
         ]}
       />
-      {/* Real, named staff contact — ties to the Organization for
-          "who do I talk to" style queries. */}
+
       <PersonSchema
         name="Ram Prasad Lamsal"
         jobTitle="Sales Manager"
@@ -138,7 +137,7 @@ export default function About() {
               </div>
               <div className="flex flex-col">
                 {[
-                  ["Authorized dealer", "Jagadamba Motors, Nepal"],
+                  ["Authorized dealer", "Trijal Motors, Nepal"],
                   ["Vehicles", "Chery Wanda (11, 12, 14 & 16 seat)"],
                   ["Service area", "Gandaki Province, Nepal"],
                   ["Company type", "Private Limited"],

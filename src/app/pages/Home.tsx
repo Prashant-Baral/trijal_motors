@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Award, Shield, CreditCard, Zap, Facebook, ArrowRight, Star, Quote, ChevronDown, ChevronLeft } from "lucide-react";
 import { C, wa, IMG, BtnRed, BtnOutline, SectionHead } from "../shared";
-import { FaqSchema, LocalBusinessSchema, OrganizationSchema, BreadcrumbSchema } from "../components/SeoSchemas";
+import { FaqSchema, LocalBusinessSchema, BreadcrumbSchema } from "../components/SeoSchemas";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 
 // ─── Hero — white bg, exact v9 layout ────────────────────────────────────────
@@ -61,6 +61,7 @@ function Hero() {
       <button
         onClick={scrollToSlideshow}
         className="flex flex-col items-center w-full pb-6 md:pb-8"
+        aria-label="Scroll down to see vehicles"
         style={{ background: "transparent", border: "none", cursor: "pointer", opacity: 0.55, transition: "opacity 0.2s" }}
         onMouseEnter={e => (e.currentTarget.style.opacity = "0.9")}
         onMouseLeave={e => (e.currentTarget.style.opacity = "0.55")}
@@ -441,8 +442,10 @@ const tiktokVideoUrls = [
 ];
 
 
+// ─── TikTok inline video feed (click-to-load facade) ────────────────────────
 function TikTokFeed() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % tiktokVideoUrls.length);
@@ -452,7 +455,6 @@ function TikTokFeed() {
     setActiveIndex((prev) => (prev - 1 + tiktokVideoUrls.length) % tiktokVideoUrls.length);
   }, []);
 
-  // Listen for the video finishing to automatically shift to the next one
   useEffect(() => {
     const handlePlayerMessage = (event: MessageEvent) => {
       if (event.data && event.data['x-tiktok-player']) {
@@ -461,7 +463,6 @@ function TikTokFeed() {
         }
       }
     };
-
     window.addEventListener('message', handlePlayerMessage);
     return () => window.removeEventListener('message', handlePlayerMessage);
   }, [handleNext]);
@@ -490,79 +491,52 @@ function TikTokFeed() {
 
       {/* Main Video Viewport */}
       <div style={{ position: "relative", background: "#f8f8f8", display: "flex", justifyContent: "center", alignItems: "center", padding: "16px", overflow: "hidden", flexGrow: 1 }}>
-
-        {/* Active Frame Wrapper */}
         <div
           key={activeVideoId}
-          style={{
-            width: "100%",
-            maxWidth: "325px",
-            aspectRatio: "325 / 555",
-            borderRadius: "12px",
-            overflow: "hidden",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
-          }}
+          style={{ width: "100%", maxWidth: "325px", aspectRatio: "325 / 555", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", position: "relative" }}
         >
-          <iframe
-            src={`https://www.tiktok.com/player/v1/${activeVideoId}?autoplay=1&loop=0&controls=1&music_info=0&description=0&rel=0`}
-            allow="autoplay; fullscreen"
-            title="Chery Wanda Pokhara Video Feed Content Update"
-            style={{
-              width: "100%",
-              height: "100%",
-              border: "none"
-            }}
-          />
+          {!loaded ? (
+            /* Facade: shows a static placeholder until user clicks — avoids loading ~1.2MB TikTok JS on page load */
+            <button
+              onClick={() => setLoaded(true)}
+              aria-label="Load TikTok video from Chery Wanda Pokhara"
+              style={{
+                width: "100%", height: "100%", border: "none", cursor: "pointer",
+                background: C.black, display: "flex", flexDirection: "column",
+                alignItems: "center", justifyContent: "center", gap: 12,
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ width: 56, height: 56, borderRadius: "50%", background: C.red, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width={24} height={24} viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+              </div>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "rgba(255,255,255,0.8)", fontWeight: 500 }}>Tap to play TikTok video</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(255,255,255,0.4)", textAlign: "center", maxWidth: 180 }}>@chery.wanda.pokha</span>
+            </button>
+          ) : (
+            <iframe
+              src={`https://www.tiktok.com/player/v1/${activeVideoId}?autoplay=1&loop=0&controls=1&music_info=0&description=0&rel=0`}
+              allow="autoplay; fullscreen"
+              title="Chery Wanda Pokhara — TikTok Video"
+              style={{ width: "100%", height: "100%", border: "none" }}
+            />
+          )}
         </div>
 
-        {/* Left Arrow Button */}
         <button
           onClick={handlePrev}
-          style={{
-            position: "absolute",
-            left: "12px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            background: "rgba(255, 255, 255, 0.95)",
-            border: `1px solid ${C.border}`,
-            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 10,
-            transition: "background 0.2s"
-          }}
+          aria-label="Previous video"
+          style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", width: 38, height: 38, borderRadius: "50%", background: "rgba(255, 255, 255, 0.95)", border: `1px solid ${C.border}`, boxShadow: "0 4px 14px rgba(0,0,0,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background 0.2s" }}
           onMouseEnter={(e) => (e.currentTarget.style.background = C.white)}
           onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)")}
         >
           <ChevronLeft size={18} color={C.black} />
         </button>
 
-        {/* Right Arrow Button */}
         <button
           onClick={handleNext}
-          style={{
-            position: "absolute",
-            right: "12px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 38,
-            height: 38,
-            borderRadius: "50%",
-            background: "rgba(255, 255, 255, 0.95)",
-            border: `1px solid ${C.border}`,
-            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 10,
-            transition: "background 0.2s"
-          }}
+          aria-label="Next video"
+          style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", width: 38, height: 38, borderRadius: "50%", background: "rgba(255, 255, 255, 0.95)", border: `1px solid ${C.border}`, boxShadow: "0 4px 14px rgba(0,0,0,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background 0.2s" }}
           onMouseEnter={(e) => (e.currentTarget.style.background = C.white)}
           onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)")}
         >
@@ -706,7 +680,6 @@ export default function Home() {
       <PageMeta {...pageMeta.home} />
       <FaqSchema />
       <LocalBusinessSchema />
-      <OrganizationSchema />
       <BreadcrumbSchema items={[{ name: "Home", url: "https://trijalmotors.com.np/" }]} />
       <Hero />
       <HeroSlideshow />

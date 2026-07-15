@@ -10,11 +10,31 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    # Automatically upgrade any accidental http:// asset loads to https://
     Content-Security-Policy = "upgrade-insecure-requests"
-    # Prevent clickjacking
     X-Frame-Options = "SAMEORIGIN"
-    # Prevent MIME-type sniffing
     X-Content-Type-Options = "nosniff"
-    # Don't leak the full URL to third-party sites via Referer header
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # HSTS — tell browsers to always use HTTPS, including subdomains
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # COOP — isolate the top-level window from cross-origin popups
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    # Permissions Policy — restrict browser features not used by the site
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self), payment=()"
+
+# Long cache for Vite-fingerprinted assets (JS/CSS bundles are immutable)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 1-week cache for images
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# 1-week cache for fonts
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"

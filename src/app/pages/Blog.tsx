@@ -240,6 +240,8 @@ function PostCard({ post, featured }: { post: Post; featured?: boolean }) {
         <img
           src={post.img}
           alt={post.title}
+          loading={featured ? "eager" : "lazy"}
+          {...(featured ? { fetchPriority: "high" } : {})}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           style={{ opacity: 0.88 }}
         />
@@ -502,7 +504,7 @@ export function BlogPost() {
         {/* Hero image */}
         <div className="max-w-4xl mx-auto px-4 md:px-10">
           <div style={{ borderRadius: "18px 18px 0 0", overflow: "hidden", height: 320, background: C.black }}>
-            <img src={post.img} alt={post.title} className="w-full h-full object-cover" style={{ opacity: 0.9 }} />
+            <img src={post.img} alt={post.title} fetchPriority="high" loading="eager" className="w-full h-full object-cover" style={{ opacity: 0.9 }} />
           </div>
         </div>
       </div>

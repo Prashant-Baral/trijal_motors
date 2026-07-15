@@ -53,7 +53,6 @@ export function LocalBusinessSchema() {
       { "@type": "ContactPoint", telephone: "+977-985-605-8195", contactType: "sales", areaServed: "NP" },
       { "@type": "ContactPoint", telephone: "+977-980-2858195", contactType: "sales", areaServed: "NP" },
     ],
-    taxID: "622328678",
     image: "/images/logo-full.png",
     address: {
       "@type": "PostalAddress",
@@ -71,7 +70,7 @@ export function LocalBusinessSchema() {
     openingHoursSpecification: [
       { "@type": "OpeningHoursSpecification", dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "17:00" },
     ],
-    priceRange: "NPR 4,90,000-69,00,000",
+    priceRange: "$$$",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Chery Wanda Electric Microbus",

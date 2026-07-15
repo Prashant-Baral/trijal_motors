@@ -18,13 +18,13 @@ export const EMAIL = "trijalmotorspvtltd@gmail.com";
 export const wa = (msg: string) =>
   `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
 export const IMG = {
-  logoFull: "/images/logo-full.png",
+  logoFull: "/images/logo-full.webp",
   logoEagle: "/images/logo-eagle.png",
-  opengraph: "/images/og-image.png",
+  opengraph: "/images/og-image.webp",
 
   wandaGolden: "/images/wanda-golden.jpg",
   jagadamba: "/images/jagadamba.png",
-  cherywandalogo: "/images/cherywandalogo.png",
+  cherywandalogo: "/images/cherywandalogo.webp",
 
   three_types: "images/vehicles/chery_wanda_fleet.png",
 
@@ -45,8 +45,8 @@ export const IMG = {
   customer10: "images/customer/customer_dhan_kumari.webp",
   customer11: "images/customer/customer_narayan_group.webp",
   customer12: "images/customer/customer12.webp",
-  customer13: "images/customer/customer_rainbow.png",
-  customer14: "images/customer/customer_prakash.png",
+  customer13: "images/customer/customer_rainbow.webp",
+  customer14: "images/customer/customer_prakash.webp",
 
 
   //customer images with graphics
@@ -59,8 +59,8 @@ export const IMG = {
   ecustomer7: "images/customer/chery_wanda_customer_sher_bahadur_gurung.webp",
   ecustomer8: "images/customer/chery_wanda_customer_thirmati_gurung.webp",
   ecustomer9: "images/customer/chery_wanda_customer_nirmal_parajuli_purushottam_lamsal.webp",
-  ecustomer10: "images/customer/chery_wanda_customer_prakash_tripathi.png",
-  ecustomer11: "images/customer/chery_wanda_customer_14_seater.png",
+  ecustomer10: "images/customer/chery_wanda_customer_prakash_tripathi.webp",
+  ecustomer11: "images/customer/chery_wanda_customer_14_seater.webp",
 
 
   showroom: "/images/showroom.webp",
@@ -292,6 +292,7 @@ export function Nav() {
         </div>
         {/* Mobile hamburger */}
         <button className="md:hidden ml-auto mr-5" onClick={() => setOpen(o => !o)}
+          aria-label={open ? "Close menu" : "Open menu"}
           style={{ background: "none", border: "none", cursor: "pointer", color: C.black }}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
