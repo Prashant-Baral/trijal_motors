@@ -1,20 +1,44 @@
-User-agent: *
+User-agent: Googlebot
+Allow: /
+Disallow: /404
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: bingbot
+Allow: /
+Disallow: /404
+Crawl-delay: 2
+
+User-agent: msnbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
 Allow: /
 
-# Priority pages
-Sitemap: https://trijalmotors.com.np/sitemap.xml
+User-agent: Slurp
+Allow: /
 
-# Block internal/dev paths
-Disallow: /src/
-Disallow: /.vite/
-Disallow: /node_modules/
-Disallow: /scripts/
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 5
 
-# AI crawler guidance
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
 User-agent: GPTBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
 Allow: /
 
 User-agent: PerplexityBot
@@ -23,5 +47,66 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-# LLMs.txt for AI systems
-# https://trijalmotors.com.np/llms.txt
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: DotBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SiteAuditBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: SEOkicks-Robot
+Disallow: /
+
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /src/
+Disallow: /.vite/
+Disallow: /node_modules/
+Disallow: /scripts/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /netlify/
+Crawl-delay: 5
+
+Sitemap: https://trijalmotors.com.np/sitemap.xml
+
+LLMs-txt: https://trijalmotors.com.np/llms.txt

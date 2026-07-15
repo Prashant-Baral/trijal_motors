@@ -1,147 +1,418 @@
-// Netlify Edge Function — injects per-post Open Graph tags for social bots.
-// Crawlers (Facebook, WhatsApp, Twitter, LinkedIn) don't run JS, so they only
-// see what's in the HTML. This function rewrites the <head> for bot traffic.
-//
-// NOTE: generate-og-pages.mjs now writes static per-post HTML files to dist/
-// at build time, which Netlify serves before this edge function fires for most
-// traffic. This edge function acts as a fallback for any slugs the static
-// script misses (e.g. draft previews, new posts before a rebuild).
-// Keep the post list below in sync with content/blog/*.md frontmatter.
+/**
+ * Netlify Edge Function — injects per-route meta tags for crawlers that don't run JS.
+ * Covers: Googlebot, Bingbot, social bots (Facebook, WhatsApp, LinkedIn, etc.)
+ *
+ * The SPA sets all meta via React (PageMeta component), but bots without JS execution
+ * only see index.html which has generic/homepage tags. This function rewrites <head>
+ * server-side so every URL gets the correct title, description, canonical, and OG tags.
+ */
 
 const SITE = "https://trijalmotors.com.np";
 
-// ── Mirror the post data from content/blog/*.md ────────────────────────────────
-// image paths must match the `image:` frontmatter field in each .md file exactly.
-const posts: Record<string, { title: string; excerpt: string; img: string; date: string; category: string }> = {
-  "wada-auto-show-pokhara-2024": {
-    title: "Trijal Motors at Wada Auto Show Pokhara 2024",
-    excerpt:
-      "We showcased the full Chery Wanda lineup at the first-ever WADA Auto Show — a major automobile exhibition in Gandaki Province. Here's what happened.",
-    img: `${SITE}/images/showroom.webp`,
-    date: "2025-03-30",
-    category: "Events",
+// ── Static page meta ──────────────────────────────────────────────────────────
+const STATIC_PAGES: Record<string, { title: string; description: string }> = {
+  "/": {
+    title: "Trijal Motors | Official Chery Wanda EV Dealer, Nepal",
+    description:
+      "Official authorized Jagadamba Motors EV dealer for Gandaki Province. Buy the Chery Wanda electric microbus — 11 to 16-seater — in Pokhara, Nepal.",
   },
-  "first-chery-wanda-delivery-baglung": {
-    title: "First Chery Wanda Delivery in Baglung District",
-    excerpt:
-      "A historic moment: the first Chery Wanda electric microbus delivered to a Baglung-based route operator, marking EV adoption in hill districts of Gandaki Province.",
-    img: `${SITE}/images/customer/customer1.webp`,
-    date: "2024-09-05",
-    category: "Deliveries",
+  "/vehicles/chery-wanda": {
+    title: "Chery Wanda Electric Microbus | Trijal Motors Nepal",
+    description:
+      "Explore the Chery Wanda electric microbus lineup at Trijal Motors Pokhara — 11 to 16-seater, CATL battery, ~300 km NEDC range, DC fast charging.",
   },
-  "why-chery-wanda-beats-diesel-nepal": {
-    title: "Why the Chery Wanda Beats Diesel for Nepal Route Operators",
-    excerpt:
-      "A detailed cost breakdown comparing the Chery Wanda electric microbus against equivalent diesel microbuses on a typical Gandaki Province route.",
-    img: `${SITE}/images/og-image.png`,
-    date: "2024-08-12",
-    category: "Insights",
+  "/financing": {
+    title: "EV Financing — 40% Down Payment | Trijal Motors",
+    description:
+      "Own a Chery Wanda with just 40% down payment, 60% bank-financed through partner banks in Gandaki Province. Contact Trijal Motors to get started.",
   },
-  "catl-battery-technology-explained": {
-    title: "CATL Battery Technology: What It Means for Your Chery Wanda",
-    excerpt:
-      "A plain-language explanation of CATL's lithium iron phosphate battery chemistry — the same cells that power the Chery Wanda — and why it matters for Nepal's climate.",
-    img: `${SITE}/images/vehicles/12seater/12_seater_chery_wanda2.webp`,
-    date: "2024-07-20",
-    category: "Technology",
+  "/gallery": {
+    title: "Chery Wanda Photos & Videos | EV Pokhara | Trijal Motors",
+    description:
+      "Chery Wanda EV Pokhara photo & video gallery — 11 to 16-seater electric microbus handovers, showroom tours, and Gandaki Province routes.",
   },
-  "gandaki-ev-policy-2024": {
-    title: "Nepal EV Policy 2024: What It Means for Bus Operators in Gandaki",
-    excerpt:
-      "A summary of the Nepal government's 2024 EV incentives and how they apply to commercial microbus operators purchasing through Trijal Motors.",
-    img: `${SITE}/images/pokhara.webp`,
-    date: "2024-06-10",
-    category: "Policy",
+  "/about": {
+    title: "About Trijal Motors | Authorized Jagadamba EV Dealer",
+    description:
+      "Trijal Motors Pvt. Ltd. is the officially authorized Jagadamba Motors EV dealer for Gandaki Province, Nepal. Showroom at Pokhara-14, Chauthe, Kaski.",
   },
-  "trijal-motors-showroom-pokhara": {
-    title: "Visit Our Showroom in Pokhara-14, Chauthe",
-    excerpt:
-      "Our Pokhara showroom has the Chery Wanda on display year-round. Here's what to expect when you visit and how to get here.",
-    img: `${SITE}/images/showroom.webp`,
-    date: "2024-05-02",
-    category: "About Us",
+  "/contact": {
+    title: "Contact Trijal Motors | Pokhara EV Showroom",
+    description:
+      "Contact Trijal Motors: +977-985-605-8195. Showroom at Pokhara-14, Chauthe. Open Sun & Mon–Fri, 9 AM–5 PM. WhatsApp welcome.",
+  },
+  "/blog": {
+    title: "Blog & News | EV Deliveries & Insights | Trijal Motors",
+    description:
+      "Chery Wanda delivery stories, EV expo coverage, CATL battery insights, and Nepal EV policy updates from Trijal Motors, Gandaki Province.",
   },
 };
 
-// ── Social-bot user-agent detector ────────────────────────────────────────────
-function isSocialBot(ua: string): boolean {
-  const bots = [
-    "facebookexternalhit",
-    "facebot",
-    "twitterbot",
-    "linkedinbot",
-    "whatsapp",
-    "slackbot",
-    "telegrambot",
-    "discordbot",
-    "googlebot",
-    "bingbot",
-    "pinterest",
-    "vkshare",
-    "w3c_validator",
+// ── Blog posts — auto-populated from content/blog/*.md at build time ──────────
+// This list is regenerated by scripts/generate-og-pages.mjs alongside the build.
+// Keep in sync with content/blog/*.md frontmatter.
+const BLOG_POSTS: Record<string, { title: string; excerpt: string; img: string; date: string; category: string }> = {
+  "best-family-car-nepal-electric-vehicle": {
+    title: "Best Family Car in Nepal: Why EVs Are the Top Choice",
+    excerpt: "Looking for the best family car in Nepal? Discover why electric vehicles, especially the Chery Wanda EV microbus, are becoming the top choice for Nepali families in Gandaki Province.",
+    img: `${SITE}/images/blogs/Best_Family_Car_in_Nepal_Why_EVs_are_the_Top_Choice.webp`,
+    date: "2026-07-14",
+    category: "Insights",
+  },
+  "best-mileage-car-nepal-ev-range-guide": {
+    title: "Best Mileage Car in Nepal: Why EV Range Beats Petrol",
+    excerpt: "Searching for the best mileage car in Nepal? Learn why the Chery Wanda EV microbus delivers superior range compared to petrol alternatives for commercial operators.",
+    img: `${SITE}/images/blogs/Best_Mileage_Car_in_Nepal_Why_EV_Range_Beats_Petrol.webp`,
+    date: "2026-07-14",
+    category: "Insights",
+  },
+  "catl-battery-technology-explained": {
+    title: "CATL Battery Technology in the Chery Wanda EV Microbus",
+    excerpt: "Explore how CATL's world-leading lithium iron phosphate battery technology powers the Chery Wanda EV microbus and why it's the right choice for Nepal's climate.",
+    img: `${SITE}/images/blogs/CATL_Battery_Technology_in_the_Chery_Wanda_EV_Microbus.webp`,
+    date: "2024-07-20",
+    category: "Technology",
+  },
+  "chery-wanda-mileage-kati-dinchha-range-nepal": {
+    title: "Chery Wanda Mileage: Kati Dinchha? EV Range Analysis for Nepal",
+    excerpt: "How far can the Chery Wanda EV really go? Our detailed range analysis covers real-world mileage on Nepal's hill routes, load conditions, and charging costs.",
+    img: `${SITE}/images/blogs/Chery_Wanda_Mileage_Kati_Dinchha_EV_Range_Analysis_for_Nepal.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "chery-wanda-safety-features-nepal": {
+    title: "Safety Features of the Chery Wanda Electric Microbus",
+    excerpt: "Discover the comprehensive safety features of the Chery Wanda EV microbus — from IP67 battery protection to ABS and hill-hold control for Nepal's mountain roads.",
+    img: `${SITE}/images/blogs/Safety_Features_of_the_Chery_Wanda_Electric_Microbus.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "chery-wanda-specifications-deep-dive": {
+    title: "Chery Wanda EV Specifications: Battery & Range Deep Dive",
+    excerpt: "A technical deep dive into the Chery Wanda EV microbus specifications — battery capacity, range, motor power, charging options, and payload for Nepal operators.",
+    img: `${SITE}/images/blogs/Chery_Wanda_EV_Specifications_Battery_and_Range_Deep_Dive.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "chery-wanda-warranty-after-sales-support": {
+    title: "Chery Wanda Warranty & After-Sales Support in Pokhara",
+    excerpt: "Learn about the Chery Wanda EV microbus warranty terms, after-sales service, and Trijal Motors' support network across Gandaki Province.",
+    img: `${SITE}/images/blogs/Chery_Wanda_Warranty_and_After-Sales_Support_in_Pokhara.webp`,
+    date: "2026-07-13",
+    category: "About Us",
+  },
+  "commercial-ev-financing-40-percent-down-payment-pokhara": {
+    title: "Commercial EV Financing in Pokhara: 40% Down Payment Guide",
+    excerpt: "Switching your commercial fleet to electric is a smart business decision. Learn how to navigate the 40% down payment financing process for EVs in Pokhara.",
+    img: `${SITE}/images/blogs/Commercial_EV_Financing_in_Pokhara_40pct_Down_Payment_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "commercial-ev-gadi-nepal-b2b-procurement-guide": {
+    title: "Commercial EV Gadi in Nepal: B2B Procurement Guide for Institutions",
+    excerpt: "A complete guide for institutions, schools, resorts, and fleet operators in Nepal looking to procure commercial EV microbuses through B2B channels.",
+    img: `${SITE}/images/blogs/Commercial_EV_Gadi_in_Nepal_B2B_Procurement_Guide_for_Institutions.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "electric-suv-nepal-ground-clearance-specs": {
+    title: "Electric SUV Nepal: Ground Clearance, Specs & Best Value",
+    excerpt: "Comparing electric SUVs and microbuses in Nepal? Our guide covers ground clearance, specifications, and value comparison for Nepal's terrain.",
+    img: `${SITE}/images/blogs/Electric_SUV_Nepal_Ground_Clearance_Specs_and_Best_Value.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "electric-van-price-nepal-total-cost-ownership": {
+    title: "Electric Van Price in Nepal: Total Cost of Ownership Guide",
+    excerpt: "What does an electric van really cost in Nepal? Our total cost of ownership guide covers purchase price, financing, running costs, and maintenance for commercial operators.",
+    img: `${SITE}/images/blogs/Electric_Van_Price_in_Nepal_Total_Cost_of_Ownership_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ev-battery-fire-safety-nepal-facts-myths": {
+    title: "EV Battery Fire Safety in Nepal: Facts vs. Social Media Myths",
+    excerpt: "Are EV batteries dangerous? We separate facts from social media myths about EV battery fire safety, with specific context for Nepal's climate and terrain.",
+    img: `${SITE}/images/blogs/EV_Battery_Fire_Safety_in_Nepal_Facts_vs._Social_Media_Myths.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "ev-battery-life-replacement-cost-nepal": {
+    title: "The Truth About EV Battery Life and Replacement Cost in Nepal",
+    excerpt: "How long does an EV battery last in Nepal? What does replacement cost? We provide honest, data-backed answers for commercial fleet operators.",
+    img: `${SITE}/images/blogs/The_Truth_About_EV_Battery_Life_and_Replacement_Cost_in_Nepal.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "ev-car-price-nepal-2026-complete-guide": {
+    title: "EV Car Price in Nepal: The 2026 Complete Price Segment Guide",
+    excerpt: "A complete guide to EV car prices in Nepal for 2026 — covering all segments from economy to commercial, with financing options and government incentives.",
+    img: `${SITE}/images/blogs/EV_Car_Price_in_Nepal_The_2026_Complete_Price_Segment_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ev-car-price-nepal-commercial-van-comparison": {
+    title: "EV Price in Nepal: Commercial Van vs Passenger EV Guide",
+    excerpt: "Comparing commercial van EV prices vs passenger EV prices in Nepal. Find out which segment offers the best value for your business.",
+    img: `${SITE}/images/blogs/EV_Price_in_Nepal_Commercial_Van_vs_Passenger_EV_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ev-driving-monsoon-nepal-water-safety": {
+    title: "EV Driving in the Nepal Monsoon: Water Wading & Battery Safety",
+    excerpt: "Can you drive an EV in Nepal's monsoon? We cover water wading depth, IP67 battery protection, and safety tips for driving the Chery Wanda in heavy rain.",
+    img: `${SITE}/images/blogs/EV_Driving_in_the_Nepal_Monsoon_Water_Wading_and_Battery_Safety.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "ev-gadi-pokhara-tourism-fleet-upgrade": {
+    title: "The Shift to EV Gadi: How Pokhara Tourism Operators Are Upgrading",
+    excerpt: "Pokhara's tourism operators are switching to electric vehicles. Learn how the Chery Wanda EV microbus is transforming the tourism fleet in Gandaki Province.",
+    img: `${SITE}/images/blogs/The_Shift_to_EV_Gadi_How_Pokhara_Tourism_Operators_are_Upgrading.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ev-loan-nepal-commercial-fleet-financing": {
+    title: "How to Secure an EV Loan in Nepal for Commercial Fleets",
+    excerpt: "Step-by-step guide to securing an EV loan in Nepal for commercial fleet operators — covering banks, documentation, and the approval process for Chery Wanda purchases.",
+    img: `${SITE}/images/blogs/How_to_Secure_an_EV_Loan_in_Nepal_for_Commercial_Fleets.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ev-microbus-load-tanchha-pulling-power-nepal": {
+    title: "EV Microbus Load Tanchha: Pulling Power on Nepal's Hills",
+    excerpt: "Can an EV microbus handle Nepal's steep hill routes with a full passenger load? We test the Chery Wanda's pulling power and torque on Gandaki Province roads.",
+    img: `${SITE}/images/blogs/EV_Microbus_Load_Tanchha_Pulling_Power_on_Nepal's_Hills.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "ev-vs-hybrid-cars-nepal-budget-comparison": {
+    title: "EV vs. Hybrid Cars in Nepal: Which Fits Your Budget?",
+    excerpt: "EV or hybrid — which is the smarter buy in Nepal? We compare upfront costs, running expenses, and total ownership value for Nepali buyers.",
+    img: `${SITE}/images/blogs/EV_vs._Hybrid_Cars_in_Nepal_Which_Fits_Your_Budget.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "gbt-fast-charging-chery-wanda-gandaki": {
+    title: "GBT Fast Charging: Chery Wanda Charging in Gandaki Province",
+    excerpt: "Where can you fast-charge the Chery Wanda EV in Gandaki Province? Our guide covers GBT charging stations, charging times, and route planning for operators.",
+    img: `${SITE}/images/blogs/wadashow.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "green-fleet-shift-pokhara-schools-tourism": {
+    title: "Green Fleet Shift: Pokhara Switches to Chery Wanda EVs",
+    excerpt: "Schools, hotels, and tourism operators in Pokhara are making the green fleet shift. Learn how the Chery Wanda EV is leading the transition in Gandaki Province.",
+    img: `${SITE}/images/blogs/Green_Fleet_Shift_Pokhara_Switches_to_Chery_Wanda_EVs.webp`,
+    date: "2026-07-13",
+    category: "Deliveries",
+  },
+  "maximizing-route-vada-chery-wanda-running-costs": {
+    title: "Maximizing Route Vada: Chery Wanda EV Running Costs in Pokhara",
+    excerpt: "How to maximize revenue on your route with the Chery Wanda EV. We break down running costs, charge cycles, and profitability for Pokhara route operators.",
+    img: `${SITE}/images/blogs/Maximizing_Route_Vada_Chery_Wanda_EV_Running_Costs_in_Pokhara.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "monsoon-safety-ip67-waterproofing-chery-wanda": {
+    title: "Monsoon Safety & IP67 Waterproofing in the Chery Wanda EV",
+    excerpt: "How does the Chery Wanda handle Nepal's monsoon season? We detail the IP67-rated battery waterproofing and monsoon safety features of this EV microbus.",
+    img: `${SITE}/images/blogs/Monsoon_Safety_and_IP67_Waterproofing_in_the_Chery_Wanda_EV.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "nea-public-charging-stations-gandaki-guide": {
+    title: "NEA Public Charging Stations in Gandaki: A Guide for EV Operators",
+    excerpt: "Where are the NEA public charging stations in Gandaki Province? Our guide covers locations, charging costs, and tips for commercial EV operators in the region.",
+    img: `${SITE}/images/blogs/Nepal_EV_Policy_2026_Commercial_EV_Microbus_Incentives_in_Pokhara.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "nepal-ev-policy-2026": {
+    title: "Nepal EV Policy 2026: Commercial EV Microbus Incentives in Pokhara",
+    excerpt: "What does Nepal's EV policy mean for commercial microbus operators in Pokhara in 2026? We break down the incentives, tax benefits, and what they mean for your business.",
+    img: `${SITE}/images/blogs/Nepal_EV_Policy_2026_Commercial_EV_Microbus_Incentives_in_Pokhara.webp`,
+    date: "2026-05-10",
+    category: "Policy",
+  },
+  "petrol-vs-ev-running-costs-nepal": {
+    title: "Petrol vs. EV Running Costs in Nepal: The Everyday Math",
+    excerpt: "How much cheaper is an EV to run compared to a petrol vehicle in Nepal? We do the everyday math on fuel costs, maintenance, and total running expenses.",
+    img: `${SITE}/images/blogs/Petrol_vs._EV_Running_Costs_in_Nepal_The_Everyday_Math.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "pokhara-chitwan-kathmandu-ev-tourism-route-guide": {
+    title: "Pokhara-Chitwan-Kathmandu Triangle: EV Tourism Route Guide",
+    excerpt: "Planning an EV road trip across Nepal's tourism triangle? Our guide covers charging stops, range planning, and route tips for the Pokhara-Chitwan-Kathmandu circuit.",
+    img: `${SITE}/images/blogs/Pokhara-Chitwan-Kathmandu_Triangle_EV_Tourism_Route_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "pokhara-to-kathmandu-electric-microbus-highway-guide": {
+    title: "Pokhara to Kathmandu Electric Microbus Highway Range Guide",
+    excerpt: "Can the Chery Wanda EV microbus make the Pokhara-Kathmandu highway run? Our detailed range guide covers charging stops, travel time, and route planning.",
+    img: `${SITE}/images/blogs/Pokhara_to_Kathmandu_Electric_Microbus_Highway_Range_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "premium-airport-shuttle-hotel-hospitality-ev": {
+    title: "Premium Airport Shuttle & Hotel EV: Hospitality Fleet Guide",
+    excerpt: "Hotels and resorts in Pokhara are upgrading to EV shuttles. Learn how the Chery Wanda EV microbus is becoming the go-to airport and hotel transfer vehicle.",
+    img: `${SITE}/images/blogs/wadashow.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "ramro-ev-gadi-nepal-chery-wanda-build-quality": {
+    title: "Ramro EV Gadi Nepal: Chery Wanda Build Quality Deep Dive",
+    excerpt: "Is the Chery Wanda truly a ramro EV gadi for Nepal? We assess build quality, material durability, and long-term reliability for harsh Nepali road conditions.",
+    img: `${SITE}/images/blogs/wadashow.webp`,
+    date: "2026-07-13",
+    category: "Technology",
+  },
+  "ramro-ev-gadi-price-nepal-chery-wanda-value": {
+    title: "Ramro EV Gadi Price in Nepal: Chery Wanda Value Analysis",
+    excerpt: "Is the Chery Wanda the best value EV gadi available in Nepal today? Our price-vs-value analysis compares it against alternatives for commercial buyers.",
+    img: `${SITE}/images/blogs/wadashow.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "route-permits-commercial-ev-nepal-yatayat-guide": {
+    title: "Route Permits for Commercial EVs: A Nepal Transport Guide",
+    excerpt: "How do you get route permits for a commercial EV in Nepal? Our step-by-step yatayat guide covers the Yatayat Karyalaya process for Chery Wanda operators.",
+    img: `${SITE}/images/blogs/Route_Permits_for_Commercial_EVs_A_Nepal_Transport_Guide.webp`,
+    date: "2026-07-13",
+    category: "Policy",
+  },
+  "school-bus-costs-nepal-ev-fleet-academies": {
+    title: "School Bus Costs in Nepal: Why Academies Are Switching to EVs",
+    excerpt: "Private schools and academies across Nepal are replacing diesel school buses with EV microbuses. We break down the cost savings and why the Chery Wanda wins.",
+    img: `${SITE}/images/blogs/School_Bus_Costs_in_Nepal_Why_Academies_are_Switching_to_EVs.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "second-hand-van-vs-naya-chery-wanda-ev-guide": {
+    title: "Second-Hand Diesel Van vs. Naya Chery Wanda EV: Capital Guide",
+    excerpt: "Should you buy a used diesel van or a new Chery Wanda EV? Our capital guide compares upfront cost, reliability, and total cost of ownership for Nepal operators.",
+    img: `${SITE}/images/blogs/Second_Hand_Diesel_Van_vs._Naya_Chery_Wanda_EV_Capital_Guide.webp`,
+    date: "2026-07-13",
+    category: "Insights",
+  },
+  "trijal-motors-showroom-pokhara": {
+    title: "Visit Our Showroom in Pokhara-14, Chauthe",
+    excerpt: "Our Pokhara showroom has the Chery Wanda EV microbus on display year-round. Here's what to expect when you visit Trijal Motors and how to get here.",
+    img: `${SITE}/images/showroom.webp`,
+    date: "2026-05-02",
+    category: "About Us",
+  },
+  "wada-auto-show-pokhara-2026": {
+    title: "Trijal Motors at WADA Auto Show Pokhara 2026",
+    excerpt: "We showcased the full Chery Wanda EV lineup at the WADA Auto Show in Pokhara. See the highlights from Gandaki Province's biggest automotive exhibition.",
+    img: `${SITE}/images/blogs/wadashow.webp`,
+    date: "2026-07-14",
+    category: "Events",
+  },
+  "why-chery-wanda-beats-diesel-nepal": {
+    title: "Why the Chery Wanda EV Microbus Beats Diesel in Nepal",
+    excerpt: "A detailed cost breakdown comparing the Chery Wanda electric microbus against equivalent diesel microbuses on typical Gandaki Province routes.",
+    img: `${SITE}/images/blogs/Why_the_Chery_Wanda_EV_Microbus_Beats_Diesel_in_Nepal.webp`,
+    date: "2026-04-12",
+    category: "Insights",
+  },
+};
+
+// ── Bot detection ─────────────────────────────────────────────────────────────
+function isCrawler(ua: string): boolean {
+  const crawlers = [
+    "googlebot", "bingbot", "slurp", "duckduckbot", "baiduspider", "yandexbot",
+    "facebookexternalhit", "facebot", "twitterbot", "linkedinbot",
+    "whatsapp", "slackbot", "telegrambot", "discordbot",
+    "applebot", "semrushbot", "ahrefsbot", "mj12bot",
+    "pinterest", "vkshare", "w3c_validator", "ia_archiver",
+    "perplexitybot", "gptbot", "chatgpt-user", "anthropic-ai", "claudebot",
+    "google-extended", "cohere-ai", "amazonbot",
   ];
   const lower = ua.toLowerCase();
-  return bots.some((b) => lower.includes(b));
+  return crawlers.some((b) => lower.includes(b));
 }
 
-// ── Edge function handler ──────────────────────────────────────────────────────
+// ── Edge function handler ─────────────────────────────────────────────────────
 export default async function handler(request: Request): Promise<Response | undefined> {
   const url = new URL(request.url);
   const ua = request.headers.get("user-agent") ?? "";
+  const pathname = url.pathname.replace(/\/$/, "") || "/";
 
-  // Only intercept /blog/:slug paths
-  const match = url.pathname.match(/^\/blog\/([^/]+)\/?$/);
-  if (!match) return; // pass through for non-blog URLs
+  if (!isCrawler(ua)) return; // let regular users go straight to SPA
 
-  // Only rewrite for social bots — regular users get normal SPA
-  if (!isSocialBot(ua)) return;
+  // Resolve page meta
+  let meta: { title: string; description: string; ogImage?: string; canonical?: string; articleDate?: string; articleCategory?: string } | null = null;
 
-  const slug = match[1];
-  const post = posts[slug];
+  const staticPage = STATIC_PAGES[pathname];
+  if (staticPage) {
+    meta = {
+      title: staticPage.title,
+      description: staticPage.description,
+      canonical: `${SITE}${pathname === "/" ? "/" : pathname}`,
+      ogImage: `${SITE}/images/og-image.jpg`,
+    };
+  } else {
+    const blogMatch = pathname.match(/^\/blog\/([^/]+)$/);
+    if (blogMatch) {
+      const slug = blogMatch[1];
+      const post = BLOG_POSTS[slug];
+      if (post) {
+        meta = {
+          title: `${post.title} | Trijal Motors Blog`,
+          description: post.excerpt,
+          canonical: `${SITE}/blog/${slug}`,
+          ogImage: post.img,
+          articleDate: new Date(post.date).toISOString(),
+          articleCategory: post.category,
+        };
+      }
+    }
+  }
 
-  // Unknown slug — fall through to SPA (will show 404 in app)
-  if (!post) return;
+  if (!meta) return; // unknown route — pass through
 
-  // Fetch the original index.html from the CDN
+  // Fetch index.html
   const origin = new URL(request.url).origin;
   const res = await fetch(`${origin}/index.html`);
   let html = await res.text();
 
-  const pageUrl = `${SITE}/blog/${slug}`;
-  const fullTitle = `${post.title} | Trijal Motors Blog`;
-  const publishedISO = new Date(post.date).toISOString();
+  const isArticle = !!meta.articleDate;
+  const fullTitle = meta.title;
+  const canonical = meta.canonical!;
+  const ogImage = meta.ogImage ?? `${SITE}/images/og-image.jpg`;
 
-  // Build the injected meta block
-  const ogBlock = `
+  const injected = `
   <!-- injected by og-meta edge function -->
   <title>${fullTitle}</title>
-  <meta name="description" content="${post.excerpt}" />
-  <link rel="canonical" href="${pageUrl}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="${pageUrl}" />
+  <meta name="description" content="${meta.description}" />
+  <link rel="canonical" href="${canonical}" />
+  <meta property="og:type" content="${isArticle ? "article" : "website"}" />
+  <meta property="og:url" content="${canonical}" />
   <meta property="og:title" content="${fullTitle}" />
-  <meta property="og:description" content="${post.excerpt}" />
-  <meta property="og:image" content="${post.img}" />
+  <meta property="og:description" content="${meta.description}" />
+  <meta property="og:image" content="${ogImage}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Trijal Motors Pvt. Ltd." />
-  <meta property="article:published_time" content="${publishedISO}" />
+  <meta property="og:locale" content="en_NP" />${isArticle ? `
+  <meta property="article:published_time" content="${meta.articleDate}" />
   <meta property="article:author" content="Trijal Motors Pvt. Ltd." />
-  <meta property="article:section" content="${post.category}" />
+  <meta property="article:section" content="${meta.articleCategory}" />` : ""}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${fullTitle}" />
-  <meta name="twitter:description" content="${post.excerpt}" />
-  <meta name="twitter:image" content="${post.img}" />`;
+  <meta name="twitter:description" content="${meta.description}" />
+  <meta name="twitter:image" content="${ogImage}" />`;
 
-  // Replace existing generic og tags + title with post-specific ones
-  // We strip the generic OG tags first, then inject ours right before </head>
   html = html
     .replace(/<title>[^<]*<\/title>/, "")
     .replace(/<meta property="og:[^"]*"[^>]*>/g, "")
     .replace(/<meta name="twitter:[^"]*"[^>]*>/g, "")
     .replace(/<meta name="description"[^>]*>/g, "")
     .replace(/<link rel="canonical"[^>]*>/g, "")
-    .replace("</head>", `${ogBlock}\n</head>`);
+    .replace("</head>", `${injected}\n</head>`);
 
   return new Response(html, {
     headers: {
@@ -151,4 +422,5 @@ export default async function handler(request: Request): Promise<Response | unde
   });
 }
 
-export const config = { path: "/blog/*" };
+// Cover all routes — not just /blog/*
+export const config = { path: "/*" };
