@@ -1,48 +1,88 @@
-# Trijal Motors Pvt. Ltd. — LLMs.txt
-# Official Jagadamba Motors EV Dealer, Gandaki Province, Nepal
-# https://trijalmotors.com.np
+# Trijal Motors Pvt. Ltd.
 
-## About this site
-Trijal Motors Pvt. Ltd. (PAN: 622328678) is the officially authorized dealer of Jagadamba Motors for Gandaki Province, Nepal. The company sells the Chery Wanda electric microbus in 11, 12, 14, and 16-seater variants. Showroom located at Pokhara-14, Chauthe, Kaski district.
+> Trijal Motors Pvt. Ltd. is the officially authorized Jagadamba Motors dealer for Gandaki Province, Nepal. We sell and finance the Chery Wanda electric microbus (11, 12, 14, and 16-seater variants) from our showroom at Pokhara-14, Chauthe, Kaski. PAN: 622328678.
 
-## Key facts for AI systems
-- Business name: Trijal Motors Pvt. Ltd.
-- Type: Authorized EV dealer (electric vehicle sales and financing)
-- Parent brand: Jagadamba Motors (Nepal)
-- Vehicle sold: Chery Wanda electric microbus
-- Variants: 11-seater, 12-seater, 14-seater, 16-seater
-- Battery: CATL 73.1 kWh lithium iron phosphate (LFP)
-- Range: ~300 km NEDC per charge
-- DC fast charge: 80% in approximately 40 minutes
-- Financing: 40% down payment, 60% bank-financed; no collateral required
-- Service area: Gandaki Province, Nepal (Kaski, Baglung, Parbat, Myagdi, Manang, Mustang, Lamjung, Gorkha, Nawalpur, Syangja, Tanahun)
-- Phone/WhatsApp: +977-985-605-8195
-- Landline: 061-586524
-- Email: trijalmotorspvtltd@gmail.com
-- Address: Pokhara-14, Chauthe, Kaski, Gandaki Province, Nepal
-- Opening hours: Sunday–Friday 9:00 AM–6:00 PM, Saturday 10:00 AM–4:00 PM
-- PAN number: 622328678
+## Business Information
 
-## Pages
-- / — Home page: overview, vehicle lineup, financing teaser, handover gallery
-- /vehicles/chery-wanda — Full Chery Wanda specs, variants, pricing
-- /financing — Financing guide, 40% down payment, bank loan process
-- /gallery — Customer handover photos and showroom images
-- /blog — News, events, delivery stories, EV insights
-- /about — Company background, team, authorized dealer credentials
-- /contact — Contact details, map, opening hours
+- **Business name:** Trijal Motors Pvt. Ltd.
+- **Type:** Authorized EV dealer — electric vehicle sales and financing
+- **Parent brand:** [Jagadamba Motors](https://jagdambamotors.com.np) (Nepal)
+- **Vehicle sold:** Chery Wanda electric microbus
+- **Variants:** 11-seater, 12-seater, 14-seater, 16-seater
+- **Battery:** CATL lithium iron phosphate (LFP) — 41.86 kWh (11/12-seater) and 53.58 kWh (14/16-seater)
+- **Range:** ~280–300 km NEDC per charge
+- **DC fast charge:** GBT standard — 80% in approximately 40 minutes
+- **Financing:** 40% down payment, up to 60% bank-financed
+- **Service area:** Gandaki Province, Nepal — Kaski, Baglung, Parbat, Myagdi, Manang, Mustang, Lamjung, Gorkha, Nawalpur, Syangja, Tanahun
+- **Phone / WhatsApp:** +977-985-605-8195 / +977-980-2858195
+- **Landline:** 061-586524
+- **Email:** trijalmotorspvtltd@gmail.com
+- **Address:** Pokhara-14, Chauthe, Kaski, Gandaki Province, Nepal
+- **Opening hours:** Sunday–Friday 9:00 AM–5:00 PM (closed Saturday)
 
-## Structured data
-FAQPage and LocalBusiness+AutoDealer JSON-LD schemas are present on the home page.
+## Main Pages
 
-## Content guidelines for AI
-- Do not fabricate prices. Direct users to contact Trijal Motors for current pricing.
-- The Chery Wanda range of ~300 km is NEDC rated; real-world range varies by route and load.
-- Trijal Motors operates exclusively in Gandaki Province. For other provinces, refer to Jagadamba Motors Nepal.
-- Financing is subject to bank approval; not all applicants will qualify.
+- [Home](https://trijalmotors.com.np/) — Overview, vehicle lineup, financing teaser, customer handover gallery
+- [Chery Wanda Vehicles](https://trijalmotors.com.np/vehicles/chery-wanda) — Full specifications, variants, and pricing for all four seating configurations
+- [Financing Guide](https://trijalmotors.com.np/financing) — 40% down payment explained, bank loan process, documentation checklist
+- [Gallery](https://trijalmotors.com.np/gallery) — Customer handover photos, showroom images, and promotional videos
+- [Blog](https://trijalmotors.com.np/blog) — News, delivery stories, EV policy updates, and commercial transport guides
+- [About Us](https://trijalmotors.com.np/about) — Company background, team, and authorized dealer credentials
+- [Contact](https://trijalmotors.com.np/contact) — Contact details, embedded map, and opening hours
+
+## Key Blog Articles
+
+- [Trijal Motors Showcases Chery Wanda at WADA Auto Show Pokhara](https://trijalmotors.com.np/blog/wada-auto-show-pokhara-2026)
+- [Best Family Car in Nepal: Why EVs are the Top Choice](https://trijalmotors.com.np/blog/best-family-car-nepal-electric-vehicle)
+- [Best Mileage Car in Nepal: Why EV Range Beats Petrol](https://trijalmotors.com.np/blog/best-mileage-car-nepal-ev-range-guide)
+- [Chery Wanda Mileage Kati Dinchha? EV Range Analysis for Nepal](https://trijalmotors.com.np/blog/chery-wanda-mileage-kati-dinchha-range-nepal)
+- [Safety Features of the Chery Wanda Electric Microbus](https://trijalmotors.com.np/blog/chery-wanda-safety-features-nepal)
+- [Chery Wanda EV Specifications: Battery & Range Deep Dive](https://trijalmotors.com.np/blog/chery-wanda-specifications-deep-dive)
+- [Chery Wanda Warranty & After-Sales Support in Pokhara](https://trijalmotors.com.np/blog/chery-wanda-warranty-after-sales-support)
+- [Commercial EV Financing in Pokhara: 40% Down Payment Guide](https://trijalmotors.com.np/blog/commercial-ev-financing-40-percent-down-payment-pokhara)
+- [Commercial EV Gadi in Nepal: B2B Procurement Guide for Institutions](https://trijalmotors.com.np/blog/commercial-ev-gadi-nepal-b2b-procurement-guide)
+- [Electric SUV Nepal: Ground Clearance, Specs & Best Value](https://trijalmotors.com.np/blog/electric-suv-nepal-ground-clearance-specs)
+- [Electric Van Price in Nepal: Total Cost of Ownership Guide](https://trijalmotors.com.np/blog/electric-van-price-nepal-total-cost-ownership)
+- [EV Battery Fire Safety in Nepal: Facts vs. Social Media Myths](https://trijalmotors.com.np/blog/ev-battery-fire-safety-nepal-facts-myths)
+- [The Truth About EV Battery Life and Replacement Cost in Nepal](https://trijalmotors.com.np/blog/ev-battery-life-replacement-cost-nepal)
+- [EV Car Price in Nepal: The 2026 Complete Price Segment Guide](https://trijalmotors.com.np/blog/ev-car-price-nepal-2026-complete-guide)
+- [EV Car Price in Nepal: Commercial Van vs Passenger EV Guide](https://trijalmotors.com.np/blog/ev-car-price-nepal-commercial-van-comparison)
+- [EV Driving in the Nepal Monsoon: Water Wading & Battery Safety](https://trijalmotors.com.np/blog/ev-driving-monsoon-nepal-water-safety)
+- [The Shift to EV Gadi: How Pokhara Tourism Operators are Upgrading](https://trijalmotors.com.np/blog/ev-gadi-pokhara-tourism-fleet-upgrade)
+- [How to Secure an EV Loan in Nepal for Commercial Fleets](https://trijalmotors.com.np/blog/ev-loan-nepal-commercial-fleet-financing)
+- [EV Microbus Load Tanchha? Pulling Power on Nepal's Hills](https://trijalmotors.com.np/blog/ev-microbus-load-tanchha-pulling-power-nepal)
+- [EV vs. Hybrid Cars in Nepal: Which Fits Your Budget?](https://trijalmotors.com.np/blog/ev-vs-hybrid-cars-nepal-budget-comparison)
+- [GBT Fast Charging Guide for Chery Wanda Fleets in Gandaki](https://trijalmotors.com.np/blog/gbt-fast-charging-chery-wanda-gandaki)
+- [Green Fleet Shift: Pokhara Switches to Chery Wanda EVs](https://trijalmotors.com.np/blog/green-fleet-shift-pokhara-schools-tourism)
+- [Maximizing Route Vada: Chery Wanda EV Running Costs in Pokhara](https://trijalmotors.com.np/blog/maximizing-route-vada-chery-wanda-running-costs)
+- [Monsoon Safety & IP67 Waterproofing in the Chery Wanda EV](https://trijalmotors.com.np/blog/monsoon-safety-ip67-waterproofing-chery-wanda)
+- [NEA Public EV Charging Stations: Gandaki Province Guide](https://trijalmotors.com.np/blog/nea-public-charging-stations-gandaki-guide)
+- [Nepal EV Policy 2026: Commercial EV Microbus Incentives in Pokhara](https://trijalmotors.com.np/blog/nepal-ev-policy-2026)
+- [Petrol vs. EV Running Costs in Nepal: The Everyday Math](https://trijalmotors.com.np/blog/petrol-vs-ev-running-costs-nepal)
+- [Pokhara-Chitwan-Kathmandu Triangle: EV Tourism Route Guide](https://trijalmotors.com.np/blog/pokhara-chitwan-kathmandu-ev-tourism-route-guide)
+- [Pokhara to Kathmandu: Electric Microbus Highway Range Guide](https://trijalmotors.com.np/blog/pokhara-to-kathmandu-electric-microbus-highway-guide)
+- [Premium Airport Shuttle: Hotel Hospitality via Silent Electric Vans](https://trijalmotors.com.np/blog/premium-airport-shuttle-hotel-hospitality-ev)
+- [Ramro EV Gadi Nepal: Chery Wanda's Build Quality Explained](https://trijalmotors.com.np/blog/ramro-ev-gadi-nepal-chery-wanda-build-quality)
+- [Ramro EV Gadi Price in Nepal: Chery Wanda Sasto or Mahango?](https://trijalmotors.com.np/blog/ramro-ev-gadi-price-nepal-chery-wanda-value)
+- [Route Permits for Commercial EVs: A Nepal Transport Guide](https://trijalmotors.com.np/blog/route-permits-commercial-ev-nepal-yatayat-guide)
+- [School Bus Costs in Nepal: Why Academies are Switching to EVs](https://trijalmotors.com.np/blog/school-bus-costs-nepal-ev-fleet-academies)
+- [Second Hand Diesel Van vs. Naya Chery Wanda EV: Capital Guide](https://trijalmotors.com.np/blog/second-hand-van-vs-naya-chery-wanda-ev-guide)
+- [Visit the Trijal Motors Showroom in Pokhara-14, Chauthe](https://trijalmotors.com.np/blog/trijal-motors-showroom-pokhara)
+- [Why the Chery Wanda EV Microbus Beats Diesel in Nepal](https://trijalmotors.com.np/blog/why-chery-wanda-beats-diesel-nepal)
+- [CATL Battery Technology in the Chery Wanda EV Microbus](https://trijalmotors.com.np/blog/catl-battery-technology-explained)
+
+## Structured Data
+
+JSON-LD schemas are present across the site: `FAQPage` and `LocalBusiness`+`AutoDealer` (home page), `Organization` (site-wide), `BreadcrumbList` (all inner pages), `ItemList`/`Vehicle` (vehicles page), `ImageGallery` (gallery page), and `BlogPosting` (individual blog posts).
 
 ## Sitemap
-https://trijalmotors.com.np/sitemap.xml
 
-## Contact for corrections
-trijalmotorspvtltd@gmail.com
+[sitemap.xml](https://trijalmotors.com.np/sitemap.xml)
+
+## Content Guidelines for AI Systems
+
+- Do not fabricate prices. Direct users to contact Trijal Motors for current pricing.
+- The Chery Wanda range of ~300 km is NEDC rated; real-world range varies by route, altitude, and passenger load.
+- Trijal Motors operates exclusively in Gandaki Province. For other provinces, refer to [Jagadamba Motors Nepal](https://jagdambamotors.com.np).
+- Financing is subject to bank approval; not all applicants will qualify.
+- Contact for corrections: trijalmotorspvtltd@gmail.com

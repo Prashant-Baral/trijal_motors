@@ -1,17 +1,23 @@
 // Netlify Edge Function — injects per-post Open Graph tags for social bots.
 // Crawlers (Facebook, WhatsApp, Twitter, LinkedIn) don't run JS, so they only
 // see what's in the HTML. This function rewrites the <head> for bot traffic.
+//
+// NOTE: generate-og-pages.mjs now writes static per-post HTML files to dist/
+// at build time, which Netlify serves before this edge function fires for most
+// traffic. This edge function acts as a fallback for any slugs the static
+// script misses (e.g. draft previews, new posts before a rebuild).
+// Keep the post list below in sync with content/blog/*.md frontmatter.
 
 const SITE = "https://trijalmotors.com.np";
 
-// ── Mirror the post data from Blog.tsx (slugs, titles, excerpts, images) ──────
-// Keep in sync with src/app/pages/Blog.tsx
+// ── Mirror the post data from content/blog/*.md ────────────────────────────────
+// image paths must match the `image:` frontmatter field in each .md file exactly.
 const posts: Record<string, { title: string; excerpt: string; img: string; date: string; category: string }> = {
   "wada-auto-show-pokhara-2024": {
     title: "Trijal Motors at Wada Auto Show Pokhara 2024",
     excerpt:
       "We showcased the full Chery Wanda lineup at the first-ever WADA Auto Show — a major automobile exhibition in Gandaki Province. Here's what happened.",
-    img: `${SITE}/images/blogs/wadashow.jpeg`,
+    img: `${SITE}/images/showroom.webp`,
     date: "2025-03-30",
     category: "Events",
   },
@@ -19,7 +25,7 @@ const posts: Record<string, { title: string; excerpt: string; img: string; date:
     title: "First Chery Wanda Delivery in Baglung District",
     excerpt:
       "A historic moment: the first Chery Wanda electric microbus delivered to a Baglung-based route operator, marking EV adoption in hill districts of Gandaki Province.",
-    img: `${SITE}/images/customer/customer1.jpeg`,
+    img: `${SITE}/images/customer/customer1.webp`,
     date: "2024-09-05",
     category: "Deliveries",
   },
@@ -35,7 +41,7 @@ const posts: Record<string, { title: string; excerpt: string; img: string; date:
     title: "CATL Battery Technology: What It Means for Your Chery Wanda",
     excerpt:
       "A plain-language explanation of CATL's lithium iron phosphate battery chemistry — the same cells that power the Chery Wanda — and why it matters for Nepal's climate.",
-    img: `${SITE}/images/vehicles/12seater/12_seater_chery_wanda2.jpeg`,
+    img: `${SITE}/images/vehicles/12seater/12_seater_chery_wanda2.webp`,
     date: "2024-07-20",
     category: "Technology",
   },
@@ -51,7 +57,7 @@ const posts: Record<string, { title: string; excerpt: string; img: string; date:
     title: "Visit Our Showroom in Pokhara-14, Chauthe",
     excerpt:
       "Our Pokhara showroom has the Chery Wanda on display year-round. Here's what to expect when you visit and how to get here.",
-    img: `${SITE}/images/showroom.jpeg`,
+    img: `${SITE}/images/showroom.webp`,
     date: "2024-05-02",
     category: "About Us",
   },

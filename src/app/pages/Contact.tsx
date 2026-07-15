@@ -1,13 +1,21 @@
 import { ChevronRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { C, wa, EMAIL, BtnRed, SectionHead } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
-
+import { BreadcrumbSchema, LocalBusinessSchema } from "../components/SeoSchemas";
 const MAPS_SRC = "https://maps.google.com/maps?width=600&height=400&hl=en&q=Trijal+Motors+Pvt+Ltd+Chauthe+Pokhara-14,+%E0%A4%AA%E0%A5%8B%E0%A4%96%E0%A4%B0%E0%A4%BE+33700,+Nepal&t=h&z=19&ie=UTF8&iwloc=B&output=embed";
-
 export default function Contact() {
   return (
     <>
       <PageMeta {...pageMeta.contact} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://trijalmotors.com.np/" },
+          { name: "Contact", url: "https://trijalmotors.com.np/contact" },
+        ]}
+      />
+      {/* This is the most relevant page on the site for LocalBusiness
+          markup — address/hours/phone are all right here and match. */}
+      <LocalBusinessSchema />
       {/* Header */}
       <div style={{ background: C.black, paddingTop: 36, paddingBottom: 28 }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -19,21 +27,19 @@ export default function Contact() {
           </h1>
         </div>
       </div>
-
       {/* Contact + Map */}
       <section style={{ background: C.white }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Left: Info card */}
           <div className="flex flex-col gap-6">
             <SectionHead eyebrow="Contact information" title="Visit or call us" />
-
             {/* Info list */}
             <div className="flex flex-col gap-0" style={{ border: `1px solid ${C.border}`, borderRadius: 18, overflow: "hidden" }}>
               {[
                 { icon: <MapPin size={16} color={C.red} />, label: "Address", value: "Pokhara-14, Chauthe, Kaski\nGandaki Province, Nepal 33700" },
-                { icon: <Phone size={16} color={C.red} />, label: "Phone / WhatsApp", value: "+977 985-605-8195" },
+                { icon: <Phone size={16} color={C.red} />, label: "Phone / WhatsApp", value: "+977 985-605-8195\n+977 980-2858195\n061-1586524" },
                 { icon: <Mail size={16} color={C.red} />, label: "Email", value: EMAIL },
-                { icon: <Clock size={16} color={C.red} />, label: "Showroom hours", value: "Sun–Fri  9:00 AM – 6:00 PM\nSat  10:00 AM – 4:00 PM" },
+                { icon: <Clock size={16} color={C.red} />, label: "Showroom hours", value: "Sunday & Mon–Fri  9:00 AM – 5:00 PM\nSaturday  Closed" },
               ].map((row, i, arr) => (
                 <div key={row.label} className="flex items-start gap-4 px-6 py-5"
                   style={{ borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none", background: i % 2 === 0 ? C.white : C.offWhite }}>
@@ -45,7 +51,6 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-
             {/* CTA */}
             <div className="flex flex-col gap-3">
               <BtnRed href={wa("Hi, I'd like to contact Trijal Motors to enquire about an EV purchase.")}>
@@ -63,7 +68,6 @@ export default function Contact() {
               </a>
             </div>
           </div>
-
           {/* Right: Map embed */}
           <div className="flex flex-col gap-4">
             <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: C.grayLight, textTransform: "uppercase", letterSpacing: "0.14em", marginBottom: 2 }}>Showroom location</p>
@@ -85,7 +89,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
       {/* WhatsApp CTA Banner */}
       <section style={{ background: C.maroon }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-6">

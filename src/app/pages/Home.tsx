@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Award, Shield, CreditCard, Zap, Facebook, ArrowRight, Star, Quote, ChevronDown, ChevronLeft } from "lucide-react";
 import { C, wa, IMG, BtnRed, BtnOutline, SectionHead } from "../shared";
-import { FaqSchema, LocalBusinessSchema } from "../components/SeoSchemas";
+import { FaqSchema, LocalBusinessSchema, OrganizationSchema, BreadcrumbSchema } from "../components/SeoSchemas";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 
 // ─── Hero — white bg, exact v9 layout ────────────────────────────────────────
@@ -16,7 +16,7 @@ function Hero() {
       {/* Real logo watermark */}
       <div className="absolute right-0 top-1/2 pointer-events-none select-none hidden md:block"
         style={{ opacity: 0.05, transform: "translateY(-60%) translateX(0%)" }}>
-        <img src={IMG.logoEmblem} alt="" style={{ width: 460, height: "auto" }} />
+        <img src={IMG.logoEagle} alt="" style={{ width: 460, height: "auto" }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-14 py-16 md:py-20">
@@ -83,10 +83,14 @@ function Hero() {
 
 // ─── Full-width slideshow — unchanged ─────────────────────────────────────────
 const heroSlides = [
-  { img: IMG.seater_16_d, caption: "Chery Wanda · 16-Seater", loc: "Pokhara, Gandaki Province" },
+
+  { img: IMG.seater_14_d, caption: "Chery Wanda · 14-Seater", loc: "Pokhara, Gandaki Province" },
   { img: IMG.seater_12_a, caption: "Chery Wanda · Chery Wanda 12-Seater", loc: "Pokhara, Gandaki Province" },
+  { img: IMG.seater_14_i, caption: "Chery Wanda · Chery Wanda 14-Seater", loc: "Pokhara, Gandaki Province" },
+  { img: IMG.seater_16_d, caption: "Chery Wanda · 16-Seater", loc: "Pokhara, Gandaki Province" },
+  { img: IMG.seater_16_i, caption: "Chery Wanda · Chery Wanda 16-Seater", loc: "Pokhara, Gandaki Province" },
   { img: IMG.customer10, caption: "Handover · Chery Wanda 11-Seater", loc: "CATL Battery · 300 km NEDC range" },
-  { img: IMG.customer4, caption: "Handover · Chery Wanda 16-seater", loc: "Gandaki Province" },
+  { img: IMG.customer8, caption: "Handover · Chery Wanda 14-seater", loc: "Gandaki Province" },
   { img: IMG.pokhara, caption: "Chery Wanda", loc: "Pokhara, Gandaki Province" },
 ];
 
@@ -170,10 +174,10 @@ function TrustStrip() {
 
 // ─── Vehicle cards ────────────────────────────────────────────────────────────
 const variants = [
-  { seats: "11", tag: "Entry", price: "Rs 48,90,,000", img: IMG.seater_11_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
-  { seats: "12", tag: "Popular", price: "Rs 49,90,000", img: IMG.seater_12_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
-  { seats: "14", tag: "Popular", price: "Rs 59,50,000", img: IMG.seater_14_a, specs: "CATL 53.58 kWh · 300 km NEDC · 80 kW" },
-  { seats: "16", tag: "Best Seller", price: "Rs 68,50,000", img: IMG.seater_16_a, specs: "CATL 53.58 kWh · 280 km NEDC · 80 kW" },
+  { seats: "11", tag: "Entry", price: "11 seater", img: IMG.seater_11_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
+  { seats: "12", tag: "Popular", price: "12 seater", img: IMG.seater_12_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
+  { seats: "14", tag: "Popular", price: "14 seater", img: IMG.seater_14_a, specs: "CATL 53.58 kWh · 300 km NEDC · 80 kW" },
+  { seats: "16", tag: "Best Seller", price: "16 seater", img: IMG.seater_16_a, specs: "CATL 53.58 kWh · 280 km NEDC · 80 kW" },
 ];
 
 function VehiclePreview() {
@@ -219,7 +223,7 @@ function VehiclePreview() {
                 <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, fontWeight: 700, color: C.red, lineHeight: 1 }}>{v.price}</p>
                 <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 8, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", textTransform: "uppercase" }}
                   className="hidden">ex-showroom</p>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: C.grayLight, lineHeight: 1.5 }}>{v.specs}</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: C.black, lineHeight: 1.5 }}>{v.specs}</p>
               </div>
             </div>
           ))}
@@ -260,16 +264,14 @@ function FinancingTeaser() {
             { label: "Down payment", value: "40%", accent: false },
             { label: "Financed amount", value: "60%", accent: false },
             { label: "Loan type", value: "Bank loan (Nepal)", accent: false },
-            { label: "Chery Wanda 11-Seater from", value: "Rs 48,90,000", accent: true },
-            { label: "Chery Wanda 16-Seater", value: "Rs 68,50,000", accent: true },
           ].map((row, i) => (
-            <div key={row.label} className="flex items-center justify-between px-6 py-4" style={{ borderBottom: i < 4 ? `1px solid ${C.border}` : "none", background: i % 2 === 0 ? C.white : C.offWhite }}>
+            <div key={row.label} className="flex items-center justify-between px-6 py-4" style={{ borderBottom: `1px solid ${C.border}`, background: i % 2 === 0 ? C.white : C.offWhite }}>
               <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.gray }}>{row.label}</span>
               <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 15, fontWeight: 600, color: row.accent ? C.red : C.black }}>{row.value}</span>
             </div>
           ))}
           <div className="px-6 py-3" style={{ background: C.offWhite }}>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.grayLight }}>*Finance subject to bank approval. Ex-showroom price, Kathmandu.</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.grayLight }}>*Finance subject to bank approval. Exact price quoted per variant on request.</p>
           </div>
         </div>
       </div>
@@ -279,12 +281,12 @@ function FinancingTeaser() {
 
 // ─── Handover photo grid ──────────────────────────────────────────────────────
 const handoverPhotos = [
-  { img: IMG.customer1, caption: "[ph] Handover · Chery Wanda 14-Seater · Pokhara" },
+  { img: IMG.ecustomer9, caption: "[ph] Handover · Chery Wanda 14-Seater · Pokhara" },
   { img: IMG.customer2, caption: "[ph] Handover · Chery Wanda 12-Seater · Baglung" },
   { img: IMG.customer3, caption: "[ph] Handover · Chery Wanda · Gandaki Province" },
-  { img: IMG.customer4, caption: "[ph] Handover · Chery Wanda 16-Seater · Pokhara" },
-  { img: IMG.showroom, caption: "[ph] Showroom · Pokhara-14, Chauthe" },
-  { img: IMG.pokhara, caption: "[ph] Serving all of Gandaki Province" },
+  { img: IMG.ecustomer11, caption: "[ph] Handover · Chery Wanda 16-Seater · Pokhara" },
+  { img: IMG.customer12, caption: "[ph] Handover · Chery Wanda 16-Seater · Pokhara" },
+  { img: IMG.customer6, caption: "[ph] Handover · Chery Wanda 16-Seater · Pokhara" },
 ];
 
 function HandoverSection() {
@@ -314,12 +316,56 @@ function HandoverSection() {
 
 // ─── Customer stories ─────────────────────────────────────────────────────────
 const reviews = [
-  { name: "Ram Bahadur Thapa", location: "Pokhara → Beni route", vehicle: "Chery Wanda 14-Seater", rating: 5, text: "हाम्रो यात्रा व्यवसाय पूर्णरूपमा बदलिएको छ। Chery Wanda को एक charge ले पूरा दिन चल्छ। Trijal Motors को team ले सबै documentation मा help गर्नुभयो।", photo: IMG.customer4 },
-  { name: "Sushila Gurung", location: "Pokhara Tourism Operator", vehicle: "Chery Wanda 16-Seater", rating: 5, text: "Tourist guests हरू EV मा travel गर्न रमाइलो मान्नुहुन्छ — quiet, clean, professional. The Chery Wanda has enough range for all our Pokhara valley circuits without needing to recharge mid-day.", photo: IMG.customer7 },
-  { name: "Bikram Shrestha", location: "Baglung School Route", vehicle: "Chery Wanda 12-Seater", rating: 5, text: "School van को लागि diesel बाट EV मा switch गरेपछि fuel cost 70% कम भयो। Trijal Motors ले loan process मा पनि राम्रो guidance दिनुभयो। Very happy.", photo: IMG.customer8 },
-  { name: "Hari Prasad Adhikari", location: "Kaski District Operator", vehicle: "Chery Wanda 16-Seater", rating: 5, text: "16-seater लिएको धेरै राम्रो निर्णय भयो। Passengers comfortable छन्, maintenance cost diesel vanको तुलनामा धेरै कम छ। Highly recommend Trijal Motors.", photo: IMG.customer5 },
-  { name: "Parbati Magar", location: "Pokhara Hotel Shuttle", vehicle: "Chery Wanda 14-Seater", rating: 5, text: "हाम्रो hotel को airport shuttle Chery Wanda ले गर्छ — smooth ride, zero emissions. Guests are impressed. Trijal's after-sale support has been excellent.", photo: IMG.customer9 },
-  { name: "Dipak Oli", location: "Lamjung District", vehicle: "Chery Wanda 11-Seater", rating: 5, text: "Nepal ko pahad route मा पनि Chery Wanda राम्रोसँग चलेको छ। 300km range को कारण हाम्रो Besisahar route confident भएर गर्न सकेका छौं। Trijal को price पनि reasonable थियो।", photo: IMG.customer10 },
+  {
+    name: "Bharat B. Karki",
+    location: "Gandaki Province",
+    vehicle: "Chery Wanda 14-Seater",
+    rating: 5,
+    text: "हाम्रो व्यवसायका लागि Chery Wanda 14-seater उत्कृष्ट साबित भएको छ। Trijal Motors को delivery र support एकदमै भरपर्दो छ।",
+    photo: IMG.customer4
+  },
+  {
+    name: "Prakash Tripathi",
+    location: "Pokhara Hotel Operator",
+    vehicle: "Chery Wanda 16-Seater",
+    rating: 5,
+    text: "Hotel operator को रूपमा guests हरूलाई smooth र premium ride दिन 16-seater EV निकै सहयोगी बन्यो। Quiet, clean, र efficient छ।",
+    photo: IMG.customer14,
+  },
+  {
+    name: "Narayan Sunar",
+    location: "Pokhara, Gandaki Province",
+    vehicle: "Chery Wanda 14-Seater",
+    rating: 5,
+    text: "Trijal Motors बाट 14-seater EV खरिद गरेपछि हाम्रो travel operations धेरै सहज भएको छ। गाडीको space र performance दुवै दमदार छ।",
+    photo: IMG.customer7
+  },
+  {
+    name: "Madan Sunar",
+    location: "Pokhara, Kaski",
+    vehicle: "Chery Wanda 14-Seater",
+    rating: 5,
+    text: "Trijal Motors को showroom मा handover ceremony देखि नै उत्कृष्ट अनुभव रह्यो। EV मा switch गरेपछि खर्च धेरै कम भएको छ।",
+    photo: IMG.customer8
+  },
+
+  {
+    name: "Sher Bahadur Gurung",
+    location: "Pokhara, Kaski",
+    vehicle: "Chery Wanda 16-Seater",
+    rating: 5,
+    text: "लामो दूरी र बढी क्षमताका लागि 16-seater EV एकदमै भरपर्दो छ। Trijal Motors बाट गाडी बुझेदेखि अहिलेसम्म यसको travel comfort र running cost बाट म पूर्ण रूपमा सन्तुष्ट छु।",
+    photo: IMG.customer9
+  },
+  {
+    name: "Mrs. Dhan Kumari",
+    location: "Pokhara, Kaski",
+    vehicle: "Chery Wanda 11-Seater",
+    rating: 5,
+    text: "हाम्रो फ्यामिली र लोकल रूटका लागि 11-seater electric microbus एकदमै उपयुक्त छ। यसको low operating cost र Trijal Motors को आत्मीय सेवा एकदमै प्रशंसनीय छ।",
+    photo: IMG.customer10
+  },
+
 ];
 
 function CustomerStories() {
@@ -370,9 +416,6 @@ function CustomerStories() {
             </div>
           ))}
         </div>
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: C.grayLight, textAlign: "center", marginTop: 20 }}>
-          {total} customer stories — replace placeholder text &amp; photos with your real reviews
-        </p>
       </div>
     </section>
   );
@@ -387,19 +430,191 @@ function TikTokIcon({ size = 14, color = "currentColor" }: { size?: number; colo
   );
 }
 
-// ─── Follow along ─────────────────────────────────────────────────────────────
+// ─── TikTok inline video feed ─────────────────────────────────────────────────
+const tiktokVideoUrls = [
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7571849708042325265",
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7639010093064867073",
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7655694781577841937",
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7654953973484440848",
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7660511819383065873",
+  "https://www.tiktok.com/@chery.wanda.pokha/video/7641802207272144144",
+];
 
+
+function TikTokFeed() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % tiktokVideoUrls.length);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + tiktokVideoUrls.length) % tiktokVideoUrls.length);
+  }, []);
+
+  // Listen for the video finishing to automatically shift to the next one
+  useEffect(() => {
+    const handlePlayerMessage = (event: MessageEvent) => {
+      if (event.data && event.data['x-tiktok-player']) {
+        if (event.data.type === 'onStateChange' && event.data.value === 0) {
+          handleNext();
+        }
+      }
+    };
+
+    window.addEventListener('message', handlePlayerMessage);
+    return () => window.removeEventListener('message', handlePlayerMessage);
+  }, [handleNext]);
+
+  const activeUrl = tiktokVideoUrls[activeIndex];
+  const activeVideoId = activeUrl.split("/video/")[1]?.split("?")[0] ?? "";
+
+  return (
+    <div style={{ width: "100%", maxWidth: 325, margin: "0 auto", borderRadius: 20, border: `1px solid ${C.border}`, overflow: "hidden", background: C.white, boxShadow: "0 4px 24px rgba(0,0,0,0.08)", display: "flex", flexDirection: "column" }}>
+      {/* Account Profile Header */}
+      <div className="flex items-center gap-3 px-5 py-4" style={{ borderBottom: `1px solid ${C.border}`, background: C.white }}>
+        <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.black, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <TikTokIcon size={17} color={C.white} />
+        </div>
+        <div>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: C.black, lineHeight: 1.2 }}>Chery Wanda Pokhara</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.gray }}>tiktok.com/@chery.wanda.pokha</p>
+        </div>
+        <a href="https://www.tiktok.com/@chery.wanda.pokha" target="_blank" rel="noopener noreferrer"
+          className="ml-auto flex items-center gap-1 px-3 py-1.5"
+          style={{ background: C.black, borderRadius: 6, textDecoration: "none" }}>
+          <TikTokIcon size={11} color={C.white} />
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: C.white }}>Follow</span>
+        </a>
+      </div>
+
+      {/* Main Video Viewport */}
+      <div style={{ position: "relative", background: "#f8f8f8", display: "flex", justifyContent: "center", alignItems: "center", padding: "16px", overflow: "hidden", flexGrow: 1 }}>
+
+        {/* Active Frame Wrapper */}
+        <div
+          key={activeVideoId}
+          style={{
+            width: "100%",
+            maxWidth: "325px",
+            aspectRatio: "325 / 555",
+            borderRadius: "12px",
+            overflow: "hidden",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+          }}
+        >
+          <iframe
+            src={`https://www.tiktok.com/player/v1/${activeVideoId}?autoplay=1&loop=0&controls=1&music_info=0&description=0&rel=0`}
+            allow="autoplay; fullscreen"
+            title="Chery Wanda Pokhara Video Feed Content Update"
+            style={{
+              width: "100%",
+              height: "100%",
+              border: "none"
+            }}
+          />
+        </div>
+
+        {/* Left Arrow Button */}
+        <button
+          onClick={handlePrev}
+          style={{
+            position: "absolute",
+            left: "12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 38,
+            height: 38,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.95)",
+            border: `1px solid ${C.border}`,
+            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10,
+            transition: "background 0.2s"
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = C.white)}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)")}
+        >
+          <ChevronLeft size={18} color={C.black} />
+        </button>
+
+        {/* Right Arrow Button */}
+        <button
+          onClick={handleNext}
+          style={{
+            position: "absolute",
+            right: "12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 38,
+            height: 38,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.95)",
+            border: `1px solid ${C.border}`,
+            boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10,
+            transition: "background 0.2s"
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = C.white)}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.95)")}
+        >
+          <ChevronRight size={18} color={C.black} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Follow along section wrapper ─────────────────────────────────────────────
 function FollowAlong() {
+  // Facebook's Page Plugin needs its JS SDK to render responsively (fill the
+  // actual column width instead of a fixed pixel size) and to re-render if
+  // this component remounts during client-side navigation.
+  useEffect(() => {
+    const w = window as any;
+    const loadOrParse = () => {
+      if (w.FB) {
+        w.FB.XFBML.parse();
+        return;
+      }
+      if (document.getElementById("facebook-jssdk")) return;
+      const script = document.createElement("script");
+      script.id = "facebook-jssdk";
+      script.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0";
+      script.async = true;
+      document.body.appendChild(script);
+    };
+    loadOrParse();
+
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => w.FB?.XFBML.parse(), 300);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section className="relative overflow-hidden" style={{ borderTop: `1px solid ${C.border}` }}>
+      <div id="fb-root" />
       <img src={IMG.pokhara} alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ opacity: 0.35, filter: "saturate(0.5)" }} />
       <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.55)" }} />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        {/* Left — text + buttons */}
-        <div className="md:sticky md:top-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)_minmax(0,1fr)] gap-8 items-stretch">
+        <div className="flex flex-col justify-center">
           <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: C.red, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>— Follow along</p>
           <h2 className="uppercase font-bold leading-none mb-4" style={{ fontFamily: "Oswald, sans-serif", fontSize: "clamp(24px, 3.5vw, 44px)", color: C.black }}>
             See new arrivals<br />&amp; handovers live
@@ -413,88 +628,50 @@ function FollowAlong() {
               style={{ background: "#1877F2", borderRadius: 8, color: C.white, fontFamily: "Inter, sans-serif", width: "fit-content" }}>
               <Facebook size={14} /> Follow on Facebook
             </a>
-            {/* PLACEHOLDER: replace href with your real TikTok profile URL */}
             <a href="https://www.tiktok.com/@chery.wanda.pokha" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest"
               style={{ background: C.black, borderRadius: 8, color: C.white, fontFamily: "Inter, sans-serif", width: "fit-content" }}>
               <TikTokIcon size={14} color={C.white} /> Follow on TikTok
             </a>
-            <a href={wa("Hi, I'd like WhatsApp updates on new EV arrivals from Trijal Motors.")} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest"
-              style={{ background: "#25D366", borderRadius: 8, color: C.white, fontFamily: "Inter, sans-serif", width: "fit-content" }}>
-              WhatsApp updates
-            </a>
           </div>
         </div>
 
-        {/* Right — Facebook Page Plugin placeholder */}
-        <div style={{ borderRadius: 20, border: `1px solid ${C.border}`, overflow: "hidden", background: C.white, boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
-
-          {/*
-            ══════════════════════════════════════════════════════════════
-            FACEBOOK PAGE PLUGIN — HOW TO REPLACE THIS PLACEHOLDER:
-
-            1. Go to: https://developers.facebook.com/docs/plugins/page-plugin
-            2. Enter your Facebook Page URL (e.g. https://www.facebook.com/trijalmotors)
-            3. Set Width: 500, Height: 500, Tabs: timeline
-            4. Click "Get Code"
-            5. Step 1: paste the <div id="fb-root"> + <script> SDK snippet
-               into index.html just before </body>
-            6. Step 2: replace the <div> block below with the <div
-               class="fb-page" data-href="..." ...> snippet Facebook gives you
-
-            The iframe version (simpler) — just replace this entire div with:
-            <iframe src="https://www.facebook.com/plugins/page.php?href=YOUR_PAGE_URL&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-              width="100%" height="500" style="border:none;overflow:hidden"
-              scrolling="no" frameborder="0" allowfullscreen="true"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-            </iframe>
-            ══════════════════════════════════════════════════════════════
-          */}
-
-          {/* Placeholder UI shown until the real embed is added */}
-          <div className="flex items-center gap-3 px-5 py-4" style={{ borderBottom: `1px solid ${C.border}` }}>
-            <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.red, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden" }}>
-              <img src="images/og-image.png" alt="Trijal Motors" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        {/* Facebook Page Plugin Card */}
+        <div className="w-full flex justify-center">
+          <div
+            className="w-full"
+            style={{
+              maxWidth: 325, // Capped to 325 to match the TikTok card identically
+              borderRadius: 20,
+              border: `1px solid ${C.border}`,
+              overflow: "hidden",
+              background: C.white,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+              height: 639
+            }}
+          >
+            <div style={{ width: "100%", height: "100%", overflowY: "auto" }}>
+              <div
+                className="fb-page"
+                data-href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/"
+                data-tabs="timeline"
+                data-height="639"
+                data-small-header="true"
+                data-adapt-container-width="true"
+                data-hide-cover="false"
+                data-show-facepile="false"
+                style={{ width: "100%" }}
+              >
+                <blockquote cite="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" className="fb-xfbml-parse-ignore">
+                  <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/">Trijal Motors Pvt. Ltd.</a>
+                </blockquote>
+              </div>
             </div>
-            <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: C.black, lineHeight: 1.2 }}>Trijal Motors Pvt. Ltd.</p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "#1877F2" }}>facebook.com/Cherry Wanda Pokhara</p>
-            </div>
-            <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" target="_blank" rel="noopener noreferrer"
-              className="ml-auto flex items-center gap-1 px-3 py-1.5"
-              style={{ background: "#1877F2", borderRadius: 6, textDecoration: "none" }}>
-              <Facebook size={11} color={C.white} />
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: C.white }}>Follow</span>
-            </a>
-          </div>
-
-          <div className="flex flex-col items-center justify-center gap-4 py-14 px-8 text-center"
-            style={{ background: "#f0f2f5", minHeight: 340 }}>
-            <Facebook size={40} color="#1877F2" />
-            <div>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: C.black, marginBottom: 6 }}>
-                Facebook feed goes here
-              </p>
-              <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: C.gray, lineHeight: 1.6, maxWidth: 280 }}>
-                Replace this block with the Facebook Page Plugin embed code from{" "}
-                <span style={{ color: "#1877F2" }}>developers.facebook.com/docs/plugins/page-plugin</span>
-              </p>
-            </div>
-            <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-widest"
-              style={{ background: "#1877F2", borderRadius: 8, color: C.white, fontFamily: "Inter, sans-serif", textDecoration: "none" }}>
-              <Facebook size={13} /> View our Facebook page
-            </a>
-          </div>
-
-          <div className="px-5 py-3 text-center" style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
-            <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" target="_blank" rel="noopener noreferrer"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#1877F2", fontWeight: 500 }}>
-              See all posts on Facebook →
-            </a>
           </div>
         </div>
+
+        {/* TikTok embed */}
+        <TikTokFeed />
       </div>
     </section>
   );
@@ -529,6 +706,8 @@ export default function Home() {
       <PageMeta {...pageMeta.home} />
       <FaqSchema />
       <LocalBusinessSchema />
+      <OrganizationSchema />
+      <BreadcrumbSchema items={[{ name: "Home", url: "https://trijalmotors.com.np/" }]} />
       <Hero />
       <HeroSlideshow />
       <TrustStrip />

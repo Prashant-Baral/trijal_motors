@@ -8,6 +8,7 @@ Sitemap: https://trijalmotors.com.np/sitemap.xml
 Disallow: /src/
 Disallow: /.vite/
 Disallow: /node_modules/
+Disallow: /scripts/
 
 # AI crawler guidance
 User-agent: GPTBot
@@ -19,7 +20,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: GoogleExtendedBot
+User-agent: Google-Extended
 Allow: /
 
 # LLMs.txt for AI systems

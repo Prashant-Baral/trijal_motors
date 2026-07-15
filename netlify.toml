@@ -6,3 +6,15 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Automatically upgrade any accidental http:// asset loads to https://
+    Content-Security-Policy = "upgrade-insecure-requests"
+    # Prevent clickjacking
+    X-Frame-Options = "SAMEORIGIN"
+    # Prevent MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Don't leak the full URL to third-party sites via Referer header
+    Referrer-Policy = "strict-origin-when-cross-origin"

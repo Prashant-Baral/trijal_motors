@@ -3,7 +3,8 @@ import { Link } from "react-router";
 import { ChevronRight, ArrowRight, Zap, Users, Battery, Gauge, ChevronLeft, ChevronDown } from "lucide-react";
 import { C, wa, IMG, BtnRed, BtnOutline, SectionHead, SpecChip } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
-
+import { VehicleSchema, BreadcrumbSchema, FaqSchema, faqData } from "../components/SeoSchemas";
+const SITE = "https://trijalmotors.com.np";
 type FullSpec = {
   sourceSheet: string;
   motorType: string;
@@ -28,17 +29,13 @@ type FullSpec = {
   warrantyMotor: string;
   configs: { label: string; value: boolean }[];
 };
-
 const configLabels = ["ABS", "EBD", "EPB", "Front Airbags", "A/C (Front & Rear Outlet)", "Power Steering", "Power Window", "Dual Screen", "Rear Parking Radar", "Reversing Image"];
-
 function makeConfigs(flags: boolean[]) {
   return configLabels.map((label, i) => ({ label, value: flags[i] }));
 }
-
 const variants: Record<string, { seats: number; price: string; images: string[]; note: string; spec: FullSpec }> = {
   "11": {
     seats: 11,
-    price: "Rs 48,00,000",
     images: [IMG.seater_11_a, IMG.seater_11_b, IMG.seater_11_c, IMG.seater_11_d],
     note: "Ideal for school routes, corporate shuttles, and small-group transfers.",
     spec: {
@@ -68,7 +65,6 @@ const variants: Record<string, { seats: number; price: string; images: string[];
   },
   "12": {
     seats: 12,
-    price: "Rs 49,90,000",
     images: [IMG.seater_12_a, IMG.seater_12_b],
     note: "Most popular configuration. Balanced for urban micro-bus operations.",
     spec: {
@@ -81,7 +77,7 @@ const variants: Record<string, { seats: number; price: string; images: string[];
       rangeNedc: "280 km",
       seatCapacity: "14 (chassis rating)",
       wheelBase: "3450 mm",
-      dimensions: "5265 × 1715 × 2065 mm",
+      dimensions: "5265 x 1715 x 2065 mm",
       groundClearance: "180 mm",
       curbWeight: "1660 kg",
       gvw: "3150 kg",
@@ -98,8 +94,7 @@ const variants: Record<string, { seats: number; price: string; images: string[];
   },
   "14": {
     seats: 14,
-    price: "Rs 59,50,000",
-    images: [IMG.seater_14_a, IMG.seater_14_b],
+    images: [IMG.seater_14_a, IMG.seater_14_b, IMG.seater_14_c, IMG.seater_14_d, IMG.seater_14_e, IMG.seater_14_f, IMG.seater_14_g, IMG.seater_14_h, IMG.seater_14_i],
     note: "Best seller for tourism routes between Pokhara and Kathmandu Valley.",
     spec: {
       sourceSheet: "14-Seater Micro Bus (High Roof)",
@@ -111,7 +106,7 @@ const variants: Record<string, { seats: number; price: string; images: string[];
       rangeNedc: "300 km",
       seatCapacity: "14",
       wheelBase: "2890 mm",
-      dimensions: "5330 × 1700 × 2260 mm",
+      dimensions: "5330 x 1700 x 2260 mm",
       groundClearance: "200 mm",
       curbWeight: "1820 kg",
       gvw: "3490 kg",
@@ -128,7 +123,6 @@ const variants: Record<string, { seats: number; price: string; images: string[];
   },
   "16": {
     seats: 16,
-    price: "Rs 68,50,000",
     images: [IMG.seater_16_a, IMG.seater_16_b, IMG.seater_16_c, IMG.seater_16_d, IMG.seater_16_e, IMG.seater_16_f, IMG.seater_16_g],
     note: "Maximum passenger capacity — ideal for resorts and mountain route operators.",
     spec: {
@@ -138,10 +132,10 @@ const variants: Record<string, { seats: number; price: string; images: string[];
       batteryBrand: "CATL",
       batteryType: "Lithium Iron Phosphate",
       batteryCapacity: "53.58 kWh",
-      rangeNedc: "260 km",
+      rangeNedc: "280 km",
       seatCapacity: "16",
       wheelBase: "3110 mm",
-      dimensions: "5470 × 1885 × 2300 mm",
+      dimensions: "5470 x 1885 x 2300 mm",
       groundClearance: "210 mm",
       curbWeight: "2420 kg",
       gvw: "3800 kg",
@@ -157,24 +151,27 @@ const variants: Record<string, { seats: number; price: string; images: string[];
     },
   },
 };
-
 const tabs = ["11", "12", "14", "16"] as const;
 type Tab = typeof tabs[number];
-
+// FAQ questions from the sitewide faqData bank that are actually relevant to
+// this page's content (vehicle specs, range, financing, battery, terrain).
+// Contact/location questions live on /contact instead, so nothing's duplicated
+// verbatim across pages with mismatched context.
+const VEHICLE_FAQ_KEYWORDS = ["price", "range", "financing", "battery", "mountain", "best seller"];
+const vehicleFaqs = faqData.filter(f =>
+  VEHICLE_FAQ_KEYWORDS.some(k => f.q.toLowerCase().includes(k))
+);
 function Slideshow({ images, alt }: { images: string[]; alt: string }) {
   // Guard against undefined/empty entries — a bad IMG key here previously
   // produced `key={src + i}` → NaN (undefined + number = NaN in JS), which
   // caused duplicate React keys AND the broken-image icon in the corner.
   const safeImages = images.filter(Boolean);
-
   const [index, setIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
   // Reset to first slide whenever the image set changes (e.g. variant tab switch)
   useEffect(() => {
     setIndex(0);
   }, [safeImages.length]);
-
   useEffect(() => {
     if (safeImages.length <= 1) return;
     timerRef.current = setInterval(() => {
@@ -184,7 +181,6 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [safeImages.length]);
-
   const restartTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     if (safeImages.length <= 1) return;
@@ -192,12 +188,10 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
       setIndex(i => (i + 1) % safeImages.length);
     }, 4000);
   };
-
   const goTo = (i: number) => {
     setIndex(((i % safeImages.length) + safeImages.length) % safeImages.length);
     restartTimer();
   };
-
   if (safeImages.length === 0) {
     return (
       <div className="relative overflow-hidden flex items-center justify-center" style={{ borderRadius: 20, background: C.black, aspectRatio: "4/3" }}>
@@ -205,7 +199,6 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
       </div>
     );
   }
-
   return (
     <div className="relative overflow-hidden" style={{ borderRadius: 20, background: C.black, aspectRatio: "4/3" }}>
       {safeImages.map((src, i) => (
@@ -217,7 +210,6 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
           style={{ opacity: i === index ? 0.82 : 0 }}
         />
       ))}
-
       {safeImages.length > 1 && (
         <>
           {/* Prev / Next arrows */}
@@ -237,7 +229,6 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
           >
             <ChevronRight size={16} color={C.white} />
           </button>
-
           {/* Dots */}
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
             {safeImages.map((_, i) => (
@@ -263,16 +254,107 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
     </div>
   );
 }
-
+// Accordion-style FAQ item — mirrors the toggle pattern used on the
+// Financing page's FAQ() component, so behavior is consistent site-wide
+// instead of dumping every answer open by default.
+function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <div className="flex flex-col gap-3">
+      {items.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <div
+            key={item.q}
+            style={{
+              borderRadius: 10,
+              background: C.white,
+              border: `1px solid ${isOpen ? C.red : C.border}`,
+              boxShadow: isOpen ? "0 8px 24px rgba(0,0,0,0.08)" : "none",
+              transition: "border-color 0.15s, box-shadow 0.15s",
+            }}
+          >
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="w-full flex items-start gap-4 px-6 py-5 text-left"
+              style={{ cursor: "pointer", background: "transparent", border: "none" }}
+              aria-expanded={isOpen}
+            >
+              <ChevronDown
+                size={18}
+                color={isOpen ? C.red : C.grayLight}
+                style={{
+                  flexShrink: 0,
+                  marginTop: 3,
+                  transition: "transform 0.2s ease",
+                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                }}
+              />
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13.5, fontWeight: 600, lineHeight: 1.5, color: C.black }}>
+                {item.q}
+              </span>
+            </button>
+            {isOpen && (
+              <div className="pl-[46px] pr-6 pb-6" style={{ marginTop: -4 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.gray, lineHeight: 1.75 }}>
+                  {item.a}
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+// Build the flat array VehicleSchema expects from the `variants` record above.
+function buildVehicleSchemaVariants() {
+  return tabs.map((t) => {
+    const v = variants[t];
+    return {
+      name: `Chery Wanda ${t}-Seater`,
+      seats: String(v.seats),
+      batteryCapacity: v.spec.batteryCapacity,
+      range: v.spec.rangeNedc,
+      power: v.spec.ratedPower,
+      image: v.images.filter(Boolean)[0] || "",
+    };
+  });
+}
 export default function CheryWanda() {
   const [active, setActive] = useState<Tab>("14");
   const v = variants[active];
   const heroImage = IMG.seater_16_a;
-
+  // Refs for auto-scrolling the spec table to the tapped variant column on mobile
+  const specScrollRef = useRef<HTMLDivElement | null>(null);
+  const tabHeaderRefs = useRef<Partial<Record<Tab, HTMLTableCellElement | null>>>({});
+  // Deep-link support: /vehicles/chery-wanda#16-seater lands directly on that
+  // tab. Keeps the four variants individually linkable/shareable without
+  // needing separate pages — the hash also updates on tab click so the URL
+  // in the address bar always reflects what's showing.
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const match = tabs.find(t => `${t}-seater` === hash);
+    if (match) setActive(match);
+  }, []);
+  const selectTab = (t: Tab) => {
+    setActive(t);
+    window.history.replaceState(null, "", `#${t}-seater`);
+  };
+  useEffect(() => {
+    const container = specScrollRef.current;
+    const th = tabHeaderRefs.current[active];
+    if (!container || !th) return;
+    // Only bother scrolling if the table actually overflows (i.e. mobile)
+    if (container.scrollWidth <= container.clientWidth) return;
+    const firstColWidth =
+      container.querySelector("thead th")?.getBoundingClientRect().width ?? 0;
+    const targetLeft = th.offsetLeft - firstColWidth - 8;
+    container.scrollTo({ left: Math.max(targetLeft, 0), behavior: "smooth" });
+  }, [active]);
   const scrollToSpecs = () => {
     document.getElementById("full-specs")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
   // Floating scroll cue — only shown while the visitor is still on the first screen
   const [showScrollCue, setShowScrollCue] = useState(true);
   useEffect(() => {
@@ -281,11 +363,23 @@ export default function CheryWanda() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
   return (
     <>
       <PageMeta {...pageMeta.vehicles} />
-
+      {/* Structured data: one Vehicle entry per seating variant (no price —
+          Trijal Motors quotes individually, see VehicleSchema comments),
+          plus a breadcrumb trail and a FAQ block (visible section further
+          down the page mirrors this, which is required for rich-result
+          eligibility — schema with no matching visible content is a risk).
+          NOTE: swap "/chery-wanda" below for this page's real route if different. */}
+      <VehicleSchema variants={buildVehicleSchemaVariants()} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: `${SITE}/` },
+          { name: "Chery Wanda", url: `${SITE}/vehicles/chery-wanda` },
+        ]}
+      />
+      <FaqSchema />
       {/* Floating scroll-down cue — visible only on the first screen */}
       <button
         onClick={scrollToSpecs}
@@ -308,7 +402,6 @@ export default function CheryWanda() {
       >
         <ChevronDown size={22} color={C.white} style={{ animation: "floatingScrollBounce 1.4s ease-in-out infinite" }} />
       </button>
-
       {/* Hero */}
       <div className="relative overflow-hidden" style={{ height: "clamp(100px, 20vh, 280px)", background: C.black }}>
         {heroImage && (
@@ -323,14 +416,15 @@ export default function CheryWanda() {
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.65)", marginTop: 4 }}>11 · 12 · 14 · 16 Seater Variants — Available in Gandaki Province</p>
         </div>
       </div>
-
-      {/* Variant Tab Selector */}
+      {/* Variant Tab Selector — grid, not scroll, so all 4 are always visible on mobile */}
       <div style={{ background: C.offWhite, borderBottom: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex gap-0.5 overflow-x-auto py-3">
+          <div className="grid grid-cols-4 gap-0.5 py-3">
             {tabs.map(t => (
-              <button key={t} onClick={() => setActive(t)}
-                className="px-6 py-3 text-[11px] font-semibold uppercase tracking-widest transition-all flex-shrink-0"
+              <button
+                key={t}
+                onClick={() => selectTab(t)}
+                className="px-2 sm:px-6 py-3 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest transition-all text-center"
                 style={{
                   fontFamily: "JetBrains Mono, monospace",
                   borderRadius: "10px 10px 0 0",
@@ -338,14 +432,14 @@ export default function CheryWanda() {
                   color: active === t ? C.white : C.gray,
                   border: "none",
                   cursor: "pointer",
-                }}>
+                }}
+              >
                 {t}-Seater
               </button>
             ))}
           </div>
         </div>
       </div>
-
       {/* Spec + Info Block */}
       <section style={{ background: C.white }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -376,7 +470,6 @@ export default function CheryWanda() {
               <BtnRed href={wa(`Hi, I'm interested in the Chery Wanda ${active}-Seater. Please contact me.`)}>Enquire on WhatsApp <ChevronRight size={13} /></BtnRed>
               <BtnOutline href={wa(`Hi, I'd like to book a test drive for the Chery Wanda ${active}-Seater.`)}>Book Test Drive</BtnOutline>
             </div>
-
             {/* Nudge toward full spec comparison */}
             <button
               onClick={scrollToSpecs}
@@ -391,7 +484,6 @@ export default function CheryWanda() {
           </div>
         </div>
       </section>
-
       {/* Full Specifications Comparison */}
       <section id="full-specs" style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
@@ -405,11 +497,10 @@ export default function CheryWanda() {
                 Manufacturer specifications for the Chery Wanda electric microbus range, as published by Shanker / Jagdamba Motors Pvt. Ltd. — the official Nepal distributor.
               </p>
             </div>
-
             {/* Variant quick-jump pills */}
             <div className="flex gap-2">
               {tabs.map(t => (
-                <button key={t} onClick={() => setActive(t)}
+                <button key={t} onClick={() => selectTab(t)}
                   style={{
                     fontFamily: "JetBrains Mono, monospace", fontSize: 11, fontWeight: 700,
                     padding: "8px 14px", borderRadius: 999,
@@ -423,19 +514,49 @@ export default function CheryWanda() {
               ))}
             </div>
           </div>
-
-          <div className="overflow-auto" style={{ borderRadius: 16, border: `1px solid ${C.border}`, background: C.white, maxHeight: "72vh" }}>
+          <div
+            ref={specScrollRef}
+            className="overflow-auto"
+            style={{ borderRadius: 16, border: `1px solid ${C.border}`, background: C.white, maxHeight: "72vh" }}
+          >
             <table className="w-full" style={{ borderCollapse: "separate", borderSpacing: 0, minWidth: 780 }}>
+              <caption style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}>
+                Comparison of Chery Wanda 11, 12, 14, and 16-seater electric microbus specifications, including motor, battery, dimensions, and warranty details.
+              </caption>
               <thead>
                 <tr>
-                  <th style={{ textAlign: "left", padding: "16px 18px", fontFamily: "JetBrains Mono, monospace", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.grayLight, background: C.offWhite, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, left: 0, zIndex: 3 }}>
+                  <th
+                    style={{
+                      textAlign: "left", padding: "16px 18px", fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.grayLight,
+                      background: C.offWhite, borderBottom: `1px solid ${C.border}`,
+                      position: "sticky", top: 0, left: 0, zIndex: 3,
+                    }}
+                  >
                     Chery Wanda
                   </th>
                   {tabs.map(t => (
-                    <th key={t} onClick={() => setActive(t)} style={{ textAlign: "left", padding: "16px 18px", fontFamily: "Oswald, sans-serif", fontSize: 15, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em", color: t === active ? C.red : C.black, background: t === active ? C.white : C.offWhite, borderBottom: t === active ? `2px solid ${C.red}` : `1px solid ${C.border}`, whiteSpace: "nowrap", cursor: "pointer", position: "sticky", top: 0, zIndex: 2 }}>
+                    <th
+                      key={t}
+                      id={`${t}-seater`}
+                      ref={el => (tabHeaderRefs.current[t] = el)}
+                      onClick={() => selectTab(t)}
+                      style={{
+                        textAlign: "left", padding: "16px 18px", fontFamily: "Oswald, sans-serif",
+                        fontSize: 15, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.03em",
+                        color: t === active ? C.red : C.black,
+                        background: t === active ? C.white : C.offWhite,
+                        borderBottom: t === active ? `2px solid ${C.red}` : `1px solid ${C.border}`,
+                        whiteSpace: "nowrap", cursor: "pointer",
+                        position: "sticky", top: 0, zIndex: 2,
+                        scrollMarginTop: 90,
+                      }}
+                    >
                       {t}-Seater
                     </th>
                   ))}
+                  {/* Spacer column — keeps the scrolled-to tab from sitting flush against the right edge */}
+                  <th aria-hidden style={{ width: 28, minWidth: 28, padding: 0, border: "none", background: C.offWhite, position: "sticky", top: 0 }} />
                 </tr>
               </thead>
               <tbody>
@@ -462,24 +583,44 @@ export default function CheryWanda() {
                   ["Motor Warranty", (s: FullSpec) => s.warrantyMotor],
                 ] as [string, (s: FullSpec) => string][]).map(([label, get], i) => (
                   <tr key={label} style={{ background: i % 2 === 0 ? C.white : C.offWhite }}>
-                    <td style={{ padding: "13px 18px", fontFamily: "Inter, sans-serif", fontSize: 12, color: C.grayLight, borderBottom: `1px solid ${C.border}`, whiteSpace: "nowrap" }}>{label}</td>
+                    <td
+                      style={{
+                        padding: "13px 18px", fontFamily: "Inter, sans-serif", fontSize: 12,
+                        color: C.grayLight, borderBottom: `1px solid ${C.border}`, whiteSpace: "nowrap",
+                        position: "sticky", left: 0, zIndex: 1,
+                        background: i % 2 === 0 ? C.white : C.offWhite,
+                        boxShadow: "2px 0 4px rgba(0,0,0,0.04)",
+                      }}
+                    >
+                      {label}
+                    </td>
                     {tabs.map(t => (
                       <td key={t} style={{ padding: "13px 18px", fontFamily: "Inter, sans-serif", fontSize: 12.5, color: t === active ? C.black : C.gray, background: t === active ? "rgba(211,47,47,0.045)" : "transparent", borderBottom: `1px solid ${C.border}` }}>
                         {get(variants[t].spec)}
                       </td>
                     ))}
+                    <td aria-hidden style={{ width: 28, minWidth: 28, padding: 0, border: "none", borderBottom: `1px solid ${C.border}` }} />
                   </tr>
                 ))}
-
                 {/* Configuration rows */}
                 <tr>
-                  <td colSpan={tabs.length + 1} style={{ padding: "18px 18px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: C.red, background: C.offWhite, borderBottom: `1px solid ${C.border}` }}>
+                  <td colSpan={tabs.length + 2} style={{ padding: "18px 18px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: C.red, background: C.offWhite, borderBottom: `1px solid ${C.border}` }}>
                     Configurations
                   </td>
                 </tr>
                 {configLabels.map((label, ci) => (
                   <tr key={label} style={{ background: ci % 2 === 0 ? C.white : C.offWhite }}>
-                    <td style={{ padding: "13px 18px", fontFamily: "Inter, sans-serif", fontSize: 12, color: C.grayLight, borderBottom: `1px solid ${C.border}`, whiteSpace: "nowrap" }}>{label}</td>
+                    <td
+                      style={{
+                        padding: "13px 18px", fontFamily: "Inter, sans-serif", fontSize: 12,
+                        color: C.grayLight, borderBottom: `1px solid ${C.border}`, whiteSpace: "nowrap",
+                        position: "sticky", left: 0, zIndex: 1,
+                        background: ci % 2 === 0 ? C.white : C.offWhite,
+                        boxShadow: "2px 0 4px rgba(0,0,0,0.04)",
+                      }}
+                    >
+                      {label}
+                    </td>
                     {tabs.map(t => {
                       const has = variants[t].spec.configs[ci]?.value;
                       return (
@@ -490,15 +631,14 @@ export default function CheryWanda() {
                         </td>
                       );
                     })}
+                    <td aria-hidden style={{ width: 28, minWidth: 28, padding: 0, border: "none", borderBottom: `1px solid ${C.border}` }} />
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
         </div>
       </section>
-
       {/* Key Features */}
       <section style={{ background: C.white, borderTop: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-14">
@@ -520,7 +660,18 @@ export default function CheryWanda() {
           </div>
         </div>
       </section>
-
+      {/* FAQ — visible content matching the FaqSchema JSON-LD rendered above.
+          Filtered to vehicle-relevant questions only (price, range, financing,
+          battery, terrain, best seller) so this doesn't duplicate the
+          location/contact questions that belong on /contact instead. */}
+      {vehicleFaqs.length > 0 && (
+        <section style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
+          <div className="max-w-4xl mx-auto px-6 md:px-12 py-14">
+            <SectionHead eyebrow="Common questions" title="Chery Wanda — FAQ" />
+            <FaqAccordion items={vehicleFaqs} />
+          </div>
+        </section>
+      )}
       <style>{`
         @keyframes specNudge {
           0%, 100% { transform: translateX(0); }
@@ -531,7 +682,6 @@ export default function CheryWanda() {
           50% { transform: translateY(5px); }
         }
       `}</style>
-
     </>
   );
 }

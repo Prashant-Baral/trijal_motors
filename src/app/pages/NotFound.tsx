@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { C } from "../shared/brand";
 import { Emblem } from "../shared/Emblem";
-
 export default function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center text-center px-6" style={{ minHeight: "70vh", background: C.offWhite }}>

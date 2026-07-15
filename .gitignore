@@ -18,6 +18,7 @@ out/
 
 # macOS
 .DS_Store
+**/.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -39,3 +40,11 @@ pnpm-debug.log*
 # Cache
 .cache/
 .parcel-cache/
+
+# Generated files (auto-rebuilt via predev/prebuild hooks)
+src/content/generated-posts.ts
+
+# Scratch / reference files — not part of the build
+saving.txt
+default_shadcn_theme.css
+

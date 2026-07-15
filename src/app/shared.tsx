@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X, ChevronDown, MessageCircle, MapPin, Phone, Mail } from "lucide-react";
-
-// ─── Brand ───────────────────────────────────────────────────────────────────
 export const C = {
   red: "#E40303",
   redDark: "#B70202",
@@ -13,70 +11,93 @@ export const C = {
   gray: "#5A5B5E",
   grayLight: "#8B8C8E",
   border: "rgba(0,0,0,0.08)",
+  blue: "rgb(20, 97, 146)"
 };
-
 export const WA = "9779856058195";
 export const EMAIL = "trijalmotorspvtltd@gmail.com";
 export const wa = (msg: string) =>
   `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
-
-
 export const IMG = {
-
   logoFull: "/images/logo-full.png",
-  logoEmblem: "/images/logo-emblem.png",
+  logoEagle: "/images/logo-eagle.png",
   opengraph: "/images/og-image.png",
+
   wandaGolden: "/images/wanda-golden.jpg",
+  jagadamba: "/images/jagadamba.png",
+  cherywandalogo: "/images/cherywandalogo.png",
 
-  wadashow: "/images/blogs/wadashow.jpeg",
+  three_types: "images/vehicles/chery_wanda_fleet.png",
 
-
+  wadashow: "/images/blogs/wadashow.webp",
   wandaBus: "/images/wanda-action.jpg",
   pokhara: "/images/pokhara.webp",
-  customer1: "images/customer/customer1.jpeg",
-  customer2: "images/customer/customer2.jpeg",
-  customer3: "images/customer/customer3.jpeg",
-  customer4: "images/customer/customer4.jpeg",
-  customer5: "images/customer/customer5.jpeg",
-  customer6: "images/customer/customer6.jpeg",
-  customer7: "images/customer/customer7.jpeg",
-  customer8: "images/customer/customer8.jpeg",
-  customer9: "images/customer/customer9.jpeg",
-  customer10: "images/customer/customer10.jpeg",
-  customer11: "images/customer/customer11.jpeg",
-  customer12: "images/customer/customer12.jpg",
 
-  showroom: "/images/showroom.jpeg",
+
+  customer1: "images/customer/customer_bharat.webp",
+  customer2: "images/customer/customer_thirmati.webp",
+  customer3: "images/customer/customer_khim.webp",
+  customer4: "images/customer/customer_bharat_group.webp",
+  customer5: "images/customer/customer5.webp",
+  customer6: "images/customer/customer_raju.webp",
+  customer7: "images/customer/customer_narayan.webp",
+  customer8: "images/customer/customer_madan.webp",
+  customer9: "images/customer/customer_sher_bahadur.webp",
+  customer10: "images/customer/customer_dhan_kumari.webp",
+  customer11: "images/customer/customer_narayan_group.webp",
+  customer12: "images/customer/customer12.webp",
+  customer13: "images/customer/customer_rainbow.png",
+  customer14: "images/customer/customer_prakash.png",
+
+
+  //customer images with graphics
+  ecustomer1: "images/customer/chery_wanda_customer_bharat_karki.webp",
+  ecustomer2: "images/customer/chery_wanda_customer_dhan_kumari.webp",
+  ecustomer3: "images/customer/chery_wanda_customer_khim_thapa.webp",
+  ecustomer4: "images/customer/chery_wanda_customer_madan_sunar.webp",
+  ecustomer5: "images/customer/chery_wanda_customer_narayan_sunar.webp",
+  ecustomer6: "images/customer/chery_wanda_customer_raju_makhim.webp",
+  ecustomer7: "images/customer/chery_wanda_customer_sher_bahadur_gurung.webp",
+  ecustomer8: "images/customer/chery_wanda_customer_thirmati_gurung.webp",
+  ecustomer9: "images/customer/chery_wanda_customer_nirmal_parajuli_purushottam_lamsal.webp",
+  ecustomer10: "images/customer/chery_wanda_customer_prakash_tripathi.png",
+  ecustomer11: "images/customer/chery_wanda_customer_14_seater.png",
+
+
+  showroom: "/images/showroom.webp",
   showroom2: "https://images.unsplash.com/photo-1771284848859-12f150fa1637?w=900&h=600&fit=crop&auto=format",
   sm: "/images/sm.jpg",
 
   // 11 seater
-  seater_11_a: "/images/vehicles/11seater/11_seater_chery_wanda1.jpeg",
-  seater_11_b: "/images/vehicles/11seater/11_seater_chery_wanda2.jpeg",
-  seater_11_c: "/images/vehicles/11seater/11_seater_chery_wanda3.jpeg",
-  seater_11_d: "/images/vehicles/11seater/11_seater_chery_wanda4.jpeg",
-
-
+  seater_11_a: "/images/vehicles/11seater/11_seater_chery_wanda1.webp",
+  seater_11_b: "/images/vehicles/11seater/11_seater_chery_wanda2.webp",
+  seater_11_c: "/images/vehicles/11seater/11_seater_chery_wanda3.webp",
+  seater_11_d: "/images/vehicles/11seater/11_seater_chery_wanda4.webp",
   // 12 seater
-  seater_12_a: "/images/vehicles/12seater/12_seater_chery_wanda1.jpeg",
-  seater_12_b: "/images/vehicles/12seater/12_seater_chery_wanda2.jpeg",
-
+  seater_12_a: "/images/vehicles/12seater/12_seater_chery_wanda1.webp",
+  seater_12_b: "/images/vehicles/12seater/12_seater_chery_wanda2.webp",
   // 14 seater
-  seater_14_a: "/images/vehicles/14seater/14_seater_chery_wanda1.jpeg",
-  seater_14_b: "/images/vehicles/14seater/14_seater_chery_wanda2.jpeg",
-
+  seater_14_a: "/images/vehicles/14seater/14_seater_chery_wanda1.webp",
+  seater_14_b: "/images/vehicles/14seater/14_seater_chery_wanda2.webp",
+  seater_14_c: "/images/vehicles/14seater/14_seater_chery_wanda3.webp",
+  seater_14_d: "/images/vehicles/14seater/14_seater_chery_wanda4.webp",
+  seater_14_e: "/images/vehicles/14seater/14_seater_chery_wanda5.webp",
+  seater_14_f: "/images/vehicles/14seater/14_seater_chery_wanda6.webp",
+  seater_14_g: "/images/vehicles/14seater/14_seater_chery_wanda7.webp",
+  seater_14_h: "/images/vehicles/14seater/14_seater_chery_wanda8.webp",
+  seater_14_i: "/images/vehicles/14seater/14_seater_chery_wanda9.webp",
   // 16 seater
-  seater_16_a: "/images/vehicles/16seater/16_seater_chery_wanda1.jpeg",
-  seater_16_b: "/images/vehicles/16seater/16_seater_chery_wanda2.jpeg",
-  seater_16_c: "/images/vehicles/16seater/16_seater_chery_wanda3.jpeg",
-  seater_16_d: "/images/vehicles/16seater/16_seater_chery_wanda4.jpeg",
-  seater_16_e: "/images/vehicles/16seater/16_seater_chery_wanda5.jpeg",
-  seater_16_f: "/images/vehicles/16seater/16_seater_chery_wanda6.jpeg",
-  seater_16_g: "/images/vehicles/16seater/16_seater_chery_wanda7.jpeg",
-
+  seater_16_a: "/images/vehicles/16seater/16_seater_chery_wanda1.webp",
+  seater_16_b: "/images/vehicles/16seater/16_seater_chery_wanda2.webp",
+  seater_16_c: "/images/vehicles/16seater/16_seater_chery_wanda3.webp",
+  seater_16_d: "/images/vehicles/16seater/16_seater_chery_wanda4.webp",
+  seater_16_e: "/images/vehicles/16seater/16_seater_chery_wanda5.webp",
+  seater_16_f: "/images/vehicles/16seater/16_seater_chery_wanda6.webp",
+  seater_16_g: "/images/vehicles/16seater/16_seater_chery_wanda7.webp",
+  seater_16_h: "/images/vehicles/16seater/16_seater_chery_wanda8.webp",
+  seater_16_i: "/images/vehicles/16seater/16_seater_chery_wanda9.webp",
+  seater_16_j: "/images/vehicles/16seater/16_seater_chery_wanda10.webp",
+  seater_16_k: "/images/vehicles/16seater/16_seater_chery_wanda11.webp",
 };
-
-// ─── Emblem SVG ───────────────────────────────────────────────────────────────
 export function Emblem({ size = 44, mono }: { size?: number; mono?: string }) {
   const gc = mono ?? C.black;
   const tc = mono ?? C.red;
@@ -123,8 +144,6 @@ export function Emblem({ size = 44, mono }: { size?: number; mono?: string }) {
     </svg>
   );
 }
-
-// ─── Buttons ─────────────────────────────────────────────────────────────────
 export function BtnRed({ href, children, className = "", block = false }: {
   href: string; children: React.ReactNode; className?: string; block?: boolean;
 }) {
@@ -144,7 +163,6 @@ export function BtnRed({ href, children, className = "", block = false }: {
       onMouseEnter={handleEnter} onMouseLeave={handleLeave}>{children}</Link>
   );
 }
-
 export function BtnOutline({ href, dark = false, children, className = "" }: {
   href: string; dark?: boolean; children: React.ReactNode; className?: string;
 }) {
@@ -160,8 +178,6 @@ export function BtnOutline({ href, dark = false, children, className = "" }: {
     <Link to={href} className={cls} style={style} onMouseEnter={enter} onMouseLeave={leave}>{children}</Link>
   );
 }
-
-// ─── SpecChip ─────────────────────────────────────────────────────────────────
 export function SpecChip({ label, value, icon }: { label: string; value: string; icon?: React.ReactNode }) {
   return (
     <div className="flex flex-col px-4 py-3" style={{ background: C.offWhite, borderRadius: 10, minWidth: 90 }}>
@@ -170,8 +186,6 @@ export function SpecChip({ label, value, icon }: { label: string; value: string;
     </div>
   );
 }
-
-// ─── Section eyebrow + heading ────────────────────────────────────────────────
 export function SectionHead({ eyebrow, title, dark = false }: { eyebrow: string; title: string; dark?: boolean }) {
   return (
     <div className="mb-10">
@@ -180,8 +194,6 @@ export function SectionHead({ eyebrow, title, dark = false }: { eyebrow: string;
     </div>
   );
 }
-
-// ─── Footer three-tone stripe ─────────────────────────────────────────────────
 function FooterStripe() {
   return (
     <div className="absolute bottom-0 left-0 pointer-events-none overflow-hidden" style={{ width: 320, height: 60, zIndex: 10 }}>
@@ -193,8 +205,6 @@ function FooterStripe() {
     </div>
   );
 }
-
-// ─── Nav ─────────────────────────────────────────────────────────────────────
 const navVehicles = [
   { label: "Chery Wanda", sub: "11 to 16 Seater EV Bus", to: "/vehicles/chery-wanda" },
 ];
@@ -206,30 +216,25 @@ const navMain = [
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
-
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [vehiclesOpen, setVehiclesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
-
   useEffect(() => {
     setOpen(false);
     setVehiclesOpen(false);
   }, [loc.pathname]);
-
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
-
   const linkStyle = (active: boolean) => ({
     fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600,
     color: active ? C.red : C.gray, textTransform: "uppercase" as const,
     letterSpacing: "0.14em", background: "none", border: "none", cursor: "pointer",
   });
-
   return (
     <header className="sticky top-0 z-50" style={{
       background: C.white, borderBottom: `1px solid ${C.border}`,
@@ -238,13 +243,13 @@ export function Nav() {
       <div className="flex items-center h-18">
         {/* Logo */}
         <Link to="/" className="flex items-center px-4 md:px-8 flex-shrink-0" style={{ height: "100%" }}>
-          <img src={IMG.logoFull} alt="Trijal Motors Pvt. Ltd." style={{ height: 68, width: "auto", objectFit: "contain" }} />
+          <img src={IMG.logoFull} alt="Trijal Motors Pvt. Ltd." style={{ height: 50, width: "auto", objectFit: "contain" }} />
+          <span style={{ width: 1, height: 48, background: "rgba(199, 40, 40, 0.15)", margin: "0 14px", display: "block", flexShrink: 0 }} />
+          <img src={IMG.cherywandalogo} alt="Chery Wanda Logo" style={{ height: 39, width: "auto", objectFit: "contain" }} />
         </Link>
-
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-7 mx-auto">
           <Link to="/" style={linkStyle(loc.pathname === "/")}>Home</Link>
-
           {/* Vehicles dropdown */}
           <div className="relative" onMouseEnter={() => setVehiclesOpen(true)} onMouseLeave={() => setVehiclesOpen(false)}>
             <button
@@ -268,12 +273,10 @@ export function Nav() {
               </div>
             )}
           </div>
-
           {navMain.slice(1).map(l => (
             <Link key={l.to} to={l.to} style={linkStyle(loc.pathname === l.to)}>{l.label}</Link>
           ))}
         </nav>
-
         {/* Buy Now */}
         <div className="hidden md:flex items-center ml-auto h-full flex-shrink-0">
           <a
@@ -287,19 +290,16 @@ export function Nav() {
             Buy Now
           </a>
         </div>
-
         {/* Mobile hamburger */}
         <button className="md:hidden ml-auto mr-5" onClick={() => setOpen(o => !o)}
           style={{ background: "none", border: "none", cursor: "pointer", color: C.black }}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
-
       {/* Mobile menu */}
       {open && (
         <div style={{ background: C.white, borderTop: `1px solid ${C.border}` }}>
           <Link to="/" className="block px-6 py-4 text-[11px] font-semibold uppercase tracking-widest" style={{ fontFamily: "Inter, sans-serif", color: C.gray, borderBottom: `1px solid ${C.border}` }}>Home</Link>
-
           {/* Vehicles expandable */}
           <button
             onClick={() => setVehiclesOpen(o => !o)}
@@ -311,7 +311,6 @@ export function Nav() {
           {vehiclesOpen && navVehicles.map(v => (
             <Link key={v.to} to={v.to} className="block pl-10 pr-6 py-3.5 text-[11px] font-semibold uppercase tracking-widest" style={{ fontFamily: "Inter, sans-serif", color: C.red, borderBottom: `1px solid ${C.border}` }}>{v.label}</Link>
           ))}
-
           {navMain.slice(1).map(l => (
             <Link key={l.to} to={l.to} className="block px-6 py-4 text-[11px] font-semibold uppercase tracking-widest" style={{ fontFamily: "Inter, sans-serif", color: loc.pathname === l.to ? C.red : C.gray, borderBottom: `1px solid ${C.border}` }}>{l.label}</Link>
           ))}
@@ -327,17 +326,16 @@ export function Nav() {
     </header>
   );
 }
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
 export function Footer() {
   return (
     <footer className="relative overflow-hidden" style={{ background: C.black }}>
       <FooterStripe />
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          {/* Logo card — rounded edges like a photo */}
-          <div className="mb-5 inline-block overflow-hidden" style={{ borderRadius: 16, background: C.white, padding: "10px 18px", boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}>
-            <img src={IMG.logoFull} alt="Trijal Motors Pvt. Ltd." style={{ height: 72, width: "auto", objectFit: "contain", display: "block" }} />
+          <div className="mb-5 flex items-center">
+            <div className="flex items-center justify-center flex-shrink-0" style={{ width: 140, height: 92, borderRadius: 16, background: C.white, boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}>
+              <img src={IMG.logoFull} alt="Trijal Motors Pvt. Ltd." style={{ maxHeight: 60, maxWidth: 110, width: "auto", height: "auto", objectFit: "contain", display: "block" }} />
+            </div>
           </div>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.35)", lineHeight: 1.7 }}>
             Official authorized dealer of Jagadamba Motors for Gandaki Province. Showroom at Pokhara-14, Chauthe.
@@ -349,7 +347,6 @@ export function Footer() {
             Follow us on TikTok →
           </a>
         </div>
-
         <div>
           <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: C.red, textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 16 }}>— Vehicles</p>
           {[
@@ -366,7 +363,6 @@ export function Footer() {
             </Link>
           ))}
         </div>
-
         <div>
           <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: C.red, textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 16 }}>— Contact</p>
           <div className="space-y-2.5">
@@ -390,8 +386,6 @@ export function Footer() {
     </footer>
   );
 }
-
-// ─── Floating WhatsApp button ─────────────────────────────────────────────────
 export function WhatsAppFAB() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
