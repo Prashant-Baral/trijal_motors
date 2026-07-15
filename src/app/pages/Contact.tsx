@@ -2,7 +2,7 @@ import { ChevronRight, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { C, wa, EMAIL, BtnRed, SectionHead } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 import { BreadcrumbSchema, LocalBusinessSchema } from "../components/SeoSchemas";
-const MAPS_SRC = "https://maps.google.com/maps?width=600&height=400&hl=en&q=Trijal+Motors+Pvt+Ltd+Chauthe+Pokhara-14,+%E0%A4%AA%E0%A5%8B%E0%A4%96%E0%A4%B0%E0%A4%BE+33700,+Nepal&t=h&z=19&ie=UTF8&iwloc=B&output=embed";
+const MAPS_SRC = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d963.7858497591008!2d84.0156865991974!3d28.197275100000017!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3995971ddb9eb697%3A0x595bc2d395d77c39!2sTrijal%20Motors%20Pvt%20Ltd!5e1!3m2!1sen!2sus!4v1784097920971!5m2!1sen!2sus";
 export default function Contact() {
   return (
     <>

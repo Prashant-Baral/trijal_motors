@@ -3,7 +3,7 @@ title: "Commercial EV Financing in Pokhara: 40% Down Payment Guide"
 excerpt: "Switching your commercial fleet to electric is a smart business decision. Learn how to navigate the 40% down payment financing process for EVs in Pokhara."
 date: 2026-07-13
 category: Insights
-image: images/blogs/Commercial_EV_Financing_in_Pokhara_40%_Down_Payment_Guide.webp
+image: images/blogs/Commercial_EV_Financing_in_Pokhara_40pct_Down_Payment_Guide.webp
 imageAlt: "Financing documentation outline for Trijal Motors EV microbus"
 keywords: ["electric van financing Nepal", "EV microbus Pokhara", "Chery Wanda financing"]
 ---
