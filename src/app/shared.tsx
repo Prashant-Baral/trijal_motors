@@ -348,12 +348,14 @@ export function Footer() {
           </a>
         </div>
         <div>
-          <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: C.red, textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 16 }}>— Vehicles</p>
+          <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: C.red, textTransform: "uppercase", letterSpacing: "0.16em", marginBottom: 16 }}>— Quick links</p>
           {[
             { label: "Chery Wanda — 11 to 16-Seater EV Bus", to: "/vehicles/chery-wanda" },
             { label: "Financing — 40% down payment", to: "/financing" },
             { label: "Gallery", to: "/gallery" },
+            { label: "Blog", to: "/blog" },
             { label: "About Us", to: "/about" },
+            { label: "Contact Us", to: "/contact" },
           ].map(l => (
             <Link key={l.to} to={l.to} className="block text-[11px] mb-2.5 transition-colors uppercase tracking-wide"
               style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, color: "rgba(255,255,255,0.4)" }}
