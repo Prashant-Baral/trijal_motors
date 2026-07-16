@@ -131,9 +131,6 @@ function FinancingOverview() {
             boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
           }}
         >
-          {/* Structure panel — now on-theme with the rest of the page (light,
-              red-accented) instead of a black block that only belongs in
-              the hero/footer */}
           <div
             className="md:col-span-2 flex flex-col"
             style={{ background: C.offWhite, padding: "36px 32px", borderRight: `1px solid ${C.border}` }}
@@ -178,7 +175,6 @@ function FinancingOverview() {
               </BtnRed>
             </div>
           </div>
-          {/* What affects your price panel — no figures, just factors */}
           <div className="md:col-span-3 flex flex-col" style={{ background: C.white, padding: "36px 32px" }}>
             <p style={eyebrowLabel}>What determines your price</p>
             <div className="flex flex-col gap-5 mb-6" style={{ marginTop: 20 }}>
@@ -327,13 +323,6 @@ function WhatYouNeed() {
     </section>
   );
 }
-// FAQ content is written for two audiences at once: people actively
-// comparing EV microbus / EV micro options in Pokhara (who may not know
-// Trijal or the Chery Wanda by name yet), and AI answer engines / search
-// crawlers that surface FAQPage schema for queries like "EV microbus
-// Pokhara", "buy electric van Nepal", or "Chery Wanda financing". Each
-// question is phrased the way someone would actually type or ask it, and
-// each answer is self-contained so it reads correctly out of context.
 const faqs = [
   {
     q: "What is an EV microbus and is the Chery Wanda a good option in Pokhara?",

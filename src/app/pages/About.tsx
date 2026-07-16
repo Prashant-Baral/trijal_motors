@@ -20,9 +20,9 @@ export default function About() {
         telephone="+977-985-605-8195"
         email={EMAIL}
       />
-      {/* ── Header ── */}
+      {/* Header */}
       <div style={{ background: C.black, paddingTop: 64, paddingBottom: 52, position: "relative", overflow: "hidden" }}>
-        {/* faint corner accent — quiet signature, not a highlight */}
+        {/* Corner accent */}
         <div style={{ position: "absolute", top: -80, right: -80, width: 280, height: 280, borderRadius: "50%", background: "radial-gradient(circle, rgba(199,40,40,0.16) 0%, transparent 70%)" }} />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
           <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: C.red, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>
@@ -36,7 +36,7 @@ export default function About() {
           </p>
         </div>
       </div>
-      {/* ── Story ── */}
+      {/* Story */}
       <section style={{ background: C.white }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
           <div>
@@ -67,7 +67,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        {/* Brand lockup strip */}
+        {/* Brand lockup */}
         <div style={{ paddingTop: 4, paddingBottom: 56 }}>
           <div className="flex justify-center">
             <div
@@ -83,7 +83,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      {/* ── Sales Manager Card ── */}
+      {/* Sales Manager Card */}
       <section style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
           <SectionHead eyebrow="Get in touch" title="Talk directly with our sales team" />
@@ -157,7 +157,7 @@ export default function About() {
           </div>
         </div>
       </section>
-      {/* ── Showroom Photo Strip ── */}
+      {/* Showroom Photo Strip */}
       <section style={{ background: C.white, borderTop: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
           <SectionHead eyebrow="Visit us" title="Showroom & handover gallery" />

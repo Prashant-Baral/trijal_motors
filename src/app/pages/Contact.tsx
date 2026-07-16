@@ -13,8 +13,7 @@ export default function Contact() {
           { name: "Contact", url: "https://trijalmotors.com.np/contact" },
         ]}
       />
-      {/* This is the most relevant page on the site for LocalBusiness
-          markup — address/hours/phone are all right here and match. */}
+      {/* LocalBusiness Schema */}
       <LocalBusinessSchema />
       {/* Header */}
       <div style={{ background: C.black, paddingTop: 36, paddingBottom: 28 }}>

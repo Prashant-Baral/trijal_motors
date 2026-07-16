@@ -4,26 +4,11 @@ import PageMeta, { pageMeta } from "../components/PageMeta";
 import { BreadcrumbSchema, ImageGallerySchema, VideoObjectSchema } from "../components/SeoSchemas";
 const SITE_URL = "https://trijalmotors.com.np";
 const absImg = (src: string) => (src.startsWith("http") ? src : `${SITE_URL}${src.startsWith("/") ? "" : "/"}${src}`);
-// type "photo"   → click opens full-screen image lightbox
-// type "youtube" → click opens inline YouTube player  (src = video ID after ?v=)
-// type "local"   → click opens native <video> player  (src = path under /public)
-//
-// NOTE: "local" videos no longer need a manual `thumb` — if you omit it, the
-// grid tile will automatically show the video's own first frame as the cover.
-// You only need `thumb` if you want to override that with a specific image.
 type MediaItem =
   | { kind: "photo"; img: string; alt: string; caption: string; description?: string }
   | { kind: "youtube"; src: string; thumb?: string; caption: string; description?: string; uploadDate: string; duration?: string }
   | { kind: "local"; src: string; thumb?: string; caption: string; description?: string; uploadDate: string; duration?: string };
-// NOTE ON KEYWORDS: alt/caption text is deliberately varied per item rather
-// than repeating "Chery Wanda Pokhara" verbatim on every photo — Google
-// Images treats near-identical alt text across a gallery as a weak/spammy
-// signal. Each entry rotates through the actual terms people search
-// (chery wanda, chery wanda pokhara, ev pokhara, trijal motors, seater
-// count + jagdamba) so the gallery as a whole covers the full keyword set
-// without any single image looking keyword-stuffed.
 const media: MediaItem[] = [
-  // ── Photos ──────────────────────────────────────────────────────────────────
   { kind: "photo", img: IMG.seater_12_b, alt: "Chery Wanda 12-seater electric microbus at Trijal Motors showroom, Pokhara", caption: "Chery Wanda 12-Seater · EV Pokhara Showroom", description: "Chery Wanda 12-seater electric microbus on display at Trijal Motors, the authorized Jagadamba Motors EV dealer in Pokhara, Gandaki Province." },
   { kind: "photo", img: IMG.customer12, alt: "Customer handover of Chery Wanda 14-seater electric van in Pokhara, Nepal", caption: "Chery Wanda Pokhara · 14-Seater Handover", description: "Trijal Motors customer handover ceremony for a Chery Wanda 14-seater electric microbus in Pokhara." },
   { kind: "photo", img: IMG.ecustomer1, alt: "Chery Wanda 14-seater EV delivered to Mr Bharat Karki", caption: "Trijal Motors · Chery Wanda Delivery", description: "Chery Wanda 14-seater electric van delivered by Trijal Motors in Gandaki Province." },
@@ -49,21 +34,10 @@ const media: MediaItem[] = [
   { kind: "photo", img: IMG.customer13, alt: "Chery Wanda 14-seater electric microbus at Trijal Motors showroom, Pokhara", caption: "Chery Wanda 14-Seater · Delivered to Rainbow Academic Homes", description: "Delivery of the Chery Wanda 14-seater electric microbus to Rainbow Academic Homes in Pokhara" },
 
 
-  // ── Videos ──────────────────────────────────────────────────────────────────
-  // YouTube: replace VIDEO_ID with the part after ?v= in the YouTube URL
-  // (thumbnail is fetched automatically from YouTube — no thumb needed)
-  // { kind: "youtube", src: "VIDEO_ID", caption: "Chery Wanda · Launch Event · Pokhara 2026", description: "...", uploadDate: "2026-06-01" },
-  //
-  // Local:   drop the file in public/videos/ then reference it here
-  // (cover image is auto-generated from the video's first frame — no thumb needed)
-  // { kind: "local", src: "/videos/handover-baglung.mp4", caption: "Handover · Baglung · 2024", description: "...", uploadDate: "2024-05-01" },
   { kind: "local", src: "/videos/trijal-promo.mp4", caption: "Trijal Motors · Chery Wanda EV Pokhara Promo", description: "Official promo video for Trijal Motors, the authorized Jagadamba Motors Chery Wanda electric microbus dealer in Pokhara, Gandaki Province.", uploadDate: "2026-01-01" },
 ];
 const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 const ytEmbed = (id: string) => `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-// Returns a static image thumb when one is available/applicable.
-// Local videos without an explicit `thumb` return "" — those are rendered
-// with a live <video> tag instead so the browser shows the first frame itself.
 function thumbFor(item: MediaItem): string {
   if (item.kind === "photo") return item.img;
   if (item.kind === "youtube") return item.thumb ?? ytThumb(item.src);
@@ -188,7 +162,6 @@ export default function Gallery() {
           .map((p) => ({ url: absImg(p.img), caption: p.caption, description: p.description }))}
       />
       {videoSchemaData.length > 0 && <VideoObjectSchema videos={videoSchemaData} />}
-      {/* ── Header ── */}
       <div style={{ background: C.black, paddingTop: 36, paddingBottom: 28 }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: C.red, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 10 }}>
@@ -203,16 +176,12 @@ export default function Gallery() {
           </h1>
         </div>
       </div>
-      {/* ── Unified masonry grid ── */}
       <section style={{ background: C.white }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
           <div className="columns-2 md:columns-3 gap-4">
             {media.map((item, i) => {
               const thumb = thumbFor(item);
               const isVideo = item.kind !== "photo";
-              // Local videos with no explicit `thumb` get an auto cover: we
-              // render the <video> element itself (paused on its first frame)
-              // instead of requiring a separate cover image.
               const useAutoVideoCover = item.kind === "local" && !item.thumb;
               return (
                 <figure
@@ -251,16 +220,11 @@ export default function Gallery() {
                       <div className="w-full h-full" style={{ background: "#111" }} />
                     )}
                     {isVideo && <PlayBadge />}
-                    {/* Subtle gradient on hover, kept purely decorative now
-                        that the caption itself lives below, always visible */}
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: "linear-gradient(to top, rgba(20,20,20,0.55) 0%, transparent 55%)" }}
                     />
                   </button>
-                  {/* Always-visible caption — real, crawlable content
-                      (not hover-only) so each tile carries a genuine,
-                      keyword-relevant text signal for image/video search. */}
                   <figcaption
                     className="px-4 py-3"
                     style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "rgba(0, 0, 0, 0.75)", letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1.6 }}
@@ -274,7 +238,6 @@ export default function Gallery() {
           </div>
         </div>
       </section>
-      {/* ── Unified lightbox ── */}
       {activeIdx !== null && (
         <Lightbox
           item={media[activeIdx]}

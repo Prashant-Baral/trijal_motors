@@ -10,13 +10,13 @@ const SITE = "https://trijalmotors.com.np";
 function fmtDate(d: string) {
   return new Date(d).toLocaleDateString("en-NP", { year: "numeric", month: "long", day: "numeric" });
 }
-// Resolve a post image to an absolute URL for schema/og purposes.
+// Resolve absolute image URL
 function absImg(img: string) {
   return img.startsWith("http") ? img : `${SITE}${img.startsWith("/") ? "" : "/"}${img}`;
 }
 function ShareBar({ post }: { post: Post }) {
   const [copied, setCopied] = useState(false);
-  // Use the real current URL — works on any domain (netlify.app, custom domain, etc.)
+  // Use current URL
   const pageUrl = typeof window !== "undefined" ? window.location.href : `https://trijalmotors.com.np/blog/${post.slug}`;
   const shareText = encodeURIComponent(`${post.title} — Trijal Motors`);
   const shareUrl = encodeURIComponent(pageUrl);
@@ -332,8 +332,7 @@ export default function Blog() {
           { name: "Blog", url: `${SITE}/blog` },
         ]}
       />
-      {/* Tells crawlers this page IS a Blog containing these posts, not just
-          an unstructured list of links. */}
+      {/* Blog Schema for crawlers */}
       <BlogSchema
         url={`${SITE}/blog`}
         name="Trijal Motors Blog"
@@ -362,7 +361,7 @@ export default function Blog() {
           )}
         </div>
       </section>
-      {/* CTA strip */}
+      {/* CTA */}
       <section
         style={{
           background: C.black,
@@ -424,9 +423,7 @@ export function BlogPost() {
           section: post.category,
         }}
       />
-      {/* Structured data: lets Google, AI assistants, and other engines
-          understand this as an article (not just a page of text), and
-          shows the breadcrumb trail (Home › Blog › Post) in rich results. */}
+      {/* Article Schema for rich results */}
       <ArticleSchema
         headline={post.title}
         description={post.excerpt}
@@ -444,7 +441,7 @@ export function BlogPost() {
           { name: post.title, url: postUrl },
         ]}
       />
-      {/* Post hero */}
+      {/* Hero */}
       <div
         style={{
           background: C.black,
@@ -501,14 +498,14 @@ export function BlogPost() {
             {post.title}
           </h1>
         </div>
-        {/* Hero image */}
+        {/* Image */}
         <div className="max-w-4xl mx-auto px-4 md:px-10">
           <div style={{ borderRadius: "18px 18px 0 0", overflow: "hidden", height: 320, background: C.black }}>
             <img src={post.img} alt={post.title} fetchPriority="high" loading="eager" className="w-full h-full object-cover" style={{ opacity: 0.9 }} />
           </div>
         </div>
       </div>
-      {/* Post body */}
+      {/* Body */}
       <section style={{ background: C.white }}>
         <div className="max-w-4xl mx-auto px-6 md:px-12 py-14">
           {/* Excerpt */}
@@ -526,14 +523,14 @@ export function BlogPost() {
           >
             {post.excerpt}
           </p>
-          {/* Body — rendered from markdown */}
+          {/* Rendered markdown */}
           <div
             className="prose"
             dangerouslySetInnerHTML={{ __html: post.bodyHtml }}
           />
           {/* Share bar */}
           <ShareBar post={post} />
-          {/* Author / source note */}
+          {/* Author */}
           <div
             className="mt-12 pt-8"
             style={{ borderTop: `1px solid ${C.border}` }}

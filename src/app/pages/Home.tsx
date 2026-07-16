@@ -5,7 +5,7 @@ import { C, wa, IMG, BtnRed, BtnOutline, SectionHead } from "../shared";
 import { FaqSchema, LocalBusinessSchema, BreadcrumbSchema } from "../components/SeoSchemas";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 
-// ─── Hero — white bg, exact v9 layout ────────────────────────────────────────
+// Hero
 function Hero() {
   const scrollToSlideshow = () => {
     document.getElementById("hero-slideshow")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -57,7 +57,7 @@ function Hero() {
         </div>
       </div>
 
-      {/* Clickable scroll cue — nudges visitor toward the slideshow below */}
+      {/* Scroll cue */}
       <button
         onClick={scrollToSlideshow}
         className="flex flex-col items-center w-full pb-6 md:pb-8"
@@ -82,7 +82,7 @@ function Hero() {
   );
 }
 
-// ─── Full-width slideshow — unchanged ─────────────────────────────────────────
+// Hero slideshow
 const heroSlides = [
 
   { img: IMG.seater_14_d, caption: "Chery Wanda · 14-Seater", loc: "Pokhara, Gandaki Province" },
@@ -150,7 +150,7 @@ function HeroSlideshow() {
   );
 }
 
-// ─── Trust strip ──────────────────────────────────────────────────────────────
+// Trust strip
 function TrustStrip() {
   const items = [
     { icon: <Award size={13} color={C.red} />, text: "Official Jagadamba dealer · Gandaki Province" },
@@ -173,7 +173,7 @@ function TrustStrip() {
   );
 }
 
-// ─── Vehicle cards ────────────────────────────────────────────────────────────
+// Vehicle cards
 const variants = [
   { seats: "11", tag: "Entry", price: "11 seater", img: IMG.seater_11_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
   { seats: "12", tag: "Popular", price: "12 seater", img: IMG.seater_12_a, specs: "CATL 41.86 kWh · 300 km NEDC · 70 kW" },
@@ -242,7 +242,7 @@ function VehiclePreview() {
   );
 }
 
-// ─── Financing teaser ─────────────────────────────────────────────────────────
+// Financing teaser
 function FinancingTeaser() {
   return (
     <section style={{ background: C.offWhite, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
@@ -280,7 +280,7 @@ function FinancingTeaser() {
   );
 }
 
-// ─── Handover photo grid ──────────────────────────────────────────────────────
+// Handover photo grid
 const handoverPhotos = [
   { img: IMG.ecustomer9, caption: "[ph] Handover · Chery Wanda 14-Seater · Pokhara" },
   { img: IMG.customer2, caption: "[ph] Handover · Chery Wanda 12-Seater · Baglung" },
@@ -315,7 +315,7 @@ function HandoverSection() {
   );
 }
 
-// ─── Customer stories ─────────────────────────────────────────────────────────
+// Customer stories
 const reviews = [
   {
     name: "Bharat B. Karki",
@@ -394,7 +394,7 @@ function CustomerStories() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {shown.map((r, i) => (
             <div key={i} className="flex flex-col overflow-hidden" style={{ borderRadius: 18, background: C.white, border: `1px solid ${C.border}`, boxShadow: "0 4px 20px rgba(0,0,0,0.05)" }}>
-              {/* Customer / delivery photo */}
+              {/* Photo */}
               <div className="relative overflow-hidden" style={{ height: 200, background: C.black, flexShrink: 0 }}>
                 <img src={r.photo} alt={`${r.name} — ${r.vehicle}`} className="w-full h-full object-cover" style={{ opacity: 0.82 }} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(20,20,20,0.5) 0%, transparent 60%)" }} />
@@ -431,7 +431,7 @@ function TikTokIcon({ size = 14, color = "currentColor" }: { size?: number; colo
   );
 }
 
-// ─── TikTok inline video feed ─────────────────────────────────────────────────
+// TikTok inline video feed
 const tiktokVideoUrls = [
   "https://www.tiktok.com/@chery.wanda.pokha/video/7571849708042325265",
   "https://www.tiktok.com/@chery.wanda.pokha/video/7639010093064867073",
@@ -442,7 +442,7 @@ const tiktokVideoUrls = [
 ];
 
 
-// ─── TikTok inline video feed (click-to-load facade) ────────────────────────
+// TikTok feed facade
 function TikTokFeed() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -496,7 +496,7 @@ function TikTokFeed() {
           style={{ width: "100%", maxWidth: "325px", aspectRatio: "325 / 555", borderRadius: "12px", overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.05)", position: "relative" }}
         >
           {!loaded ? (
-            /* Facade: shows a static placeholder until user clicks — avoids loading ~1.2MB TikTok JS on page load */
+            /* Facade */
             <button
               onClick={() => setLoaded(true)}
               aria-label="Load TikTok video from Chery Wanda Pokhara"
@@ -547,11 +547,9 @@ function TikTokFeed() {
   );
 }
 
-// ─── Follow along section wrapper ─────────────────────────────────────────────
+// Follow along section
 function FollowAlong() {
-  // Facebook's Page Plugin needs its JS SDK to render responsively (fill the
-  // actual column width instead of a fixed pixel size) and to re-render if
-  // this component remounts during client-side navigation.
+  // Load Facebook SDK for Page Plugin
   useEffect(() => {
     const w = window as any;
     const loadOrParse = () => {
@@ -615,7 +613,7 @@ function FollowAlong() {
           <div
             className="w-full"
             style={{
-              maxWidth: 325, // Capped to 325 to match the TikTok card identically
+              maxWidth: 325, // Cap width to match TikTok
               borderRadius: 20,
               border: `1px solid ${C.border}`,
               overflow: "hidden",
@@ -651,7 +649,7 @@ function FollowAlong() {
   );
 }
 
-// ─── About strip ──────────────────────────────────────────────────────────────
+// About strip
 function AboutStrip() {
   return (
     <section style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
@@ -666,7 +664,7 @@ function AboutStrip() {
             Officially authorized by Jagadamba Motors to sell the Chery Wanda electric microbus across all of Gandaki Province. Showroom at Pokhara-14, Chauthe.
           </p>
           <Link to="/about" className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest" style={{ fontFamily: "Inter, sans-serif", color: C.red }}>
-            Learn more <ArrowRight size={13} />
+            Learn more About us<ArrowRight size={13} />
           </Link>
         </div>
       </div>

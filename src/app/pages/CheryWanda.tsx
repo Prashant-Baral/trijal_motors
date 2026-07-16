@@ -153,22 +153,17 @@ const variants: Record<string, { seats: number; price: string; images: string[];
 };
 const tabs = ["11", "12", "14", "16"] as const;
 type Tab = typeof tabs[number];
-// FAQ questions from the sitewide faqData bank that are actually relevant to
-// this page's content (vehicle specs, range, financing, battery, terrain).
-// Contact/location questions live on /contact instead, so nothing's duplicated
-// verbatim across pages with mismatched context.
+// FAQ questions
 const VEHICLE_FAQ_KEYWORDS = ["price", "range", "financing", "battery", "mountain", "best seller"];
 const vehicleFaqs = faqData.filter(f =>
   VEHICLE_FAQ_KEYWORDS.some(k => f.q.toLowerCase().includes(k))
 );
 function Slideshow({ images, alt }: { images: string[]; alt: string }) {
-  // Guard against undefined/empty entries — a bad IMG key here previously
-  // produced `key={src + i}` → NaN (undefined + number = NaN in JS), which
-  // caused duplicate React keys AND the broken-image icon in the corner.
+  // Guard against empty entries
   const safeImages = images.filter(Boolean);
   const [index, setIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  // Reset to first slide whenever the image set changes (e.g. variant tab switch)
+  // Reset on image change
   useEffect(() => {
     setIndex(0);
   }, [safeImages.length]);
@@ -254,9 +249,7 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
     </div>
   );
 }
-// Accordion-style FAQ item — mirrors the toggle pattern used on the
-// Financing page's FAQ() component, so behavior is consistent site-wide
-// instead of dumping every answer open by default.
+// FaqAccordion component
 function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
@@ -307,7 +300,7 @@ function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
     </div>
   );
 }
-// Build the flat array VehicleSchema expects from the `variants` record above.
+// Build VehicleSchema variants array
 function buildVehicleSchemaVariants() {
   return tabs.map((t) => {
     const v = variants[t];
@@ -325,13 +318,10 @@ export default function CheryWanda() {
   const [active, setActive] = useState<Tab>("14");
   const v = variants[active];
   const heroImage = IMG.seater_16_a;
-  // Refs for auto-scrolling the spec table to the tapped variant column on mobile
+  // Refs for auto-scrolling
   const specScrollRef = useRef<HTMLDivElement | null>(null);
   const tabHeaderRefs = useRef<Partial<Record<Tab, HTMLTableCellElement | null>>>({});
-  // Deep-link support: /vehicles/chery-wanda#16-seater lands directly on that
-  // tab. Keeps the four variants individually linkable/shareable without
-  // needing separate pages — the hash also updates on tab click so the URL
-  // in the address bar always reflects what's showing.
+  // Deep-link support
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const match = tabs.find(t => `${t}-seater` === hash);
@@ -345,7 +335,7 @@ export default function CheryWanda() {
     const container = specScrollRef.current;
     const th = tabHeaderRefs.current[active];
     if (!container || !th) return;
-    // Only bother scrolling if the table actually overflows (i.e. mobile)
+    // Check for overflow
     if (container.scrollWidth <= container.clientWidth) return;
     const firstColWidth =
       container.querySelector("thead th")?.getBoundingClientRect().width ?? 0;
@@ -355,7 +345,7 @@ export default function CheryWanda() {
   const scrollToSpecs = () => {
     document.getElementById("full-specs")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  // Floating scroll cue — only shown while the visitor is still on the first screen
+  // Floating scroll cue
   const [showScrollCue, setShowScrollCue] = useState(true);
   useEffect(() => {
     const onScroll = () => setShowScrollCue(window.scrollY < window.innerHeight * 0.6);
@@ -366,12 +356,7 @@ export default function CheryWanda() {
   return (
     <>
       <PageMeta {...pageMeta.vehicles} />
-      {/* Structured data: one Vehicle entry per seating variant (no price —
-          Trijal Motors quotes individually, see VehicleSchema comments),
-          plus a breadcrumb trail and a FAQ block (visible section further
-          down the page mirrors this, which is required for rich-result
-          eligibility — schema with no matching visible content is a risk).
-          NOTE: swap "/chery-wanda" below for this page's real route if different. */}
+      {/* Structured data */}
       <VehicleSchema variants={buildVehicleSchemaVariants()} />
       <BreadcrumbSchema
         items={[
@@ -416,7 +401,7 @@ export default function CheryWanda() {
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.65)", marginTop: 4 }}>11 · 12 · 14 · 16 Seater Variants — Available in Gandaki Province</p>
         </div>
       </div>
-      {/* Variant Tab Selector — grid, not scroll, so all 4 are always visible on mobile */}
+      {/* Variant Tab Selector */}
       <div style={{ background: C.offWhite, borderBottom: `1px solid ${C.border}` }}>
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-4 gap-0.5 py-3">
@@ -470,7 +455,7 @@ export default function CheryWanda() {
               <BtnRed href={wa(`Hi, I'm interested in the Chery Wanda ${active}-Seater. Please contact me.`)}>Enquire on WhatsApp <ChevronRight size={13} /></BtnRed>
               <BtnOutline href={wa(`Hi, I'd like to book a test drive for the Chery Wanda ${active}-Seater.`)}>Book Test Drive</BtnOutline>
             </div>
-            {/* Nudge toward full spec comparison */}
+            {/* Compare variants button */}
             <button
               onClick={scrollToSpecs}
               className="flex items-center gap-2 self-start"
@@ -497,7 +482,7 @@ export default function CheryWanda() {
                 Manufacturer specifications for the Chery Wanda electric microbus range, as published by Shanker / Jagdamba Motors Pvt. Ltd. — the official Nepal distributor.
               </p>
             </div>
-            {/* Variant quick-jump pills */}
+            {/* Variant quick-jump */}
             <div className="flex gap-2">
               {tabs.map(t => (
                 <button key={t} onClick={() => selectTab(t)}
@@ -555,7 +540,7 @@ export default function CheryWanda() {
                       {t}-Seater
                     </th>
                   ))}
-                  {/* Spacer column — keeps the scrolled-to tab from sitting flush against the right edge */}
+                  {/* Spacer column */}
                   <th aria-hidden style={{ width: 28, minWidth: 28, padding: 0, border: "none", background: C.offWhite, position: "sticky", top: 0 }} />
                 </tr>
               </thead>
@@ -660,10 +645,7 @@ export default function CheryWanda() {
           </div>
         </div>
       </section>
-      {/* FAQ — visible content matching the FaqSchema JSON-LD rendered above.
-          Filtered to vehicle-relevant questions only (price, range, financing,
-          battery, terrain, best seller) so this doesn't duplicate the
-          location/contact questions that belong on /contact instead. */}
+      {/* FAQ */}
       {vehicleFaqs.length > 0 && (
         <section style={{ background: C.offWhite, borderTop: `1px solid ${C.border}` }}>
           <div className="max-w-4xl mx-auto px-6 md:px-12 py-14">
