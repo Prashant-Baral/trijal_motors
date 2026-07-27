@@ -75,10 +75,10 @@ export function LocalBusinessSchema() {
       "@type": "OfferCatalog",
       name: "Chery Wanda Electric Microbus",
       itemListElement: [
-        { "@type": "Offer", name: "Chery Wanda 11-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 11-Seater Electric Microbus" } },
-        { "@type": "Offer", name: "Chery Wanda 12-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 12-Seater Electric Microbus" } },
-        { "@type": "Offer", name: "Chery Wanda 14-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 14-Seater Electric Microbus" } },
-        { "@type": "Offer", name: "Chery Wanda 16-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 16-Seater Electric Microbus" } },
+        { "@type": "Offer", name: "Chery Wanda 11-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 11-Seater Electric Microbus", offers: { "@type": "Offer", url: "https://trijalmotors.com.np/vehicles/chery-wanda#11-seater", availability: "https://schema.org/InStock" } } },
+        { "@type": "Offer", name: "Chery Wanda 12-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 12-Seater Electric Microbus", offers: { "@type": "Offer", url: "https://trijalmotors.com.np/vehicles/chery-wanda#12-seater", availability: "https://schema.org/InStock" } } },
+        { "@type": "Offer", name: "Chery Wanda 14-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 14-Seater Electric Microbus", offers: { "@type": "Offer", url: "https://trijalmotors.com.np/vehicles/chery-wanda#14-seater", availability: "https://schema.org/InStock" } } },
+        { "@type": "Offer", name: "Chery Wanda 16-Seater", itemOffered: { "@type": "Product", name: "Chery Wanda 16-Seater Electric Microbus", offers: { "@type": "Offer", url: "https://trijalmotors.com.np/vehicles/chery-wanda#16-seater", availability: "https://schema.org/InStock" } } },
       ],
     },
     // NOTE: aggregateRating intentionally removed. Google's review-snippet
