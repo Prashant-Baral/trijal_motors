@@ -199,7 +199,7 @@ function VehiclePreview() {
         {/* 4-up variant grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-10">
           {variants.map(v => (
-            <div key={v.seats} className="group flex flex-col overflow-hidden"
+            <Link key={v.seats} to={`/vehicles/chery-wanda#${v.seats}-seater`} className="group flex flex-col overflow-hidden"
               style={{ borderRadius: 18, background: "rgba(255,255,255,0.92)", border: `1px solid ${C.border}`, boxShadow: "0 4px 20px rgba(0,0,0,0.08)", backdropFilter: "blur(6px)", transition: "transform 0.22s, box-shadow 0.22s" }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 14px 40px rgba(0,0,0,0.13)"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)"; }}>
@@ -226,7 +226,7 @@ function VehiclePreview() {
                   className="hidden">ex-showroom</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: C.black, lineHeight: 1.5 }}>{v.specs}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

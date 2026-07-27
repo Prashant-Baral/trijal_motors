@@ -194,17 +194,7 @@ export function SectionHead({ eyebrow, title, dark = false }: { eyebrow: string;
     </div>
   );
 }
-function FooterStripe() {
-  return (
-    <div className="absolute bottom-0 left-0 pointer-events-none overflow-hidden" style={{ width: 320, height: 60, zIndex: 10 }}>
-      <svg viewBox="0 0 320 60" width={320} height={60} fill="none">
-        <path d="M0,60 L0,14 Q0,4 10,2 L100,0 L108,60 Z" fill={C.black} />
-        <path d="M88,0 L160,2 L168,60 L108,60 Z" fill={C.maroon} />
-        <path d="M152,2 L240,18 L228,60 L168,60 Z" fill={C.red} />
-      </svg>
-    </div>
-  );
-}
+
 const navVehicles = [
   { label: "Chery Wanda", sub: "11 to 16 Seater EV Bus", to: "/vehicles/chery-wanda" },
 ];
@@ -330,7 +320,6 @@ export function Nav() {
 export function Footer() {
   return (
     <footer className="relative overflow-hidden" style={{ background: C.black }}>
-      <FooterStripe />
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-14 pb-6 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <div className="mb-5 flex items-center">
@@ -384,7 +373,9 @@ export function Footer() {
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-4 flex flex-wrap gap-3 justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
         <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "rgba(255,255,255,0.2)", paddingLeft: 100 }}>© {new Date().getFullYear()} Trijal Motors Pvt. Ltd.</p>
-        <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "rgba(255,255,255,0.2)", paddingRight: 40 }}> Authorized dealer of Jagadamba Motors</p>
+        <p style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "rgba(255,255,255,0.2)", paddingRight: 40 }}>
+          Designed by <a href="https://baralprashant.com.np" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.4)", transition: "color 0.2s" }} onMouseEnter={e => e.currentTarget.style.color = C.white} onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.4)"}>Prashant Baral</a>
+        </p>
       </div>
     </footer>
   );
