@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import { useState } from "react";
-import { Calendar, ArrowRight, ChevronRight, Share2, Facebook, Twitter, Linkedin, Link2, Check } from "lucide-react";
+import { Calendar, ArrowRight, ChevronRight, Share2, Facebook, Link2, Check } from "lucide-react";
 import { C, wa, IMG, BtnRed, SectionHead } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 import { BreadcrumbSchema, ArticleSchema, BlogSchema } from "../components/SeoSchemas";
@@ -35,22 +35,6 @@ function ShareBar({ post }: { post: Post }) {
       icon: <Facebook size={15} />,
       href: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
       bg: "#1877F2",
-      color: "#fff",
-    },
-    {
-      id: "twitter",
-      label: "X / Twitter",
-      icon: <Twitter size={15} />,
-      href: `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`,
-      bg: "#000",
-      color: "#fff",
-    },
-    {
-      id: "linkedin",
-      label: "LinkedIn",
-      icon: <Linkedin size={15} />,
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`,
-      bg: "#0A66C2",
       color: "#fff",
     },
   ];
