@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ChevronRight, Award, Shield, CreditCard, Zap, Facebook, ArrowRight, Star, Quote, ChevronDown, ChevronLeft } from "lucide-react";
-import { C, wa, IMG, BtnRed, BtnOutline, SectionHead } from "../shared";
+import { C, wa, IMG, BtnRed, BtnOutline, SectionHead, TikTokIcon } from "../shared";
 import { FaqSchema, LocalBusinessSchema, BreadcrumbSchema } from "../components/SeoSchemas";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 
@@ -422,14 +422,7 @@ function CustomerStories() {
   );
 }
 
-// TikTok icon (not in lucide)
-function TikTokIcon({ size = 14, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
-    </svg>
-  );
-}
+
 
 // TikTok inline video feed
 const tiktokVideoUrls = [
@@ -477,13 +470,13 @@ function TikTokFeed() {
         <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.black, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           <TikTokIcon size={17} color={C.white} />
         </div>
-        <div>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: C.black, lineHeight: 1.2 }}>Chery Wanda Pokhara</p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.gray }}>tiktok.com/@chery.wanda.pokha</p>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: C.black, lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Chery Wanda Pokhara</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.gray, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>tiktok.com/@cherywandapokhara</p>
         </div>
-        <a href="https://www.tiktok.com/@chery.wanda.pokha" target="_blank" rel="noopener noreferrer"
+        <a href="https://www.tiktok.com/@cherywandapokhara" target="_blank" rel="noopener noreferrer"
           className="ml-auto flex items-center gap-1 px-3 py-1.5"
-          style={{ background: C.black, borderRadius: 6, textDecoration: "none" }}>
+          style={{ background: C.black, borderRadius: 6, textDecoration: "none", flexShrink: 0 }}>
           <TikTokIcon size={11} color={C.white} />
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: C.white }}>Follow</span>
         </a>
@@ -619,24 +612,45 @@ function FollowAlong() {
               overflow: "hidden",
               background: C.white,
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-              height: 639
+              height: 639,
+              display: "flex",
+              flexDirection: "column"
             }}
           >
-            <div style={{ width: "100%", height: "100%", overflowY: "auto" }}>
-              <div
-                className="fb-page"
-                data-href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/"
-                data-tabs="timeline"
-                data-height="639"
-                data-small-header="true"
-                data-adapt-container-width="true"
-                data-hide-cover="false"
-                data-show-facepile="false"
-                style={{ width: "100%" }}
-              >
-                <blockquote cite="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" className="fb-xfbml-parse-ignore">
-                  <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/">Trijal Motors Pvt. Ltd.</a>
-                </blockquote>
+            {/* Account Profile Header */}
+            <div className="flex items-center gap-3 px-5 py-4" style={{ borderBottom: `1px solid ${C.border}`, background: C.white }}>
+              <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#1877F2", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Facebook size={17} color={C.white} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: C.black, lineHeight: 1.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Chery Wanda Pokhara</p>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: C.gray, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>facebook.com/CheryWandaPokhara</p>
+              </div>
+              <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" target="_blank" rel="noopener noreferrer"
+                className="ml-auto flex items-center gap-1 px-3 py-1.5"
+                style={{ background: "#1877F2", borderRadius: 6, textDecoration: "none", flexShrink: 0 }}>
+                <Facebook size={11} color={C.white} />
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: C.white }}>Follow</span>
+              </a>
+            </div>
+
+            <div style={{ width: "100%", flex: 1, overflow: "hidden", position: "relative" }}>
+              <div style={{ marginTop: -70, height: "calc(100% + 70px)" }}>
+                <div
+                  className="fb-page"
+                  data-href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/"
+                  data-tabs="timeline"
+                  data-height="709"
+                  data-small-header="true"
+                  data-adapt-container-width="true"
+                  data-hide-cover="true"
+                  data-show-facepile="false"
+                  style={{ width: "100%" }}
+                >
+                  <blockquote cite="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/" className="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/p/Chery-Wanda-Pokhara-61575020432553/">Trijal Motors Pvt. Ltd.</a>
+                  </blockquote>
+                </div>
               </div>
             </div>
           </div>

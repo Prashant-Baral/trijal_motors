@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
-import { useState } from "react";
-import { Calendar, ArrowRight, ChevronRight, Share2, Facebook, Link2, Check } from "lucide-react";
-import { C, wa, IMG, BtnRed, SectionHead } from "../shared";
+import { useState, useEffect } from "react";
+import { Calendar, ArrowRight, ChevronRight, Share2, Facebook, Link2, Check, Instagram, X, ZoomIn } from "lucide-react";
+import { C, wa, IMG, BtnRed, SectionHead, TikTokIcon } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 import { BreadcrumbSchema, ArticleSchema, BlogSchema } from "../components/SeoSchemas";
 import { posts } from "../../content/generated-posts";
@@ -16,8 +16,8 @@ function absImg(img: string) {
 }
 function ShareBar({ post }: { post: Post }) {
   const [copied, setCopied] = useState(false);
-  // Use current URL
-  const pageUrl = typeof window !== "undefined" ? window.location.href : `https://trijalmotors.com.np/blog/${post.slug}`;
+  // Always use the production URL for sharing. Localhost URLs cannot be scraped by Facebook.
+  const pageUrl = `https://trijalmotors.com.np/blog/${post.slug}`;
   const shareText = encodeURIComponent(`${post.title} — Trijal Motors`);
   const shareUrl = encodeURIComponent(pageUrl);
   const platforms = [
@@ -28,6 +28,7 @@ function ShareBar({ post }: { post: Post }) {
       href: `https://wa.me/?text=${shareText}%20${shareUrl}`,
       bg: "#25D366",
       color: "#fff",
+      action: null,
     },
     {
       id: "facebook",
@@ -36,8 +37,41 @@ function ShareBar({ post }: { post: Post }) {
       href: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
       bg: "#1877F2",
       color: "#fff",
+      action: null,
+    },
+    {
+      id: "instagram",
+      label: "Instagram",
+      icon: <Instagram size={15} />,
+      href: "#",
+      bg: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+      color: "#fff",
+      action: () => copyAndAlert("Instagram"),
+    },
+    {
+      id: "tiktok",
+      label: "TikTok",
+      icon: <TikTokIcon size={14} color="#fff" />,
+      href: "#",
+      bg: "#000000",
+      color: "#fff",
+      action: () => copyAndAlert("TikTok"),
     },
   ];
+
+  function copyAndAlert(platform: string) {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      navigator.share({
+        title: `${post.title} — Trijal Motors`,
+        url: pageUrl,
+      }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(pageUrl).then(() => {
+        alert(`Link copied! Open ${platform} to paste and share.`);
+      });
+    }
+  }
+
   function copyLink() {
     navigator.clipboard.writeText(pageUrl).then(() => {
       setCopied(true);
@@ -76,9 +110,14 @@ function ShareBar({ post }: { post: Post }) {
           key={p.id}
           id={`share-${p.id}`}
           href={p.href}
-          target="_blank"
           rel="noopener noreferrer"
           title={`Share on ${p.label}`}
+          onClick={(e) => {
+            if (p.action) {
+              e.preventDefault();
+              p.action();
+            }
+          }}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -380,8 +419,168 @@ export default function Blog() {
     </>
   );
 }
+
+// ── Image Lightbox with share buttons ──
+function ImageLightbox({ src, alt, postTitle, postSlug, onClose }: {
+  src: string; alt: string; postTitle: string; postSlug: string; onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const pageUrl = `https://trijalmotors.com.np/blog/${postSlug}`;
+  const shareText = encodeURIComponent(`${postTitle} — Trijal Motors`);
+  const shareUrl = encodeURIComponent(pageUrl);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  function copyLink() {
+    navigator.clipboard.writeText(pageUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    });
+  }
+
+  function nativeShare(platform: string) {
+    if (navigator.share) {
+      navigator.share({ title: `${postTitle} — Trijal Motors`, url: pageUrl }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(pageUrl).then(() =>
+        alert(`Link copied! Open ${platform} and paste to share.`)
+      );
+    }
+  }
+
+  const buttons = [
+    { id: "whatsapp", label: "WhatsApp", bg: "#25D366",
+      icon: <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.551 4.103 1.513 5.83L.057 23.57a.5.5 0 0 0 .614.614l5.74-1.456A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.667-.5-5.2-1.376l-.372-.22-3.857.979.997-3.76-.242-.387A9.958 9.958 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>,
+      href: `https://wa.me/?text=${shareText}%20${shareUrl}`, action: null },
+    { id: "facebook", label: "Facebook", bg: "#1877F2",
+      icon: <Facebook size={14} />,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, action: null },
+    { id: "instagram", label: "Instagram",
+      bg: "linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888)",
+      icon: <Instagram size={14} />, href: "#", action: () => nativeShare("Instagram") },
+    { id: "tiktok", label: "TikTok", bg: "#000",
+      icon: <TikTokIcon size={13} color="#fff" />, href: "#", action: () => nativeShare("TikTok") },
+  ];
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9999,
+        background: "rgba(0,0,0,0.92)",
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center",
+        padding: 20,
+        backdropFilter: "blur(6px)",
+      }}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        style={{
+          position: "absolute", top: 20, right: 20,
+          background: "rgba(255,255,255,0.12)", border: "none",
+          borderRadius: "50%", width: 42, height: 42,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", color: "#fff", transition: "background 0.2s",
+        }}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.22)")}
+        onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
+      >
+        <X size={20} />
+      </button>
+
+      {/* Image */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ maxWidth: 860, width: "100%", marginBottom: 24 }}
+      >
+        <img
+          src={src} alt={alt}
+          style={{
+            width: "100%", borderRadius: 16,
+            maxHeight: "60vh", objectFit: "contain",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.6)",
+          }}
+        />
+      </div>
+
+      {/* Share panel */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: "rgba(255,255,255,0.07)",
+          border: "1px solid rgba(255,255,255,0.12)",
+          borderRadius: 16, padding: "18px 24px",
+          maxWidth: 860, width: "100%",
+          display: "flex", flexWrap: "wrap",
+          alignItems: "center", gap: 10,
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 6, marginRight: 4 }}>
+          <Share2 size={12} color="rgba(255,255,255,0.5)" />
+          <span style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.14em" }}>Share</span>
+        </div>
+        {buttons.map(b => (
+          <a
+            key={b.id}
+            href={b.href}
+            target={b.action ? undefined : "_blank"}
+            rel="noopener noreferrer"
+            onClick={e => { if (b.action) { e.preventDefault(); b.action(); } }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 6,
+              background: b.bg, color: "#fff",
+              fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600,
+              padding: "7px 14px", borderRadius: 100,
+              textDecoration: "none",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+              transition: "transform 0.15s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
+            onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
+          >
+            {b.icon} {b.label}
+          </a>
+        ))}
+        {/* Copy link */}
+        <button
+          onClick={copyLink}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 6,
+            background: copied ? "#22c55e" : "transparent",
+            color: copied ? "#fff" : "rgba(255,255,255,0.7)",
+            fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600,
+            padding: "7px 14px", borderRadius: 100,
+            border: `1px solid ${copied ? "#22c55e" : "rgba(255,255,255,0.2)"}`,
+            cursor: "pointer", transition: "all 0.2s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
+          onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
+        >
+          {copied ? <Check size={13} /> : <Link2 size={13} />}
+          {copied ? "Copied!" : "Copy link"}
+        </button>
+      </div>
+
+      {/* Hint */}
+      <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 14 }}>
+        Click outside or press Esc to close
+      </p>
+    </div>
+  );
+}
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const post = posts.find(p => p.slug === slug);
   if (!post) {
     return (
@@ -482,13 +681,68 @@ export function BlogPost() {
             {post.title}
           </h1>
         </div>
-        {/* Image */}
+        {/* Image — click to open lightbox */}
         <div className="max-w-4xl mx-auto px-4 md:px-10">
-          <div style={{ borderRadius: "18px 18px 0 0", overflow: "hidden", height: 320, background: C.black }}>
-            <img src={post.img} alt={post.title} fetchPriority="high" loading="eager" className="w-full h-full object-cover" style={{ opacity: 0.9 }} />
+          <div
+            onClick={() => setLightboxOpen(true)}
+            style={{
+              borderRadius: "18px 18px 0 0", overflow: "hidden",
+              height: 320, background: C.black,
+              position: "relative", cursor: "zoom-in",
+            }}
+          >
+            <img
+              src={post.img} alt={post.title}
+              fetchPriority="high" loading="eager"
+              className="w-full h-full object-cover"
+              style={{ opacity: 0.9, transition: "opacity 0.2s" }}
+            />
+            {/* Hover hint overlay */}
+            <div
+              className="lightbox-hint"
+              style={{
+                position: "absolute", inset: 0,
+                background: "rgba(0,0,0,0)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget.style.background = "rgba(0,0,0,0.35)");
+                (e.currentTarget.querySelector(".zoom-icon") as HTMLElement)!.style.opacity = "1";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget.style.background = "rgba(0,0,0,0)");
+                (e.currentTarget.querySelector(".zoom-icon") as HTMLElement)!.style.opacity = "0";
+              }}
+            >
+              <div
+                className="zoom-icon"
+                style={{
+                  opacity: 0, transition: "opacity 0.2s",
+                  background: "rgba(255,255,255,0.18)",
+                  backdropFilter: "blur(4px)",
+                  borderRadius: "50%", width: 52, height: 52,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                }}
+              >
+                <ZoomIn size={22} color="#fff" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightboxOpen && post && (
+        <ImageLightbox
+          src={post.img}
+          alt={post.title}
+          postTitle={post.title}
+          postSlug={post.slug}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
       {/* Body */}
       <section style={{ background: C.white }}>
         <div className="max-w-4xl mx-auto px-6 md:px-12 py-14">

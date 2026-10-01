@@ -9,7 +9,7 @@ const DIST = path.join(ROOT, "dist");
 const CONTENT_DIR = path.join(ROOT, "content", "blog");
 
 const SITE = "https://trijalmotors.com.np";
-const IMG_BASE = "https://trijalmotors.netlify.app";
+const IMG_BASE = "https://trijalmotors.com.np";
 
 function loadPosts() {
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".md"));
@@ -35,9 +35,14 @@ const baseHtml = fs.readFileSync(path.join(DIST, "index.html"), "utf-8");
 
 for (const post of posts) {
   const pageUrl = `${SITE}/blog/${post.slug}`;
-  const imgUrl = `${IMG_BASE}${post.img}`;
+  // Remove 'public' from the beginning of the path if it exists, and ensure it starts with a slash
+  const cleanImgPath = post.img.replace(/^public\/?/i, "").replace(/^\/?/, "/");
+  const imgUrl = `${IMG_BASE}${cleanImgPath}`;
   const fullTitle = `${post.title} | Trijal Motors Blog`;
   const published = new Date(post.date).toISOString();
+  
+  const imgExt = cleanImgPath.split(".").pop().toLowerCase();
+  const imgType = imgExt === "png" ? "image/png" : (imgExt === "webp" ? "image/webp" : "image/jpeg");
 
   let html = baseHtml
     .replace(/<title>[^<]*<\/title>/i, "")
@@ -59,7 +64,7 @@ for (const post of posts) {
     <meta property="og:description" content="${post.excerpt.replace(/"/g, "&quot;")}" />
     <meta property="og:image" content="${imgUrl}" />
     <meta property="og:image:secure_url" content="${imgUrl}" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:type" content="${imgType}" />
     <meta property="og:site_name" content="Trijal Motors Pvt. Ltd." />
     <meta property="og:locale" content="en_NP" />
 
