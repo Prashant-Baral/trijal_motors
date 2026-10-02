@@ -7,7 +7,7 @@
 
   <url>
     <loc>https://trijalmotors.com.np/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -29,7 +29,7 @@
   </url>
   <url>
     <loc>https://trijalmotors.com.np/vehicles/chery-wanda</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -143,7 +143,7 @@
   </url>
   <url>
     <loc>https://trijalmotors.com.np/gallery</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -201,6 +201,34 @@
     <image:image>
       <image:loc>https://trijalmotors.com.np/images/customer/customer12.webp</image:loc>
       <image:title>Chery Wanda customer delivery — Trijal Motors — customer12</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer15.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer15</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer16.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer16</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer17.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer17</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer18.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer18</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer19.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer19</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer20.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer20</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://trijalmotors.com.np/images/customer/customer21.webp</image:loc>
+      <image:title>Chery Wanda customer delivery — Trijal Motors — customer21</image:title>
     </image:image>
     <image:image>
       <image:loc>https://trijalmotors.com.np/images/customer/customer5.webp</image:loc>
@@ -269,19 +297,19 @@
   </url>
   <url>
     <loc>https://trijalmotors.com.np/financing</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trijalmotors.com.np/blog</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trijalmotors.com.np/contact</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -291,7 +319,7 @@
   </url>
   <url>
     <loc>https://trijalmotors.com.np/about</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <image:image>

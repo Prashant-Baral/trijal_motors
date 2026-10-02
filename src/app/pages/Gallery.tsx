@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { C, IMG } from "../shared";
 import PageMeta, { pageMeta } from "../components/PageMeta";
 import { BreadcrumbSchema, ImageGallerySchema, VideoObjectSchema } from "../components/SeoSchemas";
@@ -30,9 +30,14 @@ const media: MediaItem[] = [
   { kind: "photo", img: IMG.ecustomer4, alt: "Chery Wanda 14-seater EV delivered to Mr Madan Sunar", caption: "Handover · Chery Wanda 14-Seater", description: "Inside the Trijal Motors EV showroom in Pokhara during a Chery Wanda 14-seater handover." },
   { kind: "photo", img: IMG.ecustomer10, alt: "Customer Mr. Prakash Tripathi receiving keys to a Chery Wanda 16-seater EV in Pokhara", caption: "Key Handover · Chery Wanda 16-Seater EV", description: "Customer receiving the keys to a Chery Wanda 16-seater electric microbus at Trijal Motors, Pokhara." },
   { kind: "photo", img: IMG.ecustomer11, alt: "Chery Wanda 14-seater electric microbus at Trijal Motors showroom Handover", caption: "Chery Wanda 14-Seater · Delivered ", description: "Delivery of the Chery Wanda 14-seater electric microbus" },
-  { kind: "photo", img: IMG.seater_16_g, alt: "Chery Wanda 16-seater electric microbus at Trijal Motors showroom, Pokhara", caption: "Chery Wanda 16-Seater · Interior", description: "Interior of the Chery Wanda 16-seater electric microbus sold by Trijal Motors in Pokhara." },
   { kind: "photo", img: IMG.customer13, alt: "Chery Wanda 14-seater electric microbus at Trijal Motors showroom, Pokhara", caption: "Chery Wanda 14-Seater · Delivered to Rainbow Academic Homes", description: "Delivery of the Chery Wanda 14-seater electric microbus to Rainbow Academic Homes in Pokhara" },
-
+  { kind: "photo", img: IMG.ecustomer12, alt: "Chery Wanda 16-seater EV delivered to Mr abhinandan bajimaya at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.ecustomer14, alt: "Chery Wanda micro bus EV delivered to Mr Sete Thapa Magar at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.ecustomer13, alt: "Chery Wanda 16 seater micro bus EV delivered to Mr Khim Thapa at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.ecustomer15, alt: "Chery Wanda micro bus EV delivered to Mr Bijay Malla at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.ecustomer16, alt: "Chery Wanda micro bus EV delivered to Mr Shantaman Shrestha at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.ecustomer17, alt: "Chery Wanda micro bus EV delivered to Mr Bel bahadur thapa at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
+  { kind: "photo", img: IMG.customer18, alt: "Customer receiving Chery Wanda EV at Trijal Motors showroom, Pokhara", caption: "Chery Wanda · Customer Delivery", description: "Happy customer taking delivery of their new Chery Wanda electric microbus at Trijal Motors." },
 
   { kind: "local", src: "/videos/trijal-promo.mp4", caption: "Trijal Motors · Chery Wanda EV Pokhara Promo", description: "Official promo video for Trijal Motors, the authorized Jagadamba Motors Chery Wanda electric microbus dealer in Pokhara, Gandaki Province.", uploadDate: "2026-01-01" },
 ];
@@ -119,9 +124,17 @@ function PlayBadge() {
 }
 export default function Gallery() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [filter, setFilter] = useState<"all" | "photo" | "video">("all");
+
+  const filteredMedia = useMemo(() => media.filter((m) => {
+    if (filter === "all") return true;
+    if (filter === "photo") return m.kind === "photo";
+    return m.kind === "youtube" || m.kind === "local";
+  }), [filter]);
+
   const close = useCallback(() => setActiveIdx(null), []);
-  const prev = useCallback(() => setActiveIdx((i) => (i === null ? null : (i - 1 + media.length) % media.length)), []);
-  const next = useCallback(() => setActiveIdx((i) => (i === null ? null : (i + 1) % media.length)), []);
+  const prev = useCallback(() => setActiveIdx((i) => (i === null ? null : (i - 1 + filteredMedia.length) % filteredMedia.length)), [filteredMedia.length]);
+  const next = useCallback(() => setActiveIdx((i) => (i === null ? null : (i + 1) % filteredMedia.length)), [filteredMedia.length]);
   useEffect(() => {
     if (activeIdx === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -177,70 +190,130 @@ export default function Gallery() {
         </div>
       </div>
       <section style={{ background: C.white }}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-          <div className="columns-2 md:columns-3 gap-4">
-            {media.map((item, i) => {
-              const thumb = thumbFor(item);
-              const isVideo = item.kind !== "photo";
-              const useAutoVideoCover = item.kind === "local" && !item.thumb;
-              return (
-                <figure
-                  key={i}
-                  className="relative overflow-hidden group mb-4 break-inside-avoid w-full"
-                  style={{ borderRadius: 16 }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setActiveIdx(i)}
-                    aria-label={`Open ${item.kind === "photo" ? "photo" : "video"}: ${item.caption}`}
-                    className="relative overflow-hidden block w-full text-left cursor-pointer"
-                    style={{
-                      aspectRatio: i % 5 === 0 ? "16/10" : "4/3",
-                      padding: 0, border: "none",
-                    }}
-                  >
-                    {useAutoVideoCover ? (
-                      <video
-                        src={(item as Extract<MediaItem, { kind: "local" }>).src}
-                        muted
-                        playsInline
-                        preload="metadata"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        style={{ opacity: 0.7 }}
-                      />
-                    ) : thumb ? (
-                      <img
-                        src={thumb} alt={item.kind === "photo" ? item.alt : item.caption}
-                        loading={i < 3 ? "eager" : "lazy"}
-                        {...(i === 0 ? { fetchPriority: "high" } : {})}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        style={{ opacity: isVideo ? 0.7 : 0.85 }}
-                      />
-                    ) : (
-                      <div className="w-full h-full" style={{ background: "#111" }} />
-                    )}
-                    {isVideo && <PlayBadge />}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: "linear-gradient(to top, rgba(20,20,20,0.55) 0%, transparent 55%)" }}
-                    />
-                  </button>
-                  <figcaption
-                    className="px-4 py-3"
-                    style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "rgba(0, 0, 0, 0.75)", letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1.6 }}
-                  >
-                    {isVideo && <span style={{ color: C.red, marginRight: 6 }}>▶</span>}
-                    {item.caption}
-                  </figcaption>
-                </figure>
-              );
-            })}
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row items-start gap-4 lg:gap-10">
+
+          {/* Mobile Buttons */}
+          <div className="md:hidden flex justify-center gap-6 w-full mb-8" style={{ fontFamily: "Inter, sans-serif" }}>
+            <button
+              onClick={() => setFilter(filter === "photo" ? "all" : "photo")}
+              className="px-6 py-2 border rounded-full text-[11px] font-semibold tracking-widest uppercase transition-all duration-300"
+              style={{
+                borderColor: C.red,
+                color: C.white,
+                backgroundColor: C.red,
+              }}
+            >
+              Images
+            </button>
+            <button
+              onClick={() => setFilter(filter === "video" ? "all" : "video")}
+              className="px-6 py-2 border rounded-full text-[11px] font-semibold tracking-widest uppercase transition-all duration-300"
+              style={{
+                borderColor: C.red,
+                color: C.white,
+                backgroundColor: C.red,
+              }}
+            >
+              Videos
+            </button>
           </div>
+
+          {/* Left Sticky Button (Desktop) */}
+          <div className="hidden md:flex sticky top-32 w-32 lg:w-40 justify-end" style={{ fontFamily: "Inter, sans-serif" }}>
+            <button
+              onClick={() => setFilter(filter === "photo" ? "all" : "photo")}
+              className="px-6 py-3 border rounded-full text-[11px] font-semibold tracking-widest uppercase transition-all duration-300 transform hover:scale-105"
+              style={{
+                borderColor: C.red,
+                color: C.white,
+                backgroundColor: C.red,
+              }}
+            >
+              Images
+            </button>
+          </div>
+
+          {/* Main Gallery Area */}
+          <div className="flex-1 w-full min-w-0 max-w-7xl mx-auto">
+            <div className="columns-2 md:columns-3 gap-4">
+              {filteredMedia.map((item, i) => {
+                const thumb = thumbFor(item);
+                const isVideo = item.kind !== "photo";
+                const useAutoVideoCover = item.kind === "local" && !item.thumb;
+                return (
+                  <figure
+                    key={i}
+                    className="relative overflow-hidden group mb-4 break-inside-avoid w-full"
+                    style={{ borderRadius: 16 }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveIdx(i)}
+                      aria-label={`Open ${item.kind === "photo" ? "photo" : "video"}: ${item.caption}`}
+                      className="relative overflow-hidden block w-full text-left cursor-pointer"
+                      style={{
+                        aspectRatio: i % 5 === 0 ? "16/10" : "4/3",
+                        padding: 0, border: "none",
+                      }}
+                    >
+                      {useAutoVideoCover ? (
+                        <video
+                          src={(item as Extract<MediaItem, { kind: "local" }>).src}
+                          muted
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          style={{ opacity: 0.7 }}
+                        />
+                      ) : thumb ? (
+                        <img
+                          src={thumb} alt={item.kind === "photo" ? item.alt : item.caption}
+                          loading={i < 3 ? "eager" : "lazy"}
+                          {...(i === 0 ? { fetchPriority: "high" } : {})}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          style={{ opacity: isVideo ? 0.7 : 0.85 }}
+                        />
+                      ) : (
+                        <div className="w-full h-full" style={{ background: "#111" }} />
+                      )}
+                      {isVideo && <PlayBadge />}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: "linear-gradient(to top, rgba(20,20,20,0.55) 0%, transparent 55%)" }}
+                      />
+                    </button>
+                    <figcaption
+                      className="px-4 py-3"
+                      style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 9, color: "rgba(0, 0, 0, 0.75)", letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1.6 }}
+                    >
+                      {isVideo && <span style={{ color: C.red, marginRight: 6 }}>▶</span>}
+                      {item.caption}
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+          {/* Right Sticky Button (Desktop) */}
+          <div className="hidden md:flex sticky top-32 w-32 lg:w-40 justify-start" style={{ fontFamily: "Inter, sans-serif" }}>
+            <button
+              onClick={() => setFilter(filter === "video" ? "all" : "video")}
+              className="px-6 py-3 border rounded-full text-[11px] font-semibold tracking-widest uppercase transition-all duration-300 transform hover:scale-105"
+              style={{
+                borderColor: C.red,
+                color: C.white,
+                backgroundColor: C.red,
+              }}
+            >
+              Videos
+            </button>
+          </div>
+
         </div>
       </section>
       {activeIdx !== null && (
         <Lightbox
-          item={media[activeIdx]}
+          item={filteredMedia[activeIdx]}
           onClose={close} onPrev={prev} onNext={next}
         />
       )}

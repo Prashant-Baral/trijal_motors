@@ -55,6 +55,13 @@ export const IMG = {
   customer12: "images/customer/customer12.webp",
   customer13: "images/customer/customer_rainbow.webp",
   customer14: "images/customer/customer_prakash.webp",
+  customer15: "images/customer/customer15.webp",
+  customer16: "images/customer/customer16.webp",
+  customer17: "images/customer/customer17.webp",
+  customer18: "images/customer/customer18.webp",
+  customer19: "images/customer/customer19.webp",
+  customer20: "images/customer/customer20.webp",
+  customer21: "images/customer/customer21.webp",
 
 
   //customer images with graphics
@@ -68,7 +75,15 @@ export const IMG = {
   ecustomer8: "images/customer/chery_wanda_customer_thirmati_gurung.webp",
   ecustomer9: "images/customer/chery_wanda_customer_nirmal_parajuli_purushottam_lamsal.webp",
   ecustomer10: "images/customer/chery_wanda_customer_prakash_tripathi.webp",
-  ecustomer11: "images/customer/chery_wanda_customer_14_seater.webp",
+  ecustomer11: "images/customer/chery_wanda_customer_kishor_bhujel.webp",
+  ecustomer12: "images/customer/chery_wanda_customer_abhinandhan_bajimaya.webp",
+  ecustomer13: "images/customer/chery_wanda_customer_khim_thapa2.webp",
+  ecustomer14: "images/customer/chery_wanda_customer_sete_thapa_magar.webp",
+  ecustomer15: "images/customer/chery_wanda_customer_bijay_malla.webp",
+  ecustomer16: "images/customer/chery_wanda_customer_shantaman_shrestha.webp",
+  ecustomer17: "images/customer/chery_wanda_customer_bel_bahadur_thapa.webp",
+
+
 
 
   showroom: "/images/showroom.webp",
